@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0u0lsvel1aoh"]
+[gd_scene load_steps=12 format=3 uid="uid://d0u0lsvel1aoh"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
-[ext_resource type="Texture2D" uid="uid://bppl8vectynht" path="res://assets/sprites/aria/aria_sprites.png" id="1_1hjfr"]
+[ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="2_hgpng"]
 
 [sub_resource type="Animation" id="Animation_m1nvf"]
 length = 0.001
@@ -65,20 +65,70 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [8, 9, 10, 11, 12, 13, 14, 15]
+"values": [4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_m2wge"]
+resource_name = "jump_up"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_nx3m7"]
+resource_name = "jump_high"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_1c604"]
+resource_name = "jump_fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
 _data = {
 "RESET": SubResource("Animation_m1nvf"),
 "idle": SubResource("Animation_aew5q"),
+"jump_fall": SubResource("Animation_1c604"),
+"jump_high": SubResource("Animation_nx3m7"),
+"jump_up": SubResource("Animation_m2wge"),
 "run": SubResource("Animation_0kouf"),
 "stand": SubResource("Animation_u0het")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1mjf6"]
-radius = 6.0
-height = 28.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rw22"]
+size = Vector2(19, 28)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_0u88g")
@@ -90,10 +140,9 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_1hjfr")
-hframes = 8
-vframes = 2
+texture = ExtResource("2_hgpng")
+hframes = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("CapsuleShape2D_1mjf6")
+position = Vector2(-1.5, 2)
+shape = SubResource("RectangleShape2D_5rw22")
