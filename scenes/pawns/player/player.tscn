@@ -77,7 +77,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1mjf6"]
-radius = 5.0
+radius = 6.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -89,12 +89,11 @@ libraries = {
 "": SubResource("AnimationLibrary_amajf")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 2)
-shape = SubResource("CapsuleShape2D_1mjf6")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1hjfr")
 hframes = 8
 vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_1mjf6")
