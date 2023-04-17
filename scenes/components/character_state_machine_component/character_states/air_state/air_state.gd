@@ -1,6 +1,5 @@
 extends CharacterState
-
-@export var ground_state_scene: PackedScene
+class_name CharacterAirState
 
 
 func state_process(ctx: CharacterStateContext, delta: float):
@@ -22,7 +21,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
-	if !ctx.is_close_to_floor.call() && ctx.character.is_on_wall() && abs(direction) > 0:
+	if !ctx.is_close_to_floor.call() && ctx.character.is_on_wall() && direction * ctx.current_direction > 0:
 		next_state_name = "wall"
 		return
 

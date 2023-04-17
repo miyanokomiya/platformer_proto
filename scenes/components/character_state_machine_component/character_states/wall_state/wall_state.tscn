@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.gd" id="1_3px8m"]
 
-[node name="AirState" type="Node"]
+[node name="WallState" type="Node"]
 script = ExtResource("1_3px8m")

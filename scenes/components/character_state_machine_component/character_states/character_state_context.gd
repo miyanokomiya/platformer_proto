@@ -7,10 +7,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var character: CharacterBody2D
 var animation_player: AnimationPlayer
+var is_close_to_floor: Callable
 
 var current_direction = 1
-
-var is_close_to_floor: Callable
 
 
 func flip_character():

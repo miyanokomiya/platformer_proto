@@ -38,7 +38,7 @@ func state_transition():
 func switch_state(next_state: CharacterState):
 	if current_state:
 		current_state.on_exit(state_context)
-		current_state.queue_free()
+		remove_child(current_state)
 	current_state = next_state
 	add_child(current_state)
 	current_state.on_enter(state_context)

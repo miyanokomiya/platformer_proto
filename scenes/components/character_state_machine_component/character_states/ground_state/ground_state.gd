@@ -1,7 +1,5 @@
 extends CharacterState
 
-@export var air_state_scene: PackedScene
-
 
 func state_process(ctx: CharacterStateContext, _delta: float):
 	if !ctx.character.is_on_floor():

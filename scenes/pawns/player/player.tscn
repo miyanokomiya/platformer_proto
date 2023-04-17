@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0u0lsvel1aoh"]
+[gd_scene load_steps=21 format=3 uid="uid://d0u0lsvel1aoh"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="2_hgpng"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cqj3wc1okgwqx" path="res://scenes/components/character_state_machine_component/character_state_machine_component.tscn" id="4_6g13u"]
 [ext_resource type="PackedScene" uid="uid://c6ovpinuevnw3" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.tscn" id="5_iy66u"]
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
+[ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
 
 [sub_resource type="Animation" id="Animation_m1nvf"]
 length = 0.001
@@ -275,6 +276,7 @@ hframes = 16
 ground_state_scene = ExtResource("3_i5wyf")
 air_state_scene = ExtResource("5_iy66u")
 wall_state_scene = ExtResource("7_idwji")
+wall_kicked_scene = ExtResource("8_dbhk6")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
 state_context = NodePath("../character_state_context")

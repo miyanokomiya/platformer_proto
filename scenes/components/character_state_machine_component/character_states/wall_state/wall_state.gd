@@ -1,7 +1,5 @@
 extends CharacterState
 
-@export var ground_state_scene: PackedScene
-
 
 func on_enter(ctx: CharacterStateContext):
 	ctx.animation_player.play("wall_stick")
@@ -15,16 +13,17 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		next_state_name = "ground"
 		return
 	
-	if !character.is_on_wall():
-		next_state_name = "air"
-		return
+	character.velocity.y = ctx.gravity * 3 * delta
 	
-	character.velocity.y = ctx.gravity * 2 * delta
+	if Input.is_action_just_pressed("action_jump"):
+		ctx.character.velocity.y = ctx.JUMP_VELOCITY
+		next_state_name = "wall_kicked"
+		return
 	
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
-	if direction == 0 || !character.is_on_wall():
+	if direction * ctx.current_direction >= 0:
 		next_state_name = "air"
 
 
