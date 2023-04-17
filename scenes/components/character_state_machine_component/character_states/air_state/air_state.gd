@@ -26,6 +26,19 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		return
 
 
+func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	if Input.is_action_just_pressed("action_jump") && ctx.is_close_to_front_wall.call():
+		ctx.character.velocity.y = ctx.JUMP_VELOCITY
+		ctx.flip_character()
+		next_state_name = "wall_kicked"
+		return
+	
+	if Input.is_action_just_pressed("action_jump") && ctx.is_close_to_back_wall.call():
+		ctx.character.velocity.y = ctx.JUMP_VELOCITY
+		next_state_name = "wall_kicked"
+		return
+
+
 func free_move(ctx: CharacterStateContext) -> int:
 	var direction = sign(Input.get_axis("move_left", "move_right"))
 	if direction:

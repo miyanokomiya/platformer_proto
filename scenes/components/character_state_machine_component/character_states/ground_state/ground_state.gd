@@ -5,9 +5,6 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
 		return
-	
-	if Input.is_action_just_pressed("action_jump"):
-		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		
 	if free_move(ctx):
 		ctx.animation_player.play("run")
@@ -15,6 +12,12 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 		ctx.animation_player.play("idle")
 	
 	ctx.character.move_and_slide()
+
+
+func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	if Input.is_action_just_pressed("action_jump"):
+		ctx.character.velocity.y = ctx.JUMP_VELOCITY
+		next_state_name = "air"
 
 
 func free_move(ctx: CharacterStateContext) -> bool:

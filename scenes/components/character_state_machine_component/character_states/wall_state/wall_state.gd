@@ -14,17 +14,17 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		return
 	
 	character.velocity.y = ctx.gravity * 3 * delta
-	
-	if Input.is_action_just_pressed("action_jump"):
-		ctx.character.velocity.y = ctx.JUMP_VELOCITY
-		next_state_name = "wall_kicked"
-		return
-	
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
 	if direction * ctx.current_direction >= 0:
 		next_state_name = "air"
+
+
+func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	if Input.is_action_just_pressed("action_jump"):
+		ctx.character.velocity.y = ctx.JUMP_VELOCITY
+		next_state_name = "wall_kicked"
 
 
 func free_move(ctx: CharacterStateContext) -> int:

@@ -8,6 +8,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var character: CharacterBody2D
 var animation_player: AnimationPlayer
 var is_close_to_floor: Callable
+var is_close_to_front_wall: Callable
+var is_close_to_back_wall: Callable
 
 var current_direction = 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0u0lsvel1aoh"]
+[gd_scene load_steps=20 format=3 uid="uid://d0u0lsvel1aoh"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="2_hgpng"]
@@ -250,9 +250,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rw22"]
 size = Vector2(18, 28)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8c3fi"]
-size = Vector2(7, 24)
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_0u88g")
 
@@ -283,22 +280,14 @@ state_context = NodePath("../character_state_context")
 state_fuctory = NodePath("../CharacterStateFuctory")
 default_state_scene = ExtResource("3_i5wyf")
 
-[node name="WalForwardArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WalForwardArea"]
-position = Vector2(10, 4)
-shape = SubResource("RectangleShape2D_8c3fi")
-debug_color = Color(0.647059, 0.505882, 0.352941, 0.419608)
-
-[node name="WallBackArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBackArea"]
-position = Vector2(-13, 4)
-shape = SubResource("RectangleShape2D_8c3fi")
-debug_color = Color(0.647059, 0.505882, 0.352941, 0.419608)
-
 [node name="CloseFloorRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, 16)
 target_position = Vector2(0, 20)
+
+[node name="BackWallRayCast" type="RayCast2D" parent="."]
+position = Vector2(-8, 10)
+target_position = Vector2(-5, 0)
+
+[node name="FrontWallRayCast" type="RayCast2D" parent="."]
+position = Vector2(6, 10)
+target_position = Vector2(5, 0)
