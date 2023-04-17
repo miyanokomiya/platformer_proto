@@ -1,7 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0u0lsvel1aoh"]
+[gd_scene load_steps=16 format=3 uid="uid://d0u0lsvel1aoh"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="2_hgpng"]
+[ext_resource type="PackedScene" uid="uid://bdhocuw5wn6tk" path="res://scenes/components/character_state_machine_component/character_state_fuctory.tscn" id="3_1hrum"]
+[ext_resource type="PackedScene" uid="uid://c87qd64aiy2nh" path="res://scenes/components/character_state_machine_component/character_states/ground_state/ground_state.tscn" id="3_i5wyf"]
+[ext_resource type="PackedScene" uid="uid://cqj3wc1okgwqx" path="res://scenes/components/character_state_machine_component/character_state_machine_component.tscn" id="4_6g13u"]
+[ext_resource type="PackedScene" uid="uid://c6ovpinuevnw3" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.tscn" id="5_iy66u"]
 
 [sub_resource type="Animation" id="Animation_m1nvf"]
 length = 0.001
@@ -139,10 +143,19 @@ libraries = {
 "": SubResource("AnimationLibrary_amajf")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_hgpng")
-hframes = 15
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 2)
 shape = SubResource("RectangleShape2D_5rw22")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hgpng")
+hframes = 16
+
+[node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
+ground_state_scene = ExtResource("3_i5wyf")
+air_state_scene = ExtResource("5_iy66u")
+
+[node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_fuctory", "animation_player") instance=ExtResource("4_6g13u")]
+state_fuctory = NodePath("../CharacterStateFuctory")
+default_state_scene = ExtResource("3_i5wyf")
+animation_player = NodePath("../AnimationPlayer")

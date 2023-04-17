@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6ovpinuevnw3"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.gd" id="1_bxf5d"]
+[ext_resource type="PackedScene" uid="uid://c87qd64aiy2nh" path="res://scenes/components/character_state_machine_component/character_states/ground_state/ground_state.tscn" id="2_2pch6"]
+
+[node name="AirState" type="Node"]
+script = ExtResource("1_bxf5d")
+ground_state_scene = ExtResource("2_2pch6")

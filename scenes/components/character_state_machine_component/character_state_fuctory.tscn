@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdhocuw5wn6tk"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_state_fuctory.gd" id="1_opcwu"]
+
+[node name="CharacterStateFuctory" type="Node"]
+script = ExtResource("1_opcwu")
