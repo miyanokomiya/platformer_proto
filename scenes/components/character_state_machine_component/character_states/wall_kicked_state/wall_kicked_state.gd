@@ -1,9 +1,11 @@
 extends CharacterAirState
 
 @onready var timer = $Timer
+@onready var audio_stream_player = $AudioStreamPlayer
 
 
 func on_enter(ctx: CharacterStateContext):
+	audio_stream_player.play()
 	timer.start()
 	if ctx.has_dash_momentum:
 		ctx.set_after_effect_playing(true)

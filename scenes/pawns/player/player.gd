@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var back_wall_ray_cast = $BackWallRayCast
 @onready var front_wall_ray_cast = $FrontWallRayCast
 @onready var after_effect_component = $AfterEffectComponent
+@onready var footstep_se = $FootstepSE
+@onready var jump_se = $JumpSE
 
 @export var h_flipped = false
 
@@ -31,3 +33,7 @@ func is_close_to_front_wall() -> bool:
 
 func is_close_to_back_wall() -> bool:
 	return back_wall_ray_cast.is_colliding()
+
+
+func play_footstep_se():
+	footstep_se.play_random()

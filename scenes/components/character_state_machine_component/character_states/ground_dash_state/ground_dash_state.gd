@@ -35,3 +35,4 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
+		ctx.play_jump_se()

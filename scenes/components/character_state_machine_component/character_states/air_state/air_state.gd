@@ -12,6 +12,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	
 	if character.is_on_floor():
 		next_state_name = "ground"
+		ctx.play_land_se()
 		return
 	
 	character.velocity.y += ctx.gravity * delta

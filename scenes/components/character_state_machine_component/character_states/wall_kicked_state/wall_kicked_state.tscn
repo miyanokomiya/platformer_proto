@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bax4fd615m3h4"]
+[gd_scene load_steps=3 format=3 uid="uid://bax4fd615m3h4"]
 
 [ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.gd" id="1_dnn3t"]
+[ext_resource type="AudioStream" uid="uid://dwpwcrcmrpoyj" path="res://assets/audios/footsteps/footstep_concrete_land_01.wav" id="2_6ygkt"]
 
 [node name="WallKickedState" type="Node"]
 script = ExtResource("1_dnn3t")
@@ -8,3 +9,9 @@ script = ExtResource("1_dnn3t")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6ygkt")
+volume_db = -9.156
+pitch_scale = 1.34
+bus = &"SE"
