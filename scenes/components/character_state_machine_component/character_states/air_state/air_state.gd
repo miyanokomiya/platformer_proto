@@ -27,6 +27,9 @@ func state_process(ctx: CharacterStateContext, delta: float):
 
 
 func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	if Input.is_action_just_pressed("action_dash"):
+		ctx.has_dash_momentum = true
+	
 	if Input.is_action_just_pressed("action_jump") && ctx.is_close_to_front_wall.call():
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		ctx.flip_character()
@@ -42,11 +45,11 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 func free_move(ctx: CharacterStateContext) -> int:
 	var direction = sign(Input.get_axis("move_left", "move_right"))
 	if direction:
-		ctx.character.velocity.x = direction * ctx.SPEED
+		ctx.character.velocity.x = direction * ctx.get_move_speed()
 		
 		if ctx.current_direction * direction < 0:
 			ctx.flip_character()
 	else:
-		ctx.character.velocity.x = move_toward(ctx.character.velocity.x, 0, ctx.SPEED)
+		ctx.character.velocity.x = move_toward(ctx.character.velocity.x, 0, ctx.get_move_speed())
 	
 	return direction

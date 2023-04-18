@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://4vf7imvg7hyd"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ground_dash_state/ground_dash_state.gd" id="1_boy42"]
+
+[node name="GroundDashState" type="Node"]
+script = ExtResource("1_boy42")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

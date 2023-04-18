@@ -29,6 +29,7 @@ func _input(event):
 func state_transition():
 	if current_state.next_state_name:
 		var next_state = state_fuctory.get_state(current_state.next_state_name)
+		print(current_state.next_state_name)
 		if next_state:
 			switch_state(next_state)
 		else:

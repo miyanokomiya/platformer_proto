@@ -22,6 +22,8 @@ func state_process(ctx: CharacterStateContext, delta: float):
 
 
 func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
+	
 	if Input.is_action_just_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		next_state_name = "wall_kicked"

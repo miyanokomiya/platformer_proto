@@ -8,9 +8,6 @@ func on_enter(_ctx: CharacterStateContext):
 
 
 func state_process(ctx: CharacterStateContext, delta: float):
-	if next_state_name:
-		return
-	
 	if timer.is_stopped():
 		next_state_name = "air"
 
@@ -18,5 +15,5 @@ func state_process(ctx: CharacterStateContext, delta: float):
 
 
 func free_move(ctx: CharacterStateContext) -> int:
-	ctx.character.velocity.x = ctx.JUMP_VELOCITY * ctx.current_direction * -0.5
+	ctx.character.velocity.x = ctx.wall_kicked_spped() * ctx.current_direction * -1
 	return sign(Input.get_axis("move_left", "move_right"))

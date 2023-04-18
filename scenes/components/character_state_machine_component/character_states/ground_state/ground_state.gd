@@ -1,11 +1,11 @@
 extends CharacterState
+class_name CharacterGroundState
 
 
 func state_process(ctx: CharacterStateContext, _delta: float):
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
-		return
-		
+	
 	if free_move(ctx):
 		ctx.animation_player.play("run")
 	else:
@@ -15,9 +15,15 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 
 
 func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
+	
+	if Input.is_action_just_pressed("action_dash"):
+		next_state_name = "ground_dash"
+		return
+	
 	if Input.is_action_just_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
-		next_state_name = "air"
+		return
 
 
 func free_move(ctx: CharacterStateContext) -> bool:
