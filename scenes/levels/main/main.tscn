@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwcpckviquer"]
 
-[ext_resource type="PackedScene" uid="uid://d0u0lsvel1aoh" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
+[ext_resource type="PackedScene" uid="uid://taor7fuq5qk6" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
 [ext_resource type="PackedScene" uid="uid://ckohjylncthe8" path="res://scenes/levels/station_x/station_x_time_map.tscn" id="2_53xma"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="3_awc7c"]
 
@@ -17,6 +17,6 @@ target = NodePath("../MainLayer/Player")
 [node name="MainLayer" type="Node" parent="." groups=["main_layer"]]
 
 [node name="Player" parent="MainLayer" instance=ExtResource("1_m3vo5")]
-position = Vector2(119, 112)
+position = Vector2(119, 113)
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]

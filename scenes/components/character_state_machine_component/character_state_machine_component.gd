@@ -1,6 +1,8 @@
 extends Node
 class_name CharacterStateMachine
 
+signal state_changed
+
 @export var state_context: CharacterStateContext
 @export var state_fuctory: CharacterStateFuctory
 @export var default_state_scene: PackedScene
@@ -42,4 +44,5 @@ func switch_state(next_state: CharacterState):
 	current_state = next_state
 	add_child(current_state)
 	current_state.on_enter(state_context)
+	state_changed.emit()
 	

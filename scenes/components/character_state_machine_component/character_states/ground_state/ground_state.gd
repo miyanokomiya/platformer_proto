@@ -23,12 +23,13 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_pressed("action_dash"):
 		next_state_name = "ground_dash"
-		return
 	
 	if Input.is_action_just_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		ctx.play_jump_se()
-		return
+	
+	if Input.is_action_just_pressed("action_main_attack"):
+		ctx.action_main_attack()
 
 
 func free_move(ctx: CharacterStateContext) -> bool:

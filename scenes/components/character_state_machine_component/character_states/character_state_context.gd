@@ -7,6 +7,8 @@ const DASH_MOMENTUM = 180.0
 const JUMP_VELOCITY = -320.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal buster
+
 @export var jump_se: AudioStreamPlayer
 @export var land_se: AudioStreamPlayer
 
@@ -59,3 +61,7 @@ func play_jump_se():
 func play_land_se():
 	if land_se:
 		land_se.play()
+
+
+func action_main_attack():
+	buster.emit()

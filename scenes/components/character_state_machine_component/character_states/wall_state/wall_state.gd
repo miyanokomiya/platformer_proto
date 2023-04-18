@@ -28,6 +28,9 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	if Input.is_action_just_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		next_state_name = "wall_kicked"
+	
+	if Input.is_action_just_pressed("action_main_attack"):
+		ctx.action_main_attack()
 
 
 func free_move(ctx: CharacterStateContext) -> int:

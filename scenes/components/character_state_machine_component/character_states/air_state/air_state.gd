@@ -41,12 +41,12 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		ctx.flip_character()
 		next_state_name = "wall_kicked"
-		return
-	
-	if Input.is_action_just_pressed("action_jump") && ctx.is_close_to_back_wall.call():
+	elif Input.is_action_just_pressed("action_jump") && ctx.is_close_to_back_wall.call():
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		next_state_name = "wall_kicked"
-		return
+	
+	if Input.is_action_just_pressed("action_main_attack"):
+		ctx.action_main_attack()
 
 
 func free_move(ctx: CharacterStateContext) -> int:
