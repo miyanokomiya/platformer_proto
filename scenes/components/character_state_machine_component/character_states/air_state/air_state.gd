@@ -2,6 +2,11 @@ extends CharacterState
 class_name CharacterAirState
 
 
+func on_enter(ctx: CharacterStateContext):
+	if ctx.has_dash_momentum:
+		ctx.set_after_effect_playing(true)
+
+
 func state_process(ctx: CharacterStateContext, delta: float):
 	var character = ctx.character
 	
@@ -29,6 +34,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	if Input.is_action_just_pressed("action_dash"):
 		ctx.has_dash_momentum = true
+		ctx.set_after_effect_playing(true)
 	
 	if Input.is_action_just_pressed("action_jump") && ctx.is_close_to_front_wall.call():
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY

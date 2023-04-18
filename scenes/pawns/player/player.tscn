@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0u0lsvel1aoh"]
+[gd_scene load_steps=23 format=3 uid="uid://d0u0lsvel1aoh"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="2_hgpng"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://4vf7imvg7hyd" path="res://scenes/components/character_state_machine_component/character_states/ground_dash_state/ground_dash_state.tscn" id="6_q13fd"]
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
 [ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
+[ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="11_y2o4e"]
 
 [sub_resource type="Animation" id="Animation_m1nvf"]
 length = 0.001
@@ -282,7 +283,12 @@ _data = {
 size = Vector2(18, 28)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_0u88g")
+
+[node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
+sprite = NodePath("../Sprite2D")
+effect_color = Color(0.32549, 0.560784, 0.831373, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -298,7 +304,7 @@ shape = SubResource("RectangleShape2D_5rw22")
 texture = ExtResource("2_hgpng")
 hframes = 18
 
-[node name="character_state_context" parent="." instance=ExtResource("3_n1m2y")]
+[node name="CharacterStateContext" parent="." instance=ExtResource("3_n1m2y")]
 
 [node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
 ground_state_scene = ExtResource("3_i5wyf")
@@ -308,7 +314,7 @@ wall_state_scene = ExtResource("7_idwji")
 wall_kicked_scene = ExtResource("8_dbhk6")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
-state_context = NodePath("../character_state_context")
+state_context = NodePath("../CharacterStateContext")
 state_fuctory = NodePath("../CharacterStateFuctory")
 default_state_scene = ExtResource("3_i5wyf")
 

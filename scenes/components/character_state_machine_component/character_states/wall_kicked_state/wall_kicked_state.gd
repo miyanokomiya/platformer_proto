@@ -3,8 +3,10 @@ extends CharacterAirState
 @onready var timer = $Timer
 
 
-func on_enter(_ctx: CharacterStateContext):
+func on_enter(ctx: CharacterStateContext):
 	timer.start()
+	if ctx.has_dash_momentum:
+		ctx.set_after_effect_playing(true)
 
 
 func state_process(ctx: CharacterStateContext, delta: float):

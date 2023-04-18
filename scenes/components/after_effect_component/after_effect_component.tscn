@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://vig0a273l8q5"]
+
+[ext_resource type="Script" path="res://scenes/components/after_effect_component/after_effect_component.gd" id="1_mlegr"]
+[ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="2_v2qcx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lylss"]
+shader = ExtResource("2_v2qcx")
+shader_parameter/mix_weight = 1.0
+shader_parameter/alpha = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[node name="AfterEffectComponent" type="Node2D"]
+script = ExtResource("1_mlegr")
+effect_material = SubResource("ShaderMaterial_lylss")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1

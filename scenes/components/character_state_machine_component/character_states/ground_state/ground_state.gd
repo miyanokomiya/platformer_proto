@@ -2,6 +2,10 @@ extends CharacterState
 class_name CharacterGroundState
 
 
+func on_enter(ctx: CharacterStateContext):
+	ctx.set_after_effect_playing(false)
+
+
 func state_process(ctx: CharacterStateContext, _delta: float):
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"

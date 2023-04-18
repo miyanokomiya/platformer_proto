@@ -7,6 +7,7 @@ func on_enter(ctx: CharacterStateContext):
 	timer.start()
 	ctx.animation_player.play("dash")
 	ctx.has_dash_momentum = true
+	ctx.set_after_effect_playing(true)
 
 
 func state_process(ctx: CharacterStateContext, delta: float):

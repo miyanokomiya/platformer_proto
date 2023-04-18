@@ -4,6 +4,7 @@ extends CharacterState
 func on_enter(ctx: CharacterStateContext):
 	ctx.animation_player.play("wall_stick")
 	ctx.flip_character()
+	ctx.set_after_effect_playing(false)
 
 
 func state_process(ctx: CharacterStateContext, delta: float):
