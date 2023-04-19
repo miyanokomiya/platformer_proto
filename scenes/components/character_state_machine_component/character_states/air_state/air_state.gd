@@ -7,6 +7,10 @@ func on_enter(ctx: CharacterStateContext):
 		ctx.set_after_effect_playing(true)
 
 
+func on_damage(_ctx: CharacterStateContext):
+	next_state_name = "air_stagger"
+
+
 func state_process(ctx: CharacterStateContext, delta: float):
 	var character = ctx.character
 	

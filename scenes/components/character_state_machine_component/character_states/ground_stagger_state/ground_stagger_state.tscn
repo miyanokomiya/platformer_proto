@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bat620o01inha"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ground_stagger_state/ground_stagger_state.gd" id="1_8yhk5"]
+
+[node name="GroundStaggerState" type="Node"]
+script = ExtResource("1_8yhk5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

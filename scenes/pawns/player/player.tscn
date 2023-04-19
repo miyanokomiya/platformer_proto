@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://taor7fuq5qk6"]
+[gd_scene load_steps=42 format=3 uid="uid://taor7fuq5qk6"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -15,10 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
 [ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="11_y2o4e"]
+[ext_resource type="PackedScene" uid="uid://bat620o01inha" path="res://scenes/components/character_state_machine_component/character_states/ground_stagger_state/ground_stagger_state.tscn" id="12_d5uef"]
 [ext_resource type="AudioStream" uid="uid://dd7woi48ris8p" path="res://assets/audios/player_dash.wav" id="12_ds52r"]
 [ext_resource type="PackedScene" uid="uid://ecoc7p1xpfg8" path="res://scenes/components/random_audio_player_component/random_audio_stream_player_2d_component.tscn" id="13_5crkc"]
 [ext_resource type="AudioStream" uid="uid://du3ou76vmmq0f" path="res://assets/audios/foley_cloth_light_fast_movement_16.wav" id="13_0320v"]
 [ext_resource type="AudioStream" uid="uid://0rd4qxqy7p2m" path="res://assets/audios/footsteps/footstep_concrete_run_01.wav" id="14_ehh7r"]
+[ext_resource type="PackedScene" uid="uid://catd2cwlxw8qu" path="res://scenes/components/character_state_machine_component/character_states/air_stagger_state/air_stagger_state.tscn" id="14_uadgv"]
 [ext_resource type="AudioStream" uid="uid://dwpwcrcmrpoyj" path="res://assets/audios/footsteps/footstep_concrete_land_01.wav" id="14_upcuo"]
 [ext_resource type="AudioStream" uid="uid://04johdhyx73i" path="res://assets/audios/footsteps/footstep_concrete_run_02.wav" id="15_jkmol"]
 [ext_resource type="AudioStream" uid="uid://d3a7jvqawg1mu" path="res://assets/audios/footsteps/footstep_concrete_run_03.wav" id="16_2uy8f"]
@@ -45,7 +47,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep2ct"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ws2tn"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -708,7 +710,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_ep2ct")
+whiten_material = SubResource("ShaderMaterial_ws2tn")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 sprite = NodePath("../Sprite2D")
@@ -736,7 +738,9 @@ land_se = NodePath("../Audios/LandSE")
 [node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
 ground_state_scene = ExtResource("3_i5wyf")
 ground_dash_state_scene = ExtResource("6_q13fd")
+ground_stagger_state_scene = ExtResource("12_d5uef")
 air_state_scene = ExtResource("5_iy66u")
+air_stagger_state_scene = ExtResource("14_uadgv")
 wall_state_scene = ExtResource("7_idwji")
 wall_kicked_scene = ExtResource("8_dbhk6")
 
@@ -796,3 +800,5 @@ unique_name_in_owner = true
 volume_db = -23.361
 bus = &"SE"
 streams = Array[AudioStream]([ExtResource("24_3we5w")])
+
+[connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]

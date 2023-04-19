@@ -18,3 +18,7 @@ func state_input(_ctx: CharacterStateContext, _event: InputEvent):
 
 func state_process(_ctx: CharacterStateContext, _delta: float):
 	pass
+
+
+func on_damage(_ctx: CharacterStateContext):
+	pass

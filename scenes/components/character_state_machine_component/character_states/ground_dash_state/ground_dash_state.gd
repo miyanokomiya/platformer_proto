@@ -19,6 +19,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
 	
+	ctx.character.velocity.y += ctx.gravity * delta
 	var direction = sign(Input.get_axis("move_left", "move_right"))
 	if ctx.current_direction * direction < 0:
 		next_state_name = "ground"

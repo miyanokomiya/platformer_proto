@@ -74,3 +74,7 @@ func on_buster_texture_timer_timeout():
 
 func on_flipped(h_flip: bool):
 	buster_direction.h_flip = h_flip
+
+
+func _on_hurtbox_component_hit(_hitbox_component):
+	character_state_machine.on_damage()

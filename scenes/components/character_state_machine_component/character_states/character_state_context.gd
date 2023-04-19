@@ -38,6 +38,10 @@ func get_move_speed() -> float:
 		return SPEED
 
 
+func get_stagger_speed() -> float:
+	return SPEED / 2
+
+
 func wall_kicked_spped() -> float:
 	if has_dash_momentum:
 		return JUMP_VELOCITY * 0.75

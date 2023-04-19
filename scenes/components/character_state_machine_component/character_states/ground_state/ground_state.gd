@@ -6,10 +6,15 @@ func on_enter(ctx: CharacterStateContext):
 	ctx.set_after_effect_playing(false)
 
 
-func state_process(ctx: CharacterStateContext, _delta: float):
+func on_damage(_ctx: CharacterStateContext):
+	next_state_name = "ground_stagger"
+
+
+func state_process(ctx: CharacterStateContext, delta: float):
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
 	
+	ctx.character.velocity.y += ctx.gravity * delta
 	if free_move(ctx):
 		ctx.animation_player.play("run")
 	else:
