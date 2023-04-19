@@ -518,4 +518,5 @@ streams = Array[AudioStream]([ExtResource("14_ehh7r"), ExtResource("15_jkmol"), 
 [node name="BusterSmallSE" parent="Audios" instance=ExtResource("13_5crkc")]
 unique_name_in_owner = true
 volume_db = -23.361
+bus = &"SE"
 streams = Array[AudioStream]([ExtResource("24_3we5w")])

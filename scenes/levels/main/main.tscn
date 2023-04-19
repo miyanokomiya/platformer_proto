@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwcpckviquer"]
+[gd_scene load_steps=5 format=3 uid="uid://cwcpckviquer"]
 
 [ext_resource type="PackedScene" uid="uid://taor7fuq5qk6" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
 [ext_resource type="PackedScene" uid="uid://ckohjylncthe8" path="res://scenes/levels/station_x/station_x_time_map.tscn" id="2_53xma"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="3_awc7c"]
+[ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="4_2lif2"]
 
 [node name="Main" type="Node2D"]
 
@@ -17,6 +18,17 @@ target = NodePath("../MainLayer/Player")
 [node name="MainLayer" type="Node" parent="." groups=["main_layer"]]
 
 [node name="Player" parent="MainLayer" instance=ExtResource("1_m3vo5")]
+z_index = 1
 position = Vector2(119, 113)
 
+[node name="Carribo" parent="MainLayer" instance=ExtResource("4_2lif2")]
+position = Vector2(40, 69)
+
+[node name="Carribo2" parent="MainLayer" instance=ExtResource("4_2lif2")]
+position = Vector2(282, 69)
+h_flip = true
+
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
+
+[node name="ActivateTimer" type="Timer" parent="."]
+one_shot = true

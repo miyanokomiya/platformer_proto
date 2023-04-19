@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmy04to47158w"]
+
+[ext_resource type="Texture2D" uid="uid://djedvu0l0c3k8" path="res://assets/sprites/enemies/carribo.png" id="1_bbx0x"]
+[ext_resource type="Script" path="res://scenes/pawns/enemies/carribo/carribo.gd" id="1_wk3rk"]
+
+[sub_resource type="Animation" id="Animation_8w2e1"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_775xj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_volad"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbrqs"]
+_data = {
+"RESET": SubResource("Animation_775xj"),
+"idle": SubResource("Animation_8w2e1"),
+"walk": SubResource("Animation_volad")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n75fr"]
+size = Vector2(20, 21)
+
+[node name="Carribo" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_wk3rk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_tbrqs")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_n75fr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bbx0x")
+flip_h = true
+hframes = 6
+
+[node name="GroundDetector" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(11, 0)
+target_position = Vector2(0, 20)
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(15, 0)
