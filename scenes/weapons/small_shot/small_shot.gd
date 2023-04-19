@@ -45,3 +45,7 @@ func on_hit():
 
 func _on_area_2d_body_entered(_body):
 	on_hit()
+
+
+func _on_hitbox_component_hit():
+	on_hit()

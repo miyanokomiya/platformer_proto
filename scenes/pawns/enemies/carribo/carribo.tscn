@@ -1,7 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmy04to47158w"]
+[gd_scene load_steps=14 format=3 uid="uid://cmy04to47158w"]
 
 [ext_resource type="Texture2D" uid="uid://djedvu0l0c3k8" path="res://assets/sprites/enemies/carribo.png" id="1_bbx0x"]
 [ext_resource type="Script" path="res://scenes/pawns/enemies/carribo/carribo.gd" id="1_wk3rk"]
+[ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_4i0uh"]
+[ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="3_xuhdu"]
+[ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_h4sty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6k1x"]
+size = Vector2(22, 24)
+
+[sub_resource type="Shader" id="Shader_4buxf"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float mix_weight: hint_range(0.0, 1.0) = 1.0;
+uniform float alpha: hint_range(0.0, 1.0) = 1.0;
+uniform vec4 color: source_color = vec4(1, 1, 1, 1);
+
+void fragment() {
+	vec4 texture_color = texture(TEXTURE, UV);
+	vec3 white = vec3(1, 1, 1);
+	vec3 whitened_texture_rgb = mix(texture_color.rgb, color.rgb, mix_weight);
+	COLOR = vec4(whitened_texture_rgb, texture_color.a * color.a * alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_umrak"]
+resource_local_to_scene = true
+shader = SubResource("Shader_4buxf")
+shader_parameter/mix_weight = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_8w2e1"]
 resource_name = "idle"
@@ -65,6 +94,23 @@ size = Vector2(20, 21)
 collision_layer = 4
 script = ExtResource("1_wk3rk")
 
+[node name="HealthComponent" parent="." instance=ExtResource("2_4i0uh")]
+max_health = 2.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_xuhdu")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_r6k1x")
+debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
+hurtbox_component = NodePath("../HurtboxComponent")
+sprite = NodePath("../Sprite2D")
+whiten_material = SubResource("ShaderMaterial_umrak")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 libraries = {
@@ -72,6 +118,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_n75fr")
 

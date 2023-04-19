@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://8j2dyxxf2rgj"]
+[gd_scene load_steps=12 format=3 uid="uid://8j2dyxxf2rgj"]
 
 [ext_resource type="Texture2D" uid="uid://duqs5gj0hip3c" path="res://assets/sprites/shots/shots.png" id="1_07w6v"]
 [ext_resource type="Script" path="res://scenes/weapons/small_shot/small_shot.gd" id="1_ry1je"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_r32ob"]
 
 [sub_resource type="Animation" id="Animation_ualya"]
 resource_name = "flying"
@@ -143,6 +144,9 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nyv0"]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_aioff"]
+radius = 4.0
+
 [node name="SmallShot" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
@@ -175,4 +179,13 @@ one_shot = true
 [node name="TerrainRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(9, 0)
 
+[node name="HitboxComponent" parent="." instance=ExtResource("3_r32ob")]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_aioff")
+debug_color = Color(0.819608, 0.364706, 0.447059, 0.419608)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
