@@ -18,8 +18,14 @@ func on_hit(_hitbox_component: HitboxComponent):
 	
 	sprite.material.set_shader_parameter("mix_weight", 1.0)
 	hit_flash_tween = create_tween()
-	hit_flash_tween.tween_property(sprite.material, "shader_parameter/mix_weight", 0.0, get_flash_duration())\
-		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	
+	var remained = get_flash_duration()
+	while remained >= 0.2:
+		remained -= 0.2
+		hit_flash_tween.tween_property(sprite.material, "shader_parameter/mix_weight", 0.0, 0.1)
+		hit_flash_tween.tween_property(sprite.material, "shader_parameter/mix_weight", 0.7, 0.1)
+	
+	hit_flash_tween.tween_property(sprite.material, "shader_parameter/mix_weight", 0.0, remained)
 
 
 func get_flash_duration() -> float:

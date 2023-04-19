@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmy04to47158w"]
+[gd_scene load_steps=16 format=3 uid="uid://cmy04to47158w"]
 
 [ext_resource type="Texture2D" uid="uid://djedvu0l0c3k8" path="res://assets/sprites/enemies/carribo.png" id="1_bbx0x"]
 [ext_resource type="Script" path="res://scenes/pawns/enemies/carribo/carribo.gd" id="1_wk3rk"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_4i0uh"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="3_xuhdu"]
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_h4sty"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="5_k2j0g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6k1x"]
 size = Vector2(22, 24)
@@ -25,12 +26,15 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_umrak"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voamd"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wr0yv"]
+radius = 11.0
 
 [sub_resource type="Animation" id="Animation_8w2e1"]
 resource_name = "idle"
@@ -109,7 +113,15 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_umrak")
+whiten_material = SubResource("ShaderMaterial_voamd")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_k2j0g")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_wr0yv")
+debug_color = Color(0.717647, 0.470588, 0.290196, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
