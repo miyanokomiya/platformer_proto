@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct2fvegc241m3"]
+
+[ext_resource type="Script" path="res://scenes/components/direction_component/direction_component.gd" id="1_jstqi"]
+
+[node name="DirectionComponent" type="RayCast2D"]
+enabled = false
+target_position = Vector2(10, 0)
+collision_mask = 0
+script = ExtResource("1_jstqi")

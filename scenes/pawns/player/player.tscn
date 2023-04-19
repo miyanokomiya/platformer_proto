@@ -1,11 +1,12 @@
-[gd_scene load_steps=31 format=3 uid="uid://taor7fuq5qk6"]
+[gd_scene load_steps=34 format=3 uid="uid://taor7fuq5qk6"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
-[ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="2_hgpng"]
+[ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
 [ext_resource type="PackedScene" uid="uid://bdhocuw5wn6tk" path="res://scenes/components/character_state_machine_component/character_state_fuctory.tscn" id="3_1hrum"]
 [ext_resource type="PackedScene" uid="uid://c87qd64aiy2nh" path="res://scenes/components/character_state_machine_component/character_states/ground_state/ground_state.tscn" id="3_i5wyf"]
 [ext_resource type="PackedScene" uid="uid://ymxrdbn5yv4h" path="res://scenes/components/character_state_machine_component/character_states/character_state_context.tscn" id="3_n1m2y"]
 [ext_resource type="PackedScene" uid="uid://cqj3wc1okgwqx" path="res://scenes/components/character_state_machine_component/character_state_machine_component.tscn" id="4_6g13u"]
+[ext_resource type="Texture2D" uid="uid://c63oyhbl3ukjf" path="res://assets/sprites/aria/aria_buster.png" id="4_mwci4"]
 [ext_resource type="PackedScene" uid="uid://c6ovpinuevnw3" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.tscn" id="5_iy66u"]
 [ext_resource type="PackedScene" uid="uid://4vf7imvg7hyd" path="res://scenes/components/character_state_machine_component/character_states/ground_dash_state/ground_dash_state.tscn" id="6_q13fd"]
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
@@ -19,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://04johdhyx73i" path="res://assets/audios/footsteps/footstep_concrete_run_02.wav" id="15_jkmol"]
 [ext_resource type="AudioStream" uid="uid://d3a7jvqawg1mu" path="res://assets/audios/footsteps/footstep_concrete_run_03.wav" id="16_2uy8f"]
 [ext_resource type="AudioStream" uid="uid://cx7ythn7ts6er" path="res://assets/audios/footsteps/footstep_concrete_run_04.wav" id="17_o50js"]
+[ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
+[ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="24_3we5w"]
 
 [sub_resource type="Animation" id="Animation_m1nvf"]
 length = 0.001
@@ -49,7 +52,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DashSE:playing")
+tracks/2/path = NodePath("Audios/DashSE:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -57,6 +60,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BusterDirection:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, -2)]
 }
 
 [sub_resource type="Animation" id="Animation_hbewr"]
@@ -90,7 +105,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DashSE:playing")
+tracks/2/path = NodePath("Audios/DashSE:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -98,6 +113,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BusterDirection:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_aew5q"]
@@ -128,6 +155,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, -2)]
+}
 
 [sub_resource type="Animation" id="Animation_1c604"]
 resource_name = "jump_fall"
@@ -155,6 +194,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, -4)]
 }
 
 [sub_resource type="Animation" id="Animation_nx3m7"]
@@ -184,6 +235,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13, -4)]
+}
 
 [sub_resource type="Animation" id="Animation_m2wge"]
 resource_name = "jump_up"
@@ -211,6 +274,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(2, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, -3)]
 }
 
 [sub_resource type="Animation" id="Animation_0kouf"]
@@ -286,6 +361,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13, -3)]
+}
 
 [sub_resource type="Animation" id="Animation_5dtx5"]
 resource_name = "wall_stick"
@@ -314,6 +401,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-4, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, -1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
 _data = {
@@ -334,6 +433,7 @@ size = Vector2(18, 28)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_0u88g")
+small_shot = ExtResource("2_vdr3h")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 sprite = NodePath("../Sprite2D")
@@ -350,12 +450,12 @@ position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_5rw22")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_hgpng")
+texture = ExtResource("4_mwci4")
 hframes = 18
 
 [node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se") instance=ExtResource("3_n1m2y")]
-jump_se = NodePath("../JumpSE")
-land_se = NodePath("../LandSE")
+jump_se = NodePath("../Audios/JumpSE")
+land_se = NodePath("../Audios/LandSE")
 
 [node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
 ground_state_scene = ExtResource("3_i5wyf")
@@ -369,6 +469,9 @@ state_context = NodePath("../CharacterStateContext")
 state_fuctory = NodePath("../CharacterStateFuctory")
 default_state_scene = ExtResource("3_i5wyf")
 
+[node name="BusterTextureTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="CloseFloorRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, 16)
 target_position = Vector2(0, 20)
@@ -381,26 +484,38 @@ target_position = Vector2(-5, 0)
 position = Vector2(6, 10)
 target_position = Vector2(5, 0)
 
-[node name="DashSE" type="AudioStreamPlayer" parent="."]
+[node name="BusterDirection" parent="." instance=ExtResource("21_ufte6")]
+unique_name_in_owner = true
+position = Vector2(14, -2)
+
+[node name="Audios" type="Node" parent="."]
+
+[node name="DashSE" type="AudioStreamPlayer" parent="Audios"]
+unique_name_in_owner = true
 stream = ExtResource("12_ds52r")
 volume_db = -19.412
 pitch_scale = 1.3
 bus = &"SE"
 
-[node name="JumpSE" type="AudioStreamPlayer" parent="."]
+[node name="JumpSE" type="AudioStreamPlayer" parent="Audios"]
+unique_name_in_owner = true
 stream = ExtResource("13_0320v")
 volume_db = -14.18
 bus = &"SE"
 
-[node name="LandSE" type="AudioStreamPlayer" parent="."]
+[node name="LandSE" type="AudioStreamPlayer" parent="Audios"]
+unique_name_in_owner = true
 stream = ExtResource("14_upcuo")
 volume_db = -8.947
 bus = &"SE"
 
-[node name="FootstepSE" parent="." instance=ExtResource("13_5crkc")]
+[node name="FootstepSE" parent="Audios" instance=ExtResource("13_5crkc")]
+unique_name_in_owner = true
 volume_db = -15.634
 bus = &"SE"
 streams = Array[AudioStream]([ExtResource("14_ehh7r"), ExtResource("15_jkmol"), ExtResource("16_2uy8f"), ExtResource("17_o50js")])
 
-[node name="BusterTextureTimer" type="Timer" parent="."]
-one_shot = true
+[node name="BusterSmallSE" parent="Audios" instance=ExtResource("13_5crkc")]
+unique_name_in_owner = true
+volume_db = -23.361
+streams = Array[AudioStream]([ExtResource("24_3we5w")])

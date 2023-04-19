@@ -7,19 +7,23 @@ extends CharacterBody2D
 @onready var back_wall_ray_cast = $BackWallRayCast
 @onready var front_wall_ray_cast = $FrontWallRayCast
 @onready var after_effect_component = $AfterEffectComponent
-@onready var footstep_se = $FootstepSE
-@onready var jump_se = $JumpSE
 @onready var sprite_2d = $Sprite2D
 @onready var buster_texture_timer = $BusterTextureTimer
+@onready var buster_direction = %BusterDirection
+@onready var buster_small_se = %BusterSmallSE
+@onready var footstep_se = %FootstepSE
+
 
 var default_texture = preload("res://assets/sprites/aria/aria.png")
 var buster_texture = preload("res://assets/sprites/aria/aria_buster.png")
 
-@export var h_flipped = false
+@export var flip_h = false
+@export var small_shot: PackedScene
 
 func _ready():
 	character_state_machine.state_changed.connect(on_state_changed)
 	character_state_context.buster.connect(on_bustered)
+	character_state_context.flipped.connect(on_flipped)
 	buster_texture_timer.timeout.connect(on_buster_texture_timer_timeout)
 	
 	character_state_context.character = self
@@ -29,7 +33,7 @@ func _ready():
 	character_state_context.is_close_to_back_wall = is_close_to_back_wall
 	character_state_context.after_effect_component = after_effect_component
 	
-	if h_flipped:
+	if flip_h:
 		character_state_context.flip_character()
 
 
@@ -57,8 +61,16 @@ func on_state_changed():
 func on_bustered():
 	sprite_2d.texture = buster_texture
 	buster_texture_timer.start()
+	var shot = small_shot.instantiate()
+	get_tree().get_first_node_in_group("foreground_layer").add_child(shot)
+	shot.flip_h = character_state_context.current_direction == -1
+	shot.shoot(buster_direction.global_position, buster_direction.get_direction(), buster_direction.get_angle())
+	buster_small_se.play_random()
 
 
 func on_buster_texture_timer_timeout():
 	sprite_2d.texture = default_texture
-	
+
+
+func on_flipped(h_flip: bool):
+	buster_direction.h_flip = h_flip

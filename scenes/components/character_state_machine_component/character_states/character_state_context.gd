@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -320.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal buster
+signal flipped(h_flip: bool)
 
 @export var jump_se: AudioStreamPlayer
 @export var land_se: AudioStreamPlayer
@@ -27,6 +28,7 @@ func flip_character():
 	character.scale.x *= -1
 	current_direction *= -1
 	after_effect_component.flip_h = !after_effect_component.flip_h
+	flipped.emit(current_direction == -1)
 
 
 func get_move_speed() -> float:
