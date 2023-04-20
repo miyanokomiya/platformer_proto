@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var wall_detector = %WallDetector
 @onready var animation_player = $AnimationPlayer
 @onready var activate_timer = $"../../ActivateTimer"
+@onready var health_component = $HealthComponent
 
 @export var h_flip: bool = false
 
@@ -11,9 +12,11 @@ var speed = 30.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 1
 var activated = false
+var died = false
 
 
 func _ready():
+	health_component.died.connect(on_died)
 	activate_timer.timeout.connect(on_activate_timer_timeout)
 	activate_timer.start()
 	if h_flip:
@@ -22,6 +25,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if died:
+		return
+	
 	velocity.y += gravity
 	
 	if activated:
@@ -46,3 +52,8 @@ func stop_and_turn():
 
 func on_activate_timer_timeout():
 	activated = true
+
+
+func on_died():
+	died = true
+	animation_player.play("die")

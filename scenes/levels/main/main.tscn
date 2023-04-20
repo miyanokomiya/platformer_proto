@@ -25,7 +25,15 @@ position = Vector2(119, 113)
 position = Vector2(40, 69)
 
 [node name="Carribo2" parent="MainLayer" instance=ExtResource("4_2lif2")]
-position = Vector2(282, 69)
+position = Vector2(282, 67)
+h_flip = true
+
+[node name="Carribo3" parent="MainLayer" instance=ExtResource("4_2lif2")]
+position = Vector2(336, 67)
+h_flip = true
+
+[node name="Carribo4" parent="MainLayer" instance=ExtResource("4_2lif2")]
+position = Vector2(391, 67)
 h_flip = true
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
