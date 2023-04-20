@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://8j2dyxxf2rgj"]
+[gd_scene load_steps=18 format=3 uid="uid://8j2dyxxf2rgj"]
 
 [ext_resource type="Texture2D" uid="uid://duqs5gj0hip3c" path="res://assets/sprites/shots/shots.png" id="1_07w6v"]
 [ext_resource type="Script" path="res://scenes/weapons/small_shot/small_shot.gd" id="1_ry1je"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_r32ob"]
+[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_ti380"]
 
 [sub_resource type="Animation" id="Animation_ualya"]
 resource_name = "flying"
@@ -147,6 +148,32 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_aioff"]
 radius = 4.0
 
+[sub_resource type="Gradient" id="Gradient_u4itg"]
+offsets = PackedFloat32Array(0, 0.237624, 0.821782, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.733, 0.11, 1, 0.890196, 0.435294, 0.141176, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0qsdm"]
+gradient = SubResource("Gradient_u4itg")
+
+[sub_resource type="Curve" id="Curve_utg36"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.283262, 1), 0.0, 0.0, 0, 0, Vector2(0.755365, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_15ddi"]
+curve = SubResource("Curve_utg36")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jw57r"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 75.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_15ddi")
+color_ramp = SubResource("GradientTexture1D_0qsdm")
+
 [node name="SmallShot" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
@@ -187,6 +214,20 @@ oneshot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_aioff")
 debug_color = Color(0.819608, 0.364706, 0.447059, 0.419608)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_jw57r")
+lifetime = 0.1
+one_shot = true
+explosiveness = 0.8
+
+[node name="HitSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ti380")
+volume_db = -23.11
+pitch_scale = 3.05
+bus = &"SE"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

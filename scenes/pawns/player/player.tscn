@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://taor7fuq5qk6"]
+[gd_scene load_steps=44 format=3 uid="uid://taor7fuq5qk6"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://cx7ythn7ts6er" path="res://assets/audios/footsteps/footstep_concrete_run_04.wav" id="17_o50js"]
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
 [ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="24_3we5w"]
+[ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euhxd"]
 size = Vector2(14, 27)
@@ -47,7 +48,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uymi8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvrnj"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -728,7 +729,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_uymi8")
+whiten_material = SubResource("ShaderMaterial_qvrnj")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 sprite = NodePath("../Sprite2D")
@@ -818,5 +819,11 @@ unique_name_in_owner = true
 volume_db = -23.361
 bus = &"SE"
 streams = Array[AudioStream]([ExtResource("24_3we5w")])
+
+[node name="HurtSE" type="AudioStreamPlayer" parent="Audios"]
+unique_name_in_owner = true
+stream = ExtResource("28_ba21n")
+volume_db = -15.826
+bus = &"SE"
 
 [connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]

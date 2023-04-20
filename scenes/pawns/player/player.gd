@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var buster_direction = %BusterDirection
 @onready var buster_small_se = %BusterSmallSE
 @onready var footstep_se = %FootstepSE
+@onready var hurt_se = %HurtSE
 
 
 var default_texture = preload("res://assets/sprites/aria/aria.png")
@@ -77,4 +78,5 @@ func on_flipped(h_flip: bool):
 
 
 func _on_hurtbox_component_hit(_hitbox_component):
+	hurt_se.play()
 	character_state_machine.on_damage()

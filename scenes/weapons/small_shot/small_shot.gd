@@ -7,6 +7,8 @@ extends StaticBody2D
 @onready var timer = $Timer
 @onready var animation_player = $AnimationPlayer
 @onready var terrain_ray_cast = $TerrainRayCast
+@onready var gpu_particles_2d = $GPUParticles2D
+@onready var hit_se = $HitSE
 
 var direction = Vector2.RIGHT
 var hit = false
@@ -26,6 +28,7 @@ func shoot(from: Vector2, _direction: Vector2, _rotation: bool):
 		scale.x *= -1
 	
 	animation_player.play("flying")
+	gpu_particles_2d.emitting = true
 
 
 func _physics_process(delta):
@@ -48,4 +51,5 @@ func _on_area_2d_body_entered(_body):
 
 
 func _on_hitbox_component_hit():
+	hit_se.play()
 	on_hit()
