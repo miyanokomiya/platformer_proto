@@ -12,7 +12,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6k1x"]
 size = Vector2(22, 24)
 
-[sub_resource type="Shader" id="Shader_4buxf"]
+[sub_resource type="Shader" id="Shader_l7m31"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -28,9 +28,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7kk3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tadul"]
 resource_local_to_scene = true
-shader = SubResource("Shader_4buxf")
+shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
@@ -206,7 +206,7 @@ tracks/3/path = NodePath("Sprite2D:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 0.594604),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -292,7 +292,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_o7kk3")
+whiten_material = SubResource("ShaderMaterial_tadul")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_k2j0g")]
 collision_layer = 4

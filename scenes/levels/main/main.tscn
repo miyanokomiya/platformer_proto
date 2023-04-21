@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwcpckviquer"]
+[gd_scene load_steps=6 format=3 uid="uid://cwcpckviquer"]
 
 [ext_resource type="PackedScene" uid="uid://taor7fuq5qk6" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
 [ext_resource type="PackedScene" uid="uid://ckohjylncthe8" path="res://scenes/levels/station_x/station_x_time_map.tscn" id="2_53xma"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="3_awc7c"]
 [ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="4_2lif2"]
+[ext_resource type="PackedScene" uid="uid://dbh1nbol5hser" path="res://scenes/pawns/enemies/humblecone/humblecone.tscn" id="6_pdt07"]
 
 [node name="Main" type="Node2D"]
 
@@ -34,6 +35,13 @@ h_flip = true
 
 [node name="Carribo4" parent="MainLayer" instance=ExtResource("4_2lif2")]
 position = Vector2(391, 67)
+h_flip = true
+
+[node name="Humblecone" parent="MainLayer" instance=ExtResource("6_pdt07")]
+position = Vector2(94, 107)
+
+[node name="Humblecone2" parent="MainLayer" instance=ExtResource("6_pdt07")]
+position = Vector2(225, 91)
 h_flip = true
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
