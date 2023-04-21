@@ -28,7 +28,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ml3n6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2lw0"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -503,7 +503,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_wg4d4")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_ml3n6")
+whiten_material = SubResource("ShaderMaterial_e2lw0")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_tf866")]
 collision_layer = 4
@@ -552,5 +552,10 @@ volume_db = -23.363
 pitch_scale = 1.2
 bus = &"SE"
 
+[node name="BlockTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="blocked" from="HurtboxComponent" to="." method="_on_hurtbox_component_blocked"]
 [connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]
 [connection signal="body_exited" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_exited"]

@@ -2,6 +2,7 @@ extends Area2D
 class_name HurtboxComponent
 
 signal hit(hitbox_component: HitboxComponent)
+signal blocked(hitbox_component: HitboxComponent)
 
 @export var health_component: HealthComponent
 @export var invincible_time: float = 0.0
@@ -28,7 +29,8 @@ func accept_hitbox(hitbox_component: HitboxComponent):
 		return
 	
 	if invincible:
-		hitbox_component.hit.emit()
+		hitbox_component.blocked.emit()
+		blocked.emit(hitbox_component)
 		return
 	
 	var damage = hitbox_component.get_damage()

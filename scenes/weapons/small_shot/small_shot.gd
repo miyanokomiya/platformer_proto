@@ -9,9 +9,11 @@ extends StaticBody2D
 @onready var terrain_ray_cast = $TerrainRayCast
 @onready var gpu_particles_2d = $GPUParticles2D
 @onready var hit_se = $HitSE
+@onready var blocked_se = $BlockedSE
 
 var direction = Vector2.RIGHT
 var hit = false
+var blocked = false
 
 func _ready():
 	timer.timeout.connect(queue_free)
@@ -53,3 +55,13 @@ func _on_area_2d_body_entered(_body):
 func _on_hitbox_component_hit():
 	hit_se.play()
 	on_hit()
+
+
+func _on_hitbox_component_blocked():
+	blocked_se.play()
+	animation_player.play("stay")
+	blocked = true
+	if direction.x >= 0:
+		direction = direction.rotated(PI * 1.25)
+	else:
+		direction = direction.rotated(PI * 0.75)

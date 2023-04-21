@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 @onready var health_component = $HealthComponent
 @onready var hurtbox_component = $HurtboxComponent
+@onready var block_timer = $BlockTimer
 
 @export var h_flip: bool = false
 
@@ -14,6 +15,7 @@ var died = false
 
 func _ready():
 	health_component.died.connect(on_died)
+	block_timer.timeout.connect(on_block_timer_timeout)
 	if h_flip:
 		scale.x *= -1
 
@@ -24,11 +26,7 @@ func start_block():
 	
 	start_invicible()
 	animation_player.play("block")
-	await get_tree().create_timer(2.0).timeout
-	end_invicible()
-	animation_player.play("unblock")
-	await animation_player.animation_finished
-	start_block()
+	block_timer.start()
 
 
 func start_invicible():
@@ -53,3 +51,14 @@ func _on_player_detect_area_body_exited(_body):
 func on_died():
 	died = true
 	animation_player.play("die")
+
+
+func _on_hurtbox_component_blocked(_hitbox_component):
+	block_timer.start()
+
+
+func on_block_timer_timeout():
+	end_invicible()
+	animation_player.play("unblock")
+	await animation_player.animation_finished
+	start_block()

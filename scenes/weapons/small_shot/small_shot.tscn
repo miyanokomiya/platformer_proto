@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://8j2dyxxf2rgj"]
+[gd_scene load_steps=19 format=3 uid="uid://8j2dyxxf2rgj"]
 
 [ext_resource type="Texture2D" uid="uid://duqs5gj0hip3c" path="res://assets/sprites/shots/shots.png" id="1_07w6v"]
 [ext_resource type="Script" path="res://scenes/weapons/small_shot/small_shot.gd" id="1_ry1je"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_r32ob"]
 [ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_ti380"]
+[ext_resource type="AudioStream" uid="uid://cic8tlt7mnvyi" path="res://assets/audios/blocked/knife_hit_small_05.wav" id="5_twwa3"]
 
 [sub_resource type="Animation" id="Animation_ualya"]
 resource_name = "flying"
@@ -229,5 +230,10 @@ volume_db = -23.11
 pitch_scale = 3.05
 bus = &"SE"
 
+[node name="BlockedSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_twwa3")
+bus = &"SE"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
