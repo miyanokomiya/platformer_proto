@@ -1,0 +1,334 @@
+[gd_scene load_steps=21 format=3 uid="uid://hecsiu8110dw"]
+
+[ext_resource type="Script" path="res://scenes/pawns/enemies/ceilwatcher/ceilwatcher.gd" id="1_vaf06"]
+[ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_siiun"]
+[ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="3_bhp1l"]
+[ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_hpx5q"]
+[ext_resource type="Texture2D" uid="uid://bh10f1bgpjjoo" path="res://assets/sprites/enemies/ceilwatcher.png" id="5_qvnfs"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="5_s1u3x"]
+[ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="7_tctb3"]
+[ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="8_pagcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjhbs"]
+size = Vector2(17, 22)
+
+[sub_resource type="Shader" id="Shader_4buxf"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float mix_weight: hint_range(0.0, 1.0) = 1.0;
+uniform float alpha: hint_range(0.0, 1.0) = 1.0;
+uniform vec4 color: source_color = vec4(1, 1, 1, 1);
+
+void fragment() {
+	vec4 texture_color = texture(TEXTURE, UV);
+	vec3 white = vec3(1, 1, 1);
+	vec3 whitened_texture_rgb = mix(texture_color.rgb, color.rgb, mix_weight);
+	COLOR = vec4(whitened_texture_rgb, texture_color.a * color.a * alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1suoq"]
+resource_local_to_scene = true
+shader = SubResource("Shader_4buxf")
+shader_parameter/mix_weight = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ky3ld"]
+size = Vector2(17, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hr0l"]
+size = Vector2(17, 22)
+
+[sub_resource type="Animation" id="Animation_02ijc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DiedSE:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:material")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_rmcdk"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.406126),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DiedSE:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:material")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xmalr"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rk5si"]
+_data = {
+"RESET": SubResource("Animation_02ijc"),
+"die": SubResource("Animation_rmcdk"),
+"idle": SubResource("Animation_xmalr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6e1a"]
+size = Vector2(244, 162)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4g78f"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7ob2y"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Ceilwatcher" type="CharacterBody2D"]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_vaf06")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_siiun")]
+max_health = 3.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_bhp1l")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_hjhbs")
+debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_hpx5q")]
+hurtbox_component = NodePath("../HurtboxComponent")
+sprite = NodePath("../Sprite2D")
+whiten_material = SubResource("ShaderMaterial_1suoq")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_s1u3x")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_ky3ld")
+debug_color = Color(0.717647, 0.470588, 0.290196, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_7hr0l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_qvnfs")
+flip_h = true
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_rk5si")
+}
+
+[node name="PlayerDetectArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea"]
+shape = SubResource("RectangleShape2D_v6e1a")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4g78f")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_7ob2y")
+texture = ExtResource("7_tctb3")
+lifetime = 0.5
+one_shot = true
+
+[node name="DiedSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_pagcx")
+volume_db = -23.363
+pitch_scale = 1.2
+bus = &"SE"
+
+[node name="FlyingTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true

@@ -28,7 +28,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2lw0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fiere"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -467,7 +467,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6e1a"]
-size = Vector2(95, 64)
+size = Vector2(95, 88)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4g78f"]
 particles_animation = true
@@ -503,7 +503,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_wg4d4")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_e2lw0")
+whiten_material = SubResource("ShaderMaterial_fiere")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_tf866")]
 collision_layer = 4
@@ -530,11 +530,12 @@ libraries = {
 }
 
 [node name="PlayerDetectArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea"]
-position = Vector2(47.5, -12)
+position = Vector2(48, 0)
 shape = SubResource("RectangleShape2D_v6e1a")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
