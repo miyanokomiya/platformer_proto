@@ -118,4 +118,5 @@ sources/13 = SubResource("TileSetAtlasSource_jlvat")
 
 [node name="StationXTileMap" type="TileMap"]
 tile_set = SubResource("TileSet_8ur4i")
+cell_quadrant_size = 8
 format = 2

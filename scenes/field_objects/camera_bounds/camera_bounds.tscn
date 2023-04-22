@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq4qga58cfmks"]
+
+[ext_resource type="Script" path="res://scenes/field_objects/camera_bounds/camera_bounds.gd" id="1_v6f1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dgv4"]
+resource_local_to_scene = true
+size = Vector2(52, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjye3"]
+resource_local_to_scene = true
+size = Vector2(320, 180)
+
+[node name="CameraBounds" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_v6f1w")
+
+[node name="PlayerDetector" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_5dgv4")
+debug_color = Color(0.588235, 0.541176, 0.270588, 0.419608)
+
+[node name="BoundsArea" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_hjye3")
+disabled = true
