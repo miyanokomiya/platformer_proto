@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var ground_detector = %GroundDetector
 @onready var wall_detector = %WallDetector
 @onready var animation_player = $AnimationPlayer
-@onready var activate_timer = $"../../ActivateTimer"
+@onready var activate_timer = $ActivateTimer
 @onready var health_component = $HealthComponent
 
 @export var h_flip: bool = false

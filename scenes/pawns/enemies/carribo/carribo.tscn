@@ -341,3 +341,5 @@ stream = ExtResource("8_clpqq")
 volume_db = -23.363
 pitch_scale = 1.2
 bus = &"SE"
+
+[node name="ActivateTimer" type="Timer" parent="."]
