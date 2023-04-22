@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwcpckviquer"]
+[gd_scene load_steps=8 format=3 uid="uid://cwcpckviquer"]
 
 [ext_resource type="PackedScene" uid="uid://taor7fuq5qk6" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
 [ext_resource type="PackedScene" uid="uid://ckohjylncthe8" path="res://scenes/levels/station_x/station_x_time_map.tscn" id="2_53xma"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="4_2lif2"]
 [ext_resource type="PackedScene" uid="uid://dbh1nbol5hser" path="res://scenes/pawns/enemies/humblecone/humblecone.tscn" id="6_pdt07"]
 [ext_resource type="PackedScene" uid="uid://hecsiu8110dw" path="res://scenes/pawns/enemies/ceilwatcher/ceilwatcher.tscn" id="6_qrgld"]
+[ext_resource type="PackedScene" uid="uid://badggq5y3umih" path="res://scenes/pawns/enemies/angledtrapper/angledtrapper.tscn" id="7_8e4jf"]
 
 [node name="Main" type="Node2D"]
 
@@ -52,6 +53,13 @@ h_flip = true
 [node name="Ceilwatcher2" parent="MainLayer" instance=ExtResource("6_qrgld")]
 position = Vector2(432, -22)
 h_flip = true
+
+[node name="Angledtrapper" parent="MainLayer" instance=ExtResource("7_8e4jf")]
+position = Vector2(0, 26)
+h_flip = true
+
+[node name="Angledtrapper2" parent="MainLayer" instance=ExtResource("7_8e4jf")]
+position = Vector2(608, 10)
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
 

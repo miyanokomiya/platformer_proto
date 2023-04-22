@@ -48,7 +48,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_11udy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xxtd"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -659,7 +659,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(10, 27)]
+"values": [Vector2(13, 32)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -671,7 +671,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-2, 2.5)]
+"values": [Vector2(-3.5, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_w37ts"]
@@ -729,7 +729,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_11udy")
+whiten_material = SubResource("ShaderMaterial_7xxtd")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 sprite = NodePath("../Sprite2D")
