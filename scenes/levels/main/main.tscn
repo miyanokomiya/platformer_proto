@@ -62,6 +62,3 @@ h_flip = true
 position = Vector2(608, 10)
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
-
-[node name="ActivateTimer" type="Timer" parent="."]
-one_shot = true
