@@ -1,10 +1,8 @@
 extends StaticBody2D
 
 @export var speed = 300
-@export var lifetime: float = 1.0
 @export var flip_h: bool = false
 
-@onready var timer = $Timer
 @onready var animation_player = $AnimationPlayer
 @onready var terrain_ray_cast = $TerrainRayCast
 @onready var gpu_particles_2d = $GPUParticles2D
@@ -15,13 +13,8 @@ var direction = Vector2.RIGHT
 var hit = false
 var blocked = false
 
-func _ready():
-	timer.timeout.connect(queue_free)
-
 
 func shoot(from: Vector2, _direction: Vector2, _rotation: bool):
-	timer.wait_time = lifetime
-	timer.start()
 	global_position = from
 	rotation = _rotation
 	direction = _direction
@@ -65,3 +58,7 @@ func _on_hitbox_component_blocked():
 		direction = direction.rotated(PI * 1.25)
 	else:
 		direction = direction.rotated(PI * 0.75)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

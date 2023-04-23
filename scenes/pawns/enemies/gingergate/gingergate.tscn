@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxjj31qcfg6a2"]
-
-[ext_resource type="Texture2D" uid="uid://dilk3yfevu0ir" path="res://assets/sprites/enemies/gingergate.png" id="1_b0cbb"]
-
-[node name="Gingergate" type="CharacterBody2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_b0cbb")

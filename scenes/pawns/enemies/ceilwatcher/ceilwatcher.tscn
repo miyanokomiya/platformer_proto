@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://hecsiu8110dw"]
+[gd_scene load_steps=22 format=3 uid="uid://hecsiu8110dw"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/ceilwatcher/ceilwatcher.gd" id="1_vaf06"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_siiun"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_hpx5q"]
 [ext_resource type="Texture2D" uid="uid://bh10f1bgpjjoo" path="res://assets/sprites/enemies/ceilwatcher.png" id="5_qvnfs"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="5_s1u3x"]
+[ext_resource type="PackedScene" uid="uid://bu8kgcot4n6tt" path="res://scenes/components/off_screen_component/off_screen_component.tscn" id="6_ne1rs"]
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="7_tctb3"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="8_pagcx"]
 
@@ -28,7 +29,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1suoq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6a13"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -280,7 +281,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_hpx5q")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_1suoq")
+whiten_material = SubResource("ShaderMaterial_o6a13")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_s1u3x")]
 collision_layer = 4
@@ -291,13 +292,14 @@ position = Vector2(-2.5, 0)
 shape = SubResource("RectangleShape2D_ky3ld")
 debug_color = Color(0.717647, 0.470588, 0.290196, 0.419608)
 
+[node name="OffScreenComponent" parent="." instance=ExtResource("6_ne1rs")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 0)
 shape = SubResource("RectangleShape2D_7hr0l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("5_qvnfs")
-flip_h = true
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

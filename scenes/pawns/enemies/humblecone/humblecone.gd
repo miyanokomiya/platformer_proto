@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends EnemyBase
 
 @onready var player_detect_area = $PlayerDetectArea
 @onready var animation_player = $AnimationPlayer
@@ -6,18 +6,15 @@ extends CharacterBody2D
 @onready var hurtbox_component = $HurtboxComponent
 @onready var block_timer = $BlockTimer
 
-@export var h_flip: bool = false
-
 var player_detected = false
 var blocked = false
 var died = false
 
 
 func _ready():
+	super._ready()
 	health_component.died.connect(on_died)
 	block_timer.timeout.connect(on_block_timer_timeout)
-	if h_flip:
-		scale.x *= -1
 
 
 func start_block():

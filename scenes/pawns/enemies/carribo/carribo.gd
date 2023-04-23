@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends EnemyBase
 
 @onready var ground_detector = %GroundDetector
 @onready var wall_detector = %WallDetector
@@ -6,22 +6,24 @@ extends CharacterBody2D
 @onready var activate_timer = $ActivateTimer
 @onready var health_component = $HealthComponent
 
-@export var h_flip: bool = false
 
 var speed = 30.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var direction = 1
+var direction = -1
 var activated = false
 var died = false
 
 
 func _ready():
+	super._ready()
 	health_component.died.connect(on_died)
 	activate_timer.timeout.connect(on_activate_timer_timeout)
 	activate_timer.start()
-	if h_flip:
-		scale.x *= -1
-		direction *= -1
+
+
+func turn_h():
+	super.turn_h()
+	direction *= -1
 
 
 func _physics_process(delta):
@@ -45,8 +47,7 @@ func stop_and_turn():
 	activated = false
 	animation_player.play("idle")
 	await get_tree().create_timer(2).timeout
-	scale.x *= -1
-	direction *= -1
+	turn_h()
 	activated = true
 
 

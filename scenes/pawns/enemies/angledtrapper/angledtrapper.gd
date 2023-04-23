@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends EnemyBase
 
 @onready var player_detect_area = $PlayerDetectArea
 @onready var animation_player = $AnimationPlayer
@@ -9,8 +9,6 @@ extends CharacterBody2D
 @onready var ceil_detector = %CeilDetector
 @onready var floor_detector = %FloorDetector
 
-@export var h_flip: bool = false
-
 var player_detected = false
 var broken = false
 var breaking = false
@@ -20,9 +18,8 @@ var turning = false
 
 
 func _ready():
+	super._ready()
 	health_component.died.connect(on_died)
-	if h_flip:
-		scale.x *= -1
 
 
 func _physics_process(delta):
