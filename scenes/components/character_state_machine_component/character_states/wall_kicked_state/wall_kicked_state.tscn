@@ -5,6 +5,7 @@
 
 [node name="WallKickedState" type="Node"]
 script = ExtResource("1_dnn3t")
+state_name = "wall_kicked"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

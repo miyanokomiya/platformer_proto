@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvaiar5aecjik"]
-
-[ext_resource type="Script" path="res://scenes/components/LadderDetectComponent/ladder_detect_component.gd" id="1_4a7fq"]
-
-[node name="LadderDetectComponent" type="Area2D"]
-collision_layer = 0
-collision_mask = 32
-script = ExtResource("1_4a7fq")

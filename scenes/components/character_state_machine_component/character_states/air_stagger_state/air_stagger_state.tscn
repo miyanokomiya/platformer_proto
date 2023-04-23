@@ -4,6 +4,7 @@
 
 [node name="AirStaggerState" type="Node"]
 script = ExtResource("1_wixrf")
+state_name = "air_stagger"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

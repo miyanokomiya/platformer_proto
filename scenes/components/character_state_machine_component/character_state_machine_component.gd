@@ -35,12 +35,7 @@ func on_damage():
 
 func state_transition():
 	if current_state.next_state_name:
-		# print(current_state, current_state.next_state_name)
-		var next_state = state_fuctory.get_state(current_state.next_state_name)
-		if next_state:
-			switch_state(next_state)
-		else:
-			print_debug("Unknown state: " + current_state.next_state_name)
+		switch_state_by_name(current_state.next_state_name)
 
 
 func switch_state(next_state: CharacterState):
@@ -51,4 +46,12 @@ func switch_state(next_state: CharacterState):
 	add_child(current_state)
 	current_state.on_enter(state_context)
 	state_changed.emit()
-	
+
+
+func switch_state_by_name(next_state_name: String):
+	# print(current_state, current_state.next_state_name)
+	var next_state = state_fuctory.get_state(next_state_name)
+	if next_state:
+		switch_state(next_state)
+	else:
+		print_debug("Unknown state: " + next_state_name)

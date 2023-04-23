@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi1hxqbxw4b2f"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ladder_down_state/ladder_down_state.gd" id="1_a0g5m"]
+
+[node name="LadderDownState" type="Node"]
+script = ExtResource("1_a0g5m")
+state_name = "ladder_down"
+
+[node name="BeginTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="BeginTimer" to="." method="_on_begin_timer_timeout"]

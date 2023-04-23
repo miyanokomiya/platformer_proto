@@ -4,6 +4,7 @@
 
 [node name="GroundDashState" type="Node"]
 script = ExtResource("1_boy42")
+state_name = "ground_dash"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

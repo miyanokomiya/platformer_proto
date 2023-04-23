@@ -13,6 +13,7 @@ signal flipped(h_flip: bool)
 @export var jump_se: AudioStreamPlayer
 @export var land_se: AudioStreamPlayer
 @export var ladder_detect_component: LadderDetectComponent
+@export var almost_floor_raycast: RayCast2D
 
 var character: CharacterBody2D
 var animation_player: AnimationPlayer
@@ -42,6 +43,10 @@ func get_move_speed() -> float:
 
 func get_stagger_speed() -> float:
 	return SPEED / 2
+
+
+func get_ladder_speed() -> float:
+	return SPEED * 0.7
 
 
 func wall_kicked_spped() -> float:

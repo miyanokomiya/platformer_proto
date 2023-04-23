@@ -4,3 +4,4 @@
 
 [node name="AirState" type="Node"]
 script = ExtResource("1_bxf5d")
+state_name = "air"

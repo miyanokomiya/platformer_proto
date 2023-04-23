@@ -4,3 +4,4 @@
 
 [node name="GroundState" type="Node"]
 script = ExtResource("1_m05td")
+state_name = "ground"

@@ -4,6 +4,7 @@
 
 [node name="GroundStaggerState" type="Node"]
 script = ExtResource("1_8yhk5")
+state_name = "ground_stagger"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

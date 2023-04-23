@@ -4,8 +4,11 @@
 
 [node name="LadderState" type="Node"]
 script = ExtResource("1_ljnag")
+state_name = "ladder"
 
 [node name="BeginTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="timeout" from="BeginTimer" to="." method="_on_begin_timer_timeout"]
+[node name="AttackWaitTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

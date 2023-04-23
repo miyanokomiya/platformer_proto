@@ -1,6 +1,8 @@
 extends Node
 class_name CharacterState
 
+@export var state_name = ""
+
 var next_state_name: String
 
 

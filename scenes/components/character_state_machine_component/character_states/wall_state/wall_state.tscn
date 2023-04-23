@@ -4,3 +4,4 @@
 
 [node name="WallState" type="Node"]
 script = ExtResource("1_3px8m")
+state_name = "wall"

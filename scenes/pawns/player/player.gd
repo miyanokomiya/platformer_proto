@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var character_state_machine = $CharacterStateMachine
 @onready var character_state_context = $CharacterStateContext
@@ -52,6 +53,14 @@ func is_close_to_back_wall() -> bool:
 
 func play_footstep_se():
 	footstep_se.play_random()
+
+
+func get_current_state() -> CharacterState:
+	return character_state_machine.current_state
+
+
+func switch_state(state_name: String):
+	character_state_machine.switch_state_by_name(state_name)
 
 
 func on_state_changed():

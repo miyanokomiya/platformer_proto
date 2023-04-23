@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvrvurjh8h6l"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ladder_up_state/ladder_up_state.gd" id="1_htlv6"]
+
+[node name="LadderUpState" type="Node"]
+script = ExtResource("1_htlv6")

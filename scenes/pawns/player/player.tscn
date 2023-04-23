@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://taor7fuq5qk6"]
+[gd_scene load_steps=52 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="5_vir1a"]
 [ext_resource type="PackedScene" uid="uid://4vf7imvg7hyd" path="res://scenes/components/character_state_machine_component/character_states/ground_dash_state/ground_dash_state.tscn" id="6_q13fd"]
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
-[ext_resource type="PackedScene" uid="uid://bvaiar5aecjik" path="res://scenes/components/LadderDetectComponent/ladder_detect_component.tscn" id="7_kdsuq"]
+[ext_resource type="PackedScene" uid="uid://bh8yf7v5eku2l" path="res://scenes/components/ladder_detect_component/ladder_detect_component.tscn" id="7_kdsuq"]
 [ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="8_ndnoh"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="11_y2o4e"]
@@ -28,6 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://d3a7jvqawg1mu" path="res://assets/audios/footsteps/footstep_concrete_run_03.wav" id="16_2uy8f"]
 [ext_resource type="AudioStream" uid="uid://cx7ythn7ts6er" path="res://assets/audios/footsteps/footstep_concrete_run_04.wav" id="17_o50js"]
 [ext_resource type="PackedScene" uid="uid://bic1fqp0lci2m" path="res://scenes/components/character_state_machine_component/character_states/ladder_state/ladder_state.tscn" id="19_iafpo"]
+[ext_resource type="PackedScene" uid="uid://bi1hxqbxw4b2f" path="res://scenes/components/character_state_machine_component/character_states/ladder_down_state/ladder_down_state.tscn" id="20_hong7"]
+[ext_resource type="PackedScene" uid="uid://bvrvurjh8h6l" path="res://scenes/components/character_state_machine_component/character_states/ladder_up_state/ladder_up_state.tscn" id="21_1dice"]
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
 [ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="24_3we5w"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
@@ -51,7 +53,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2u6r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dt0vs"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -59,7 +61,7 @@ shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ni0j2"]
-size = Vector2(10, 20)
+size = Vector2(10, 22)
 
 [sub_resource type="Animation" id="Animation_m1nvf"]
 length = 0.001
@@ -85,7 +87,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -174,7 +176,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -251,7 +253,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -315,7 +317,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-1, 0)]
+"values": [Vector2(-1, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -379,7 +381,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 0)]
+"values": [Vector2(1, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -443,7 +445,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2, 0)]
+"values": [Vector2(2, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -509,7 +511,85 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BusterDirection:position")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, -7)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtboxComponent/CollisionShape2D:shape:size")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 31)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtboxComponent/CollisionShape2D:position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_ndnoh")]
+}
+
+[sub_resource type="Animation" id="Animation_doahs"]
+resource_name = "ladder_buster"
+length = 0.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -586,7 +666,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -658,6 +738,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [18, 19]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
 
 [sub_resource type="Animation" id="Animation_u0het"]
 resource_name = "stand"
@@ -684,7 +776,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -748,7 +840,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-4, 0)]
+"values": [Vector2(-4, -16)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -796,6 +888,7 @@ _data = {
 "jump_high": SubResource("Animation_nx3m7"),
 "jump_up": SubResource("Animation_m2wge"),
 "ladder": SubResource("Animation_howit"),
+"ladder_buster": SubResource("Animation_doahs"),
 "run": SubResource("Animation_0kouf"),
 "stagger": SubResource("Animation_w37ts"),
 "stand": SubResource("Animation_u0het"),
@@ -813,6 +906,7 @@ small_shot = ExtResource("2_vdr3h")
 [node name="HealthComponent" parent="." instance=ExtResource("3_10q3v")]
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_i3utj")]
+position = Vector2(0, -16)
 collision_layer = 2
 collision_mask = 20
 health_component = NodePath("../HealthComponent")
@@ -826,15 +920,18 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_r2u6r")
+whiten_material = SubResource("ShaderMaterial_dt0vs")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
+position = Vector2(0, -16)
 sprite = NodePath("../Sprite2D")
 effect_color = Color(0.32549, 0.560784, 0.831373, 1)
 
 [node name="LadderDetectComponent" parent="." instance=ExtResource("7_kdsuq")]
+position = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderDetectComponent"]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ni0j2")
 debug_color = Color(0.631373, 0.435294, 0.784314, 0.419608)
 
@@ -845,18 +942,19 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, 2)
+position = Vector2(-1, -14)
 shape = SubResource("RectangleShape2D_5rw22")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
 texture = ExtResource("4_mwci4")
 hframes = 27
 
-[node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component") instance=ExtResource("3_n1m2y")]
+[node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast") instance=ExtResource("3_n1m2y")]
 jump_se = NodePath("../Audios/JumpSE")
 land_se = NodePath("../Audios/LandSE")
 ladder_detect_component = NodePath("../LadderDetectComponent")
+almost_floor_raycast = NodePath("../AlmostFloorRayCast")
 
 [node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
 ground_state_scene = ExtResource("3_i5wyf")
@@ -867,6 +965,8 @@ air_stagger_state_scene = ExtResource("14_uadgv")
 wall_state_scene = ExtResource("7_idwji")
 wall_kicked_scene = ExtResource("8_dbhk6")
 ladder_state_scene = ExtResource("19_iafpo")
+ladder_down_state_scene = ExtResource("20_hong7")
+ladder_up_state_scene = ExtResource("21_1dice")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
 state_context = NodePath("../CharacterStateContext")
@@ -877,15 +977,21 @@ default_state_scene = ExtResource("3_i5wyf")
 one_shot = true
 
 [node name="CloseFloorRayCast" type="RayCast2D" parent="."]
-position = Vector2(0, 16)
+visible = false
 target_position = Vector2(0, 20)
 
+[node name="AlmostFloorRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -11)
+target_position = Vector2(0, 13)
+
 [node name="BackWallRayCast" type="RayCast2D" parent="."]
-position = Vector2(-8, 10)
+position = Vector2(-8, -6)
 target_position = Vector2(-5, 0)
 
 [node name="FrontWallRayCast" type="RayCast2D" parent="."]
-position = Vector2(6, 10)
+position = Vector2(6, -6)
 target_position = Vector2(5, 0)
 
 [node name="BusterDirection" parent="." instance=ExtResource("21_ufte6")]

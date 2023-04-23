@@ -11,7 +11,7 @@ func on_damage(_ctx: CharacterStateContext):
 
 
 func state_process(ctx: CharacterStateContext, delta: float):
-	if !ctx.character.is_on_floor():
+	if !ctx.character.is_on_floor() && !ctx.almost_floor_raycast.is_colliding():
 		next_state_name = "air"
 	
 	if Input.is_action_pressed("move_up") && ctx.ladder_detect_component.is_close_to_ladder():

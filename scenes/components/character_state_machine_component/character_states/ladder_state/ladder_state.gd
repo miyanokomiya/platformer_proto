@@ -1,16 +1,17 @@
 extends CharacterState
 
 @onready var begin_timer = $BeginTimer
-
-var can_land = false
+@onready var attack_wait_timer = $AttackWaitTimer
 
 
 func on_enter(ctx: CharacterStateContext):
 	ctx.set_after_effect_playing(false)
 	var ladder = ctx.ladder_detect_component.get_ladder()
-	ctx.character.global_position.x = ladder.global_position.x
-	can_land = false
-	begin_timer.start()
+	if ladder:
+		ctx.character.global_position.x = ladder.global_position.x
+		begin_timer.start()
+	else:
+		next_state_name = "air"
 
 
 func on_damage(_ctx: CharacterStateContext):
@@ -18,7 +19,7 @@ func on_damage(_ctx: CharacterStateContext):
 
 
 func state_process(ctx: CharacterStateContext, _delta: float):
-	if can_land && ctx.character.is_on_floor():
+	if begin_timer.is_stopped() && ctx.character.is_on_floor():
 		next_state_name = "ground"
 		return
 	
@@ -26,10 +27,14 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 		next_state_name = "air"
 		return
 	
-	if free_move(ctx):
-		ctx.animation_player.play("ladder")
+	if attack_wait_timer.is_stopped():
+		if free_move(ctx):
+			ctx.animation_player.play("ladder")
+		else:
+			ctx.animation_player.pause()
 	else:
-		ctx.animation_player.pause()
+		ctx.character.velocity.x = 0
+		ctx.character.velocity.y = 0
 	
 	ctx.character.move_and_slide()
 
@@ -44,21 +49,21 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 		next_state_name = "air"
 	
 	if Input.is_action_just_pressed("action_main_attack"):
-		# ctx.action_main_attack()
-		pass
+		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
+			ctx.flip_character()
+		
+		ctx.animation_player.play("ladder_buster")
+		ctx.action_main_attack()
+		attack_wait_timer.start()
 
 
 func free_move(ctx: CharacterStateContext) -> bool:
 	ctx.character.velocity.x = 0
 	var direction = sign(Input.get_axis("move_up", "move_down"))
-	var speed = ctx.SPEED * 0.7
+	var speed = ctx.get_ladder_speed()
 	if direction:
 		ctx.character.velocity.y = direction * speed
 	else:
 		ctx.character.velocity.y = move_toward(ctx.character.velocity.y, 0, speed)
 	
 	return !!direction
-
-
-func _on_begin_timer_timeout():
-	can_land = true
