@@ -7,7 +7,7 @@ script = ExtResource("1_a0g5m")
 state_name = "ladder_down"
 
 [node name="BeginTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [connection signal="timeout" from="BeginTimer" to="." method="_on_begin_timer_timeout"]

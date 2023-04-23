@@ -6,6 +6,7 @@ extends CharacterState
 
 func on_enter(ctx: CharacterStateContext):
 	ctx.set_after_effect_playing(false)
+	ctx.animation_player.play("ladder")
 	var ladder = ctx.ladder_detect_component.get_ladder()
 	if ladder:
 		ctx.character.global_position.x = ladder.global_position.x
@@ -28,8 +29,11 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 		return
 	
 	if attack_wait_timer.is_stopped():
-		if free_move(ctx):
+		var direction = free_move(ctx)
+		if direction < 0:
 			ctx.animation_player.play("ladder")
+		elif direction > 0:
+			ctx.animation_player.play_backwards("ladder")
 		else:
 			ctx.animation_player.pause()
 	else:
@@ -57,7 +61,7 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 		attack_wait_timer.start()
 
 
-func free_move(ctx: CharacterStateContext) -> bool:
+func free_move(ctx: CharacterStateContext) -> int:
 	ctx.character.velocity.x = 0
 	var direction = sign(Input.get_axis("move_up", "move_down"))
 	var speed = ctx.get_ladder_speed()
@@ -66,4 +70,4 @@ func free_move(ctx: CharacterStateContext) -> bool:
 	else:
 		ctx.character.velocity.y = move_toward(ctx.character.velocity.y, 0, speed)
 	
-	return !!direction
+	return direction

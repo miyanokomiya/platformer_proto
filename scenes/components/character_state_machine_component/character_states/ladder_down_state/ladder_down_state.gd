@@ -17,7 +17,7 @@ func on_damage(_ctx: CharacterStateContext):
 func state_process(ctx: CharacterStateContext, _delta: float):
 	ctx.character.velocity.x = 0
 	ctx.character.velocity.y = ctx.get_ladder_speed()
-	ctx.animation_player.play("ladder")
+	ctx.animation_player.play_backwards("ladder")
 	ctx.character.move_and_slide()
 
 

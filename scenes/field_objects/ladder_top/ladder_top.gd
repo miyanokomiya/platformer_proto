@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var top_out_area = %TopOutArea
-@onready var trap_area = %TrapArea
 
 var found_player: Player
 
