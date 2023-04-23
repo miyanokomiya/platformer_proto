@@ -19,6 +19,10 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		ctx.play_land_se()
 		return
 	
+	if Input.is_action_pressed("move_up") && ctx.ladder_detect_component.is_close_to_ladder() && ctx.character.velocity.y > ctx.JUMP_VELOCITY / 2:
+		next_state_name = "ladder"
+		return
+	
 	character.velocity.y += ctx.gravity * delta
 	
 	if character.velocity.y < ctx.JUMP_VELOCITY / 8:

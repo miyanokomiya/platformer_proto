@@ -12,6 +12,7 @@ signal flipped(h_flip: bool)
 
 @export var jump_se: AudioStreamPlayer
 @export var land_se: AudioStreamPlayer
+@export var ladder_detect_component: LadderDetectComponent
 
 var character: CharacterBody2D
 var animation_player: AnimationPlayer
@@ -22,6 +23,7 @@ var after_effect_component: AfterEffectComponent
 
 var current_direction = 1
 var has_dash_momentum = false
+var is_close_to_ladder = false
 
 
 func flip_character():

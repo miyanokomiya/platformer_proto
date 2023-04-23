@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bic1fqp0lci2m"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ladder_state/ladder_state.gd" id="1_ljnag"]
+
+[node name="LadderState" type="Node"]
+script = ExtResource("1_ljnag")
+
+[node name="BeginTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="BeginTimer" to="." method="_on_begin_timer_timeout"]

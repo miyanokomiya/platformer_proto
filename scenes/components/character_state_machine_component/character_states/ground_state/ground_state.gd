@@ -14,6 +14,10 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
 	
+	if Input.is_action_pressed("move_up") && ctx.ladder_detect_component.is_close_to_ladder():
+		next_state_name = "ladder"
+		return
+	
 	ctx.character.velocity.y += ctx.gravity * delta
 	if free_move(ctx):
 		ctx.animation_player.play("run")
