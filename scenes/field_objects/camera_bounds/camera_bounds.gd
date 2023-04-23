@@ -23,10 +23,7 @@ func reset_bounds():
 	if !camera:
 		return
 	
-	if camera.limit_id != get_instance_id():
-		return
-	
-	camera.restore_original_limit()
+	camera.clear_limit(get_instance_id())
 
 
 func on_body_entered(_body: Node2D):

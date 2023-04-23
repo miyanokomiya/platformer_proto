@@ -9,7 +9,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvy43"]
 resource_local_to_scene = true
-size = Vector2(1192, 154)
+size = Vector2(1311, 154)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5j6ls"]
 resource_local_to_scene = true
@@ -17,7 +17,7 @@ size = Vector2(1440, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ump2p"]
 resource_local_to_scene = true
-size = Vector2(278, 222)
+size = Vector2(151, 222)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4mg3"]
 resource_local_to_scene = true
@@ -76,7 +76,7 @@ position = Vector2(189, 90)
 camera = NodePath("../../MainCamera")
 
 [node name="PlayerDetector" parent="CameraMeta/CameraBounds" index="0"]
-position = Vector2(407, 0)
+position = Vector2(466.5, 0)
 shape = SubResource("RectangleShape2D_xvy43")
 
 [node name="BoundsArea" parent="CameraMeta/CameraBounds" index="1"]
@@ -88,7 +88,7 @@ position = Vector2(1289, 88)
 camera = NodePath("../../MainCamera")
 
 [node name="PlayerDetector" parent="CameraMeta/CameraBounds2" index="0"]
-position = Vector2(12, -34)
+position = Vector2(75.5, -34)
 shape = SubResource("RectangleShape2D_ump2p")
 
 [node name="BoundsArea" parent="CameraMeta/CameraBounds2" index="1"]
