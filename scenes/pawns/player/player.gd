@@ -14,6 +14,7 @@ class_name Player
 @onready var footstep_se = %FootstepSE
 @onready var hurt_se = %HurtSE
 @onready var charge_particles = %ChargeParticles
+@onready var charge_se = %ChargeSE
 
 
 var default_texture = preload("res://assets/sprites/aria/aria.png")
@@ -78,8 +79,7 @@ func on_bustered(charge_level: int):
 		shot = middle_shot.instantiate()
 		
 	get_tree().get_first_node_in_group("foreground_layer").add_child(shot)
-	shot.flip_h = character_state_context.current_direction == -1
-	shot.shoot(buster_direction.global_position, buster_direction.get_direction(), buster_direction.get_angle())
+	shot.shoot(buster_direction.global_position, buster_direction.get_direction())
 
 
 func on_buster_texture_timer_timeout():
@@ -98,11 +98,13 @@ func _on_hurtbox_component_hit(_hitbox_component):
 
 
 func _on_charge_component_charged(_level):
+	charge_se.play(80000)
 	charge_particles.emitting = true
 	charge_particles.restart()
 	charge_particles.visible = true
 
 
 func _on_charge_component_released(_level):
+	charge_se.stop()
 	charge_particles.emitting = false
 	charge_particles.visible = false

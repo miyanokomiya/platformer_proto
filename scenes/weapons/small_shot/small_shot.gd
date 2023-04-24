@@ -1,31 +1,15 @@
 extends StaticBody2D
 
-@export var speed = 300
-@export var flip_h: bool = false
-
 @onready var animation_player = $AnimationPlayer
 @onready var terrain_ray_cast = $TerrainRayCast
 @onready var gpu_particles_2d = $GPUParticles2D
 @onready var hit_se = $HitSE
 @onready var blocked_se = $BlockedSE
 @onready var shoot_se = %ShootSE
+@onready var projectile_component: ProjectimeComponent = $ProjectileComponent
 
-var direction = Vector2.RIGHT
 var hit = false
 var blocked = false
-
-
-func shoot(from: Vector2, _direction: Vector2, _rotation: bool):
-	global_position = from
-	rotation = _rotation
-	direction = _direction
-	
-	if flip_h:
-		scale.x *= -1
-	
-	shoot_se.play()
-	animation_player.play("flying")
-	gpu_particles_2d.emitting = true
 
 
 func _physics_process(delta):
@@ -35,7 +19,15 @@ func _physics_process(delta):
 	if terrain_ray_cast.is_colliding():
 		on_hit()
 
-	global_position += direction * speed * delta
+	projectile_component.move(self, delta)
+
+
+func shoot(from: Vector2, direction: Vector2):
+	global_position = from
+	projectile_component.angled_shoot(self, direction.angle())
+	shoot_se.play()
+	animation_player.play("flying")
+	gpu_particles_2d.emitting = true
 
 
 func on_hit():
@@ -56,10 +48,7 @@ func _on_hitbox_component_blocked():
 	blocked_se.play()
 	animation_player.play("stay")
 	blocked = true
-	if direction.x >= 0:
-		direction = direction.rotated(PI * 1.25)
-	else:
-		direction = direction.rotated(PI * 0.75)
+	projectile_component.y_angled_shoot(self, -PI * 0.75)
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

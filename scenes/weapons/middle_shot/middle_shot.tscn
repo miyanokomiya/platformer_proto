@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c2epr5tr7yqs2"]
+[gd_scene load_steps=21 format=3 uid="uid://c2epr5tr7yqs2"]
 
 [ext_resource type="Script" path="res://scenes/weapons/middle_shot/middle_shot.gd" id="1_fjcff"]
 [ext_resource type="Shader" path="res://vfx/fade/horizontal_fade.gdshader" id="2_lpeog"]
 [ext_resource type="Texture2D" uid="uid://cbjufm14mfgsf" path="res://assets/sprites/shots/energy_small_blue.png" id="2_sgtno"]
+[ext_resource type="PackedScene" uid="uid://cltyyd03qhp1x" path="res://scenes/components/projectile_component/projectile_component.tscn" id="2_vlwws"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_8bce1"]
 [ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_eutnr"]
 [ext_resource type="AudioStream" uid="uid://b366teurb0oor" path="res://assets/audios/shots/retro_laser_gun_shoot_53.wav" id="6_3rqb2"]
@@ -133,6 +134,9 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_fjcff")
 
+[node name="ProjectileComponent" parent="." instance=ExtResource("2_vlwws")]
+speed = 380
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "flying"
 libraries = {
@@ -182,7 +186,8 @@ bus = &"SE"
 [node name="ShootSE" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_3rqb2")
-volume_db = -19.343
+volume_db = -27.633
+pitch_scale = 1.15
 bus = &"SE"
 
 [node name="BlockedSE" type="AudioStreamPlayer" parent="."]

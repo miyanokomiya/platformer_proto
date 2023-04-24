@@ -1,30 +1,14 @@
 extends StaticBody2D
 
-@export var speed = 380
-@export var flip_h: bool = false
-
 @onready var animation_player = $AnimationPlayer
 @onready var terrain_ray_cast = $TerrainRayCast
 @onready var gpu_particles_2d = $GPUParticles2D
 @onready var hit_se = $HitSE
 @onready var blocked_se = $BlockedSE
 @onready var shoot_se = %ShootSE
+@onready var projectile_component = $ProjectileComponent
 
-var direction = Vector2.RIGHT
 var broken = false
-
-
-func shoot(from: Vector2, _direction: Vector2, _rotation: bool):
-	global_position = from
-	rotation = _rotation
-	direction = _direction
-	
-	if flip_h:
-		scale.x *= -1
-	
-	shoot_se.play()
-	animation_player.play("flying")
-	gpu_particles_2d.emitting = true
 
 
 func _physics_process(delta):
@@ -34,7 +18,15 @@ func _physics_process(delta):
 	if terrain_ray_cast.is_colliding():
 		break_shot()
 
-	global_position += direction * speed * delta
+	projectile_component.move(self, delta)
+
+
+func shoot(from: Vector2, direction: Vector2):
+	global_position = from
+	projectile_component.angled_shoot(self, direction.angle())
+	shoot_se.play()
+	animation_player.play("flying")
+	gpu_particles_2d.emitting = true
 
 
 func break_shot():

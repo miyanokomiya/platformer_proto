@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=59 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bvrvurjh8h6l" path="res://scenes/components/character_state_machine_component/character_states/ladder_up_state/ladder_up_state.tscn" id="21_1dice"]
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
+[ext_resource type="AudioStream" uid="uid://cy0jspxgajwds" path="res://assets/audios/charges/sci-fi_power_up_04.wav" id="35_u0jx0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euhxd"]
 size = Vector2(14, 27)
@@ -54,7 +55,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrova"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5b0xq"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -955,7 +956,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_lrova")
+whiten_material = SubResource("ShaderMaterial_5b0xq")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -1068,6 +1069,13 @@ streams = Array[AudioStream]([ExtResource("14_ehh7r"), ExtResource("15_jkmol"), 
 unique_name_in_owner = true
 stream = ExtResource("28_ba21n")
 volume_db = -15.826
+bus = &"SE"
+
+[node name="ChargeSE" type="AudioStreamPlayer" parent="Audios"]
+unique_name_in_owner = true
+stream = ExtResource("35_u0jx0")
+volume_db = -27.129
+pitch_scale = 1.18
 bus = &"SE"
 
 [node name="ChargeParticles" type="GPUParticles2D" parent="."]
