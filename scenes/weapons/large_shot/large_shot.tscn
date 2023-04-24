@@ -1,13 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2epr5tr7yqs2"]
+[gd_scene load_steps=16 format=3 uid="uid://b8pamn41tkwr5"]
 
-[ext_resource type="Script" path="res://scenes/weapons/middle_shot/middle_shot.gd" id="1_fjcff"]
-[ext_resource type="Shader" path="res://vfx/fade/horizontal_fade.gdshader" id="2_lpeog"]
-[ext_resource type="Texture2D" uid="uid://cbjufm14mfgsf" path="res://assets/sprites/shots/energy_small_blue.png" id="2_sgtno"]
-[ext_resource type="PackedScene" uid="uid://cltyyd03qhp1x" path="res://scenes/components/projectile_component/projectile_component.tscn" id="2_vlwws"]
-[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_8bce1"]
-[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_eutnr"]
-[ext_resource type="AudioStream" uid="uid://b366teurb0oor" path="res://assets/audios/shots/retro_laser_gun_shoot_53.wav" id="6_3rqb2"]
-[ext_resource type="AudioStream" uid="uid://b3lles5jvkijm" path="res://assets/audios/blocked/sword_hit_impact_04.wav" id="6_mm37u"]
+[ext_resource type="Script" path="res://scenes/weapons/large_shot/large_shot.gd" id="1_mv43r"]
+[ext_resource type="PackedScene" uid="uid://cltyyd03qhp1x" path="res://scenes/components/projectile_component/projectile_component.tscn" id="2_mmcdy"]
+[ext_resource type="Shader" path="res://vfx/fade/horizontal_fade.gdshader" id="3_m3gn5"]
+[ext_resource type="Texture2D" uid="uid://bhy28bj1jywm4" path="res://assets/sprites/shots/energy_large_blue.png" id="4_wobw2"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="5_grffj"]
+[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="6_jur2y"]
+[ext_resource type="AudioStream" uid="uid://b366teurb0oor" path="res://assets/audios/shots/retro_laser_gun_shoot_53.wav" id="7_rx48h"]
+[ext_resource type="AudioStream" uid="uid://b3lles5jvkijm" path="res://assets/audios/blocked/sword_hit_impact_04.wav" id="8_crf57"]
 
 [sub_resource type="Animation" id="Animation_mdgm5"]
 length = 0.001
@@ -34,23 +34,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
-}
-
-[sub_resource type="Animation" id="Animation_ualya"]
-resource_name = "flying"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_pipi4"]
@@ -83,6 +66,23 @@ tracks/1/keys = {
 "values": [1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_ualya"]
+resource_name = "flying"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2f8kg"]
 _data = {
 "RESET": SubResource("Animation_mdgm5"),
@@ -92,7 +92,7 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ikpc1"]
 resource_local_to_scene = true
-shader = ExtResource("2_lpeog")
+shader = ExtResource("3_m3gn5")
 shader_parameter/fade_to = 1.0
 shader_parameter/flip = true
 shader_parameter/hframes = 4
@@ -101,14 +101,14 @@ shader_parameter/hframes = 4
 radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aioff"]
-radius = 9.05539
+radius = 15.0
 
-[node name="MiddleShot" type="StaticBody2D"]
+[node name="LargeShot" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("1_fjcff")
+script = ExtResource("1_mv43r")
 
-[node name="ProjectileComponent" parent="." instance=ExtResource("2_vlwws")]
+[node name="ProjectileComponent" parent="." instance=ExtResource("2_mmcdy")]
 speed = 380
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -119,8 +119,8 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ikpc1")
-position = Vector2(-2, 0)
-texture = ExtResource("2_sgtno")
+position = Vector2(-10, 0)
+texture = ExtResource("4_wobw2")
 hframes = 4
 frame = 1
 
@@ -130,13 +130,13 @@ shape = SubResource("CircleShape2D_8nyv0")
 
 [node name="TerrainRayCast" type="RayCast2D" parent="."]
 visible = false
-target_position = Vector2(11, 0)
+target_position = Vector2(16, 0)
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_8bce1")]
+[node name="HitboxComponent" parent="." instance=ExtResource("5_grffj")]
 visible = false
 collision_layer = 8
 collision_mask = 4
-damage = 4
+damage = 6
 oneshot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -144,20 +144,20 @@ shape = SubResource("CircleShape2D_aioff")
 debug_color = Color(0.819608, 0.364706, 0.447059, 0.419608)
 
 [node name="HitSE" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_eutnr")
+stream = ExtResource("6_jur2y")
 volume_db = -23.11
 pitch_scale = 3.05
 bus = &"SE"
 
 [node name="ShootSE" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_3rqb2")
+stream = ExtResource("7_rx48h")
 volume_db = -27.633
 pitch_scale = 1.15
 bus = &"SE"
 
 [node name="BlockedSE" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_mm37u")
+stream = ExtResource("8_crf57")
 volume_db = -12.787
 bus = &"SE"
 

@@ -14,6 +14,7 @@ class_name Player
 @onready var footstep_se = %FootstepSE
 @onready var hurt_se = %HurtSE
 @onready var charge_particles = %ChargeParticles
+@onready var charge_particles_2 = %ChargeParticles2
 @onready var charge_se = %ChargeSE
 
 
@@ -23,6 +24,7 @@ var buster_texture = preload("res://assets/sprites/aria/aria_buster.png")
 @export var flip_h = false
 @export var small_shot: PackedScene
 @export var middle_shot: PackedScene
+@export var large_shot: PackedScene
 
 func _ready():
 	character_state_machine.state_changed.connect(on_state_changed)
@@ -77,6 +79,8 @@ func on_bustered(charge_level: int):
 	var shot = small_shot.instantiate()
 	if charge_level == 1:
 		shot = middle_shot.instantiate()
+	elif charge_level == 2:
+		shot = large_shot.instantiate()
 		
 	get_tree().get_first_node_in_group("foreground_layer").add_child(shot)
 	shot.shoot(buster_direction.global_position, buster_direction.get_direction())
@@ -97,14 +101,22 @@ func _on_hurtbox_component_hit(_hitbox_component):
 
 
 
-func _on_charge_component_charged(_level):
+func _on_charge_component_charged(level):
+	charge_se.pitch_scale = 1.18 + 0.5 * (level - 1)
 	charge_se.play(80000)
 	charge_particles.emitting = true
-	charge_particles.restart()
 	charge_particles.visible = true
+	if level == 1:
+		charge_particles.restart()
+	elif level == 2:
+		charge_particles_2.emitting = true
+		charge_particles_2.visible = true
+		charge_particles_2.restart()
 
 
 func _on_charge_component_released(_level):
 	charge_se.stop()
 	charge_particles.emitting = false
 	charge_particles.visible = false
+	charge_particles_2.emitting = false
+	charge_particles_2.visible = false

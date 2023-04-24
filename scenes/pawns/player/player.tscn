@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=67 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cqj3wc1okgwqx" path="res://scenes/components/character_state_machine_component/character_state_machine_component.tscn" id="4_6g13u"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="4_i3utj"]
 [ext_resource type="Texture2D" uid="uid://c63oyhbl3ukjf" path="res://assets/sprites/aria/aria_buster.png" id="4_mwci4"]
+[ext_resource type="PackedScene" uid="uid://b8pamn41tkwr5" path="res://scenes/weapons/large_shot/large_shot.tscn" id="4_yjfg6"]
 [ext_resource type="PackedScene" uid="uid://c6ovpinuevnw3" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.tscn" id="5_iy66u"]
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="5_vir1a"]
 [ext_resource type="PackedScene" uid="uid://4vf7imvg7hyd" path="res://scenes/components/character_state_machine_component/character_states/ground_dash_state/ground_dash_state.tscn" id="6_q13fd"]
@@ -55,7 +56,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5b0xq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5nknf"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -933,11 +934,53 @@ scale_min = 3.0
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_f5k5w")
 
+[sub_resource type="Gradient" id="Gradient_3jsxp"]
+offsets = PackedFloat32Array(0, 0.277228, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.22, 0.363, 1, 1, 0.219608, 0.784314, 1, 0.717647)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4pkdx"]
+gradient = SubResource("Gradient_3jsxp")
+
+[sub_resource type="Curve" id="Curve_tvgwy"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, -0.127), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fxcsl"]
+curve = SubResource("Curve_tvgwy")
+
+[sub_resource type="Curve" id="Curve_v3bnp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.296137, 1), 0.0, 0.0, 0, 0, Vector2(0.648069, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_em3ds"]
+curve = SubResource("Curve_v3bnp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0iky6"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 24.0
+emission_ring_inner_radius = 24.0
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.1
+radial_accel_min = -120.0
+radial_accel_max = -100.0
+radial_accel_curve = SubResource("CurveTexture_fxcsl")
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_em3ds")
+color_ramp = SubResource("GradientTexture1D_4pkdx")
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_0u88g")
 small_shot = ExtResource("2_vdr3h")
 middle_shot = ExtResource("3_jsbgg")
+large_shot = ExtResource("4_yjfg6")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_10q3v")]
 
@@ -956,7 +999,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_5b0xq")
+whiten_material = SubResource("ShaderMaterial_5nknf")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -964,7 +1007,7 @@ sprite = NodePath("../Sprite2D")
 effect_color = Color(0.32549, 0.560784, 0.831373, 1)
 
 [node name="ChargeComponent" parent="." instance=ExtResource("7_42n1b")]
-charge_times = Array[float]([1.0])
+charge_times = Array[float]([1.0, 1.0])
 
 [node name="LadderDetectComponent" parent="." instance=ExtResource("7_kdsuq")]
 position = Vector2(0, -16)
@@ -1085,6 +1128,17 @@ emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_kmr0e")
 lifetime = 1.5
+explosiveness = 0.2
+local_coords = true
+
+[node name="ChargeParticles2" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -16)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_0iky6")
+lifetime = 1.5
+explosiveness = 0.7
 local_coords = true
 
 [connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]
