@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-@export var speed = 300
+@export var speed = 380
 @export var flip_h: bool = false
 
 @onready var animation_player = $AnimationPlayer
@@ -11,8 +11,7 @@ extends StaticBody2D
 @onready var shoot_se = %ShootSE
 
 var direction = Vector2.RIGHT
-var hit = false
-var blocked = false
+var broken = false
 
 
 func shoot(from: Vector2, _direction: Vector2, _rotation: bool):
@@ -29,37 +28,27 @@ func shoot(from: Vector2, _direction: Vector2, _rotation: bool):
 
 
 func _physics_process(delta):
-	if hit:
+	if broken:
 		return
 	
 	if terrain_ray_cast.is_colliding():
-		on_hit()
+		break_shot()
 
 	global_position += direction * speed * delta
 
 
-func on_hit():
-	animation_player.play("hit")
-	hit = true
-
-
-func _on_area_2d_body_entered(_body):
-	on_hit()
+func break_shot():
+	broken = true
+	animation_player.play("break")
 
 
 func _on_hitbox_component_hit():
 	hit_se.play()
-	on_hit()
 
 
 func _on_hitbox_component_blocked():
 	blocked_se.play()
-	animation_player.play("stay")
-	blocked = true
-	if direction.x >= 0:
-		direction = direction.rotated(PI * 1.25)
-	else:
-		direction = direction.rotated(PI * 0.75)
+	break_shot()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

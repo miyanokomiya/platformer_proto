@@ -1,11 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://8j2dyxxf2rgj"]
+[gd_scene load_steps=20 format=3 uid="uid://c2epr5tr7yqs2"]
 
-[ext_resource type="Texture2D" uid="uid://duqs5gj0hip3c" path="res://assets/sprites/shots/shots.png" id="1_07w6v"]
-[ext_resource type="Script" path="res://scenes/weapons/small_shot/small_shot.gd" id="1_ry1je"]
-[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_r32ob"]
-[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_ti380"]
-[ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="5_o7nb8"]
-[ext_resource type="AudioStream" uid="uid://cic8tlt7mnvyi" path="res://assets/audios/blocked/knife_hit_small_05.wav" id="5_twwa3"]
+[ext_resource type="Script" path="res://scenes/weapons/middle_shot/middle_shot.gd" id="1_fjcff"]
+[ext_resource type="Shader" path="res://vfx/fade/horizontal_fade.gdshader" id="2_lpeog"]
+[ext_resource type="Texture2D" uid="uid://cbjufm14mfgsf" path="res://assets/sprites/shots/energy_small_blue.png" id="2_sgtno"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_8bce1"]
+[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_eutnr"]
+[ext_resource type="AudioStream" uid="uid://b366teurb0oor" path="res://assets/audios/shots/retro_laser_gun_shoot_53.wav" id="6_3rqb2"]
+[ext_resource type="AudioStream" uid="uid://b3lles5jvkijm" path="res://assets/audios/blocked/sword_hit_impact_04.wav" id="6_mm37u"]
 
 [sub_resource type="Animation" id="Animation_mdgm5"]
 length = 0.001
@@ -24,19 +25,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/fade_to")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_ualya"]
 resource_name = "flying"
-length = 0.2
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -45,110 +46,61 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_l81si"]
-resource_name = "hit"
-length = 0.2
-tracks/0/type = "value"
+[sub_resource type="Animation" id="Animation_pipi4"]
+resource_name = "break"
+length = 0.3
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [3, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"queue_free"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_p38ty"]
-resource_name = "stay"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/fade_to")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2f8kg"]
 _data = {
 "RESET": SubResource("Animation_mdgm5"),
-"flying": SubResource("Animation_ualya"),
-"hit": SubResource("Animation_l81si"),
-"stay": SubResource("Animation_p38ty")
+"break": SubResource("Animation_pipi4"),
+"flying": SubResource("Animation_ualya")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yra2f"]
-radius = 4.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ikpc1"]
+resource_local_to_scene = true
+shader = ExtResource("2_lpeog")
+shader_parameter/fade_to = 1.0
+shader_parameter/flip = true
+shader_parameter/hframes = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nyv0"]
-radius = 4.0
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aioff"]
-radius = 4.0
+radius = 9.05539
 
 [sub_resource type="Gradient" id="Gradient_u4itg"]
 offsets = PackedFloat32Array(0, 0.237624, 0.821782, 1)
@@ -176,29 +128,23 @@ orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_15ddi")
 color_ramp = SubResource("GradientTexture1D_0qsdm")
 
-[node name="SmallShot" type="StaticBody2D"]
+[node name="MiddleShot" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("1_ry1je")
+script = ExtResource("1_fjcff")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "stay"
+autoplay = "flying"
 libraries = {
 "": SubResource("AnimationLibrary_2f8kg")
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_07w6v")
-hframes = 5
+material = SubResource("ShaderMaterial_ikpc1")
+position = Vector2(-2, 0)
+texture = ExtResource("2_sgtno")
+hframes = 4
 frame = 1
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_yra2f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -206,12 +152,13 @@ shape = SubResource("CircleShape2D_8nyv0")
 
 [node name="TerrainRayCast" type="RayCast2D" parent="."]
 visible = false
-target_position = Vector2(9, 0)
+target_position = Vector2(11, 0)
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_r32ob")]
+[node name="HitboxComponent" parent="." instance=ExtResource("3_8bce1")]
 visible = false
 collision_layer = 8
 collision_mask = 4
+damage = 4
 oneshot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -227,26 +174,26 @@ one_shot = true
 explosiveness = 0.8
 
 [node name="HitSE" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ti380")
+stream = ExtResource("4_eutnr")
 volume_db = -23.11
 pitch_scale = 3.05
 bus = &"SE"
 
 [node name="ShootSE" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("5_o7nb8")
-volume_db = -23.361
+stream = ExtResource("6_3rqb2")
+volume_db = -19.343
 bus = &"SE"
 
 [node name="BlockedSE" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_twwa3")
+stream = ExtResource("6_mm37u")
+volume_db = -12.787
 bus = &"SE"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
 scale = Vector2(3.6, 3.6)
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

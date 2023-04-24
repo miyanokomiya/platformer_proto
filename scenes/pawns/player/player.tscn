@@ -1,10 +1,11 @@
-[gd_scene load_steps=52 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=58 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
 [ext_resource type="PackedScene" uid="uid://bdhocuw5wn6tk" path="res://scenes/components/character_state_machine_component/character_state_fuctory.tscn" id="3_1hrum"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="3_10q3v"]
 [ext_resource type="PackedScene" uid="uid://c87qd64aiy2nh" path="res://scenes/components/character_state_machine_component/character_states/ground_state/ground_state.tscn" id="3_i5wyf"]
+[ext_resource type="PackedScene" uid="uid://c2epr5tr7yqs2" path="res://scenes/weapons/middle_shot/middle_shot.tscn" id="3_jsbgg"]
 [ext_resource type="PackedScene" uid="uid://ymxrdbn5yv4h" path="res://scenes/components/character_state_machine_component/character_states/character_state_context.tscn" id="3_n1m2y"]
 [ext_resource type="PackedScene" uid="uid://cqj3wc1okgwqx" path="res://scenes/components/character_state_machine_component/character_state_machine_component.tscn" id="4_6g13u"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="4_i3utj"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c6ovpinuevnw3" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.tscn" id="5_iy66u"]
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="5_vir1a"]
 [ext_resource type="PackedScene" uid="uid://4vf7imvg7hyd" path="res://scenes/components/character_state_machine_component/character_states/ground_dash_state/ground_dash_state.tscn" id="6_q13fd"]
+[ext_resource type="PackedScene" uid="uid://cbwfk3n3yop0d" path="res://scenes/components/charge_component/charge_component.tscn" id="7_42n1b"]
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
 [ext_resource type="PackedScene" uid="uid://bh8yf7v5eku2l" path="res://scenes/components/ladder_detect_component/ladder_detect_component.tscn" id="7_kdsuq"]
 [ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
@@ -31,7 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://bi1hxqbxw4b2f" path="res://scenes/components/character_state_machine_component/character_states/ladder_down_state/ladder_down_state.tscn" id="20_hong7"]
 [ext_resource type="PackedScene" uid="uid://bvrvurjh8h6l" path="res://scenes/components/character_state_machine_component/character_states/ladder_up_state/ladder_up_state.tscn" id="21_1dice"]
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
-[ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="24_3we5w"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euhxd"]
@@ -53,7 +54,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dt0vs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrova"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -898,10 +899,44 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rw22"]
 size = Vector2(18, 28)
 
+[sub_resource type="Curve" id="Curve_sgfgw"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, -0.127), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t0bnc"]
+curve = SubResource("Curve_sgfgw")
+
+[sub_resource type="Curve" id="Curve_j5jji"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.296137, 1), 0.0, 0.0, 0, 0, Vector2(0.648069, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_f5k5w"]
+curve = SubResource("Curve_j5jji")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmr0e"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 20.0
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.1
+radial_accel_min = -120.0
+radial_accel_max = -100.0
+radial_accel_curve = SubResource("CurveTexture_t0bnc")
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_f5k5w")
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_0u88g")
 small_shot = ExtResource("2_vdr3h")
+middle_shot = ExtResource("3_jsbgg")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_10q3v")]
 
@@ -920,12 +955,15 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_dt0vs")
+whiten_material = SubResource("ShaderMaterial_lrova")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
 sprite = NodePath("../Sprite2D")
 effect_color = Color(0.32549, 0.560784, 0.831373, 1)
+
+[node name="ChargeComponent" parent="." instance=ExtResource("7_42n1b")]
+charge_times = Array[float]([1.0])
 
 [node name="LadderDetectComponent" parent="." instance=ExtResource("7_kdsuq")]
 position = Vector2(0, -16)
@@ -950,11 +988,12 @@ position = Vector2(0, -16)
 texture = ExtResource("4_mwci4")
 hframes = 27
 
-[node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast") instance=ExtResource("3_n1m2y")]
+[node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast", "charge_component_main") instance=ExtResource("3_n1m2y")]
 jump_se = NodePath("../Audios/JumpSE")
 land_se = NodePath("../Audios/LandSE")
 ladder_detect_component = NodePath("../LadderDetectComponent")
 almost_floor_raycast = NodePath("../AlmostFloorRayCast")
+charge_component_main = NodePath("../ChargeComponent")
 
 [node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
 ground_state_scene = ExtResource("3_i5wyf")
@@ -1025,16 +1064,21 @@ volume_db = -15.634
 bus = &"SE"
 streams = Array[AudioStream]([ExtResource("14_ehh7r"), ExtResource("15_jkmol"), ExtResource("16_2uy8f"), ExtResource("17_o50js")])
 
-[node name="BusterSmallSE" parent="Audios" instance=ExtResource("13_5crkc")]
-unique_name_in_owner = true
-volume_db = -23.361
-bus = &"SE"
-streams = Array[AudioStream]([ExtResource("24_3we5w")])
-
 [node name="HurtSE" type="AudioStreamPlayer" parent="Audios"]
 unique_name_in_owner = true
 stream = ExtResource("28_ba21n")
 volume_db = -15.826
 bus = &"SE"
 
+[node name="ChargeParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -16)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_kmr0e")
+lifetime = 1.5
+local_coords = true
+
 [connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]
+[connection signal="charged" from="ChargeComponent" to="." method="_on_charge_component_charged"]
+[connection signal="released" from="ChargeComponent" to="." method="_on_charge_component_released"]

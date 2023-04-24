@@ -11,9 +11,9 @@ class_name Player
 @onready var sprite_2d = $Sprite2D
 @onready var buster_texture_timer = $BusterTextureTimer
 @onready var buster_direction = %BusterDirection
-@onready var buster_small_se = %BusterSmallSE
 @onready var footstep_se = %FootstepSE
 @onready var hurt_se = %HurtSE
+@onready var charge_particles = %ChargeParticles
 
 
 var default_texture = preload("res://assets/sprites/aria/aria.png")
@@ -21,6 +21,7 @@ var buster_texture = preload("res://assets/sprites/aria/aria_buster.png")
 
 @export var flip_h = false
 @export var small_shot: PackedScene
+@export var middle_shot: PackedScene
 
 func _ready():
 	character_state_machine.state_changed.connect(on_state_changed)
@@ -68,14 +69,17 @@ func on_state_changed():
 	buster_texture_timer.stop()
 
 
-func on_bustered():
+func on_bustered(charge_level: int):
 	sprite_2d.texture = buster_texture
 	buster_texture_timer.start()
+	
 	var shot = small_shot.instantiate()
+	if charge_level == 1:
+		shot = middle_shot.instantiate()
+		
 	get_tree().get_first_node_in_group("foreground_layer").add_child(shot)
 	shot.flip_h = character_state_context.current_direction == -1
 	shot.shoot(buster_direction.global_position, buster_direction.get_direction(), buster_direction.get_angle())
-	buster_small_se.play_random()
 
 
 func on_buster_texture_timer_timeout():
@@ -89,3 +93,16 @@ func on_flipped(h_flip: bool):
 func _on_hurtbox_component_hit(_hitbox_component):
 	hurt_se.play()
 	character_state_machine.on_damage()
+
+
+
+
+func _on_charge_component_charged(_level):
+	charge_particles.emitting = true
+	charge_particles.restart()
+	charge_particles.visible = true
+
+
+func _on_charge_component_released(_level):
+	charge_particles.emitting = false
+	charge_particles.visible = false

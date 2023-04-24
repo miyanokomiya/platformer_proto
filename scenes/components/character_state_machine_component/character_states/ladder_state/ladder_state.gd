@@ -56,9 +56,17 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
 			ctx.flip_character()
 		
-		ctx.animation_player.play("ladder_buster")
-		ctx.action_main_attack()
-		attack_wait_timer.start()
+		if ctx.action_main_attack():
+			ctx.animation_player.play("ladder_buster")
+			attack_wait_timer.start()
+	
+	if Input.is_action_just_released("action_main_attack"):
+		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
+			ctx.flip_character()
+			
+		if ctx.action_main_attack_release():
+			ctx.animation_player.play("ladder_buster")
+			attack_wait_timer.start()
 
 
 func free_move(ctx: CharacterStateContext) -> int:

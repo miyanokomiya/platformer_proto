@@ -7,13 +7,14 @@ const DASH_MOMENTUM = 180.0
 const JUMP_VELOCITY = -320.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-signal buster
+signal buster(charge_level: int)
 signal flipped(h_flip: bool)
 
 @export var jump_se: AudioStreamPlayer
 @export var land_se: AudioStreamPlayer
 @export var ladder_detect_component: LadderDetectComponent
 @export var almost_floor_raycast: RayCast2D
+@export var charge_component_main: ChargeComponent
 
 var character: CharacterBody2D
 var animation_player: AnimationPlayer
@@ -76,5 +77,16 @@ func play_land_se():
 		land_se.play()
 
 
-func action_main_attack():
-	buster.emit()
+func action_main_attack() -> bool:
+	buster.emit(0)
+	charge_component_main.start_charge()
+	return true
+
+
+func action_main_attack_release() -> bool:
+	var level = charge_component_main.release_charge()
+	if level > 0:
+		buster.emit(level)
+		return true
+	
+	return false

@@ -39,6 +39,9 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_pressed("action_main_attack"):
 		ctx.action_main_attack()
+	
+	if Input.is_action_just_released("action_main_attack"):
+		ctx.action_main_attack_release()
 
 
 func free_move(ctx: CharacterStateContext) -> bool:
