@@ -12,6 +12,8 @@ var bounds_limits: Array[Dictionary] = []
 func _ready():
 	make_current()
 	save_original_limit()
+	acquire_target()
+	global_position = target_position
 
 
 func _process(delta):

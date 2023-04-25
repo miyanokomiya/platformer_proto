@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://spluk184vpgb"]
+[gd_scene load_steps=17 format=3 uid="uid://spluk184vpgb"]
 
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="2_52t0x"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="2_kunsm"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dj7ijhocgp8d" path="res://scenes/pawns/player/player.tscn" id="3_ne5dv"]
 [ext_resource type="PackedScene" uid="uid://bq4qga58cfmks" path="res://scenes/field_objects/camera_bounds/camera_bounds.tscn" id="4_6uq7n"]
 [ext_resource type="PackedScene" uid="uid://c6w82b5erpp5g" path="res://scenes/field_objects/on_screen_spawner/on_screen_spawner.tscn" id="6_hg6q6"]
-[ext_resource type="PackedScene" uid="uid://hecsiu8110dw" path="res://scenes/pawns/enemies/ceilwatcher/ceilwatcher.tscn" id="6_y807r"]
+[ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="7_5jf7q"]
+[ext_resource type="PackedScene" uid="uid://sjkamyoxqama" path="res://scenes/pawns/enemies/ceilraidsnail/ceilraidsnail.tscn" id="8_1t7yv"]
 [ext_resource type="PackedScene" uid="uid://dss7qwefde8p" path="res://scenes/field_objects/ladder_top/ladder_top.tscn" id="8_jbfmd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khw77"]
@@ -289,7 +290,11 @@ position = Vector2(1303, 152)
 
 [node name="OnScreenSpawner" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(310, 122)
-pawn_scene = ExtResource("6_y807r")
+pawn_scene = ExtResource("7_5jf7q")
+
+[node name="OnScreenSpawner2" parent="MainLayer" instance=ExtResource("6_hg6q6")]
+position = Vector2(546, 16)
+pawn_scene = ExtResource("8_1t7yv")
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
 

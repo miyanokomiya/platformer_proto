@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhy28bj1jywm4" path="res://assets/sprites/shots/energy_large_blue.png" id="4_wobw2"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="5_grffj"]
 [ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="6_jur2y"]
-[ext_resource type="AudioStream" uid="uid://b366teurb0oor" path="res://assets/audios/shots/retro_laser_gun_shoot_53.wav" id="7_rx48h"]
+[ext_resource type="AudioStream" uid="uid://btg5dpw84rysn" path="res://assets/audios/shots/sci-fi_weapon_blaster_laser_boom_small_03.wav" id="7_h8ays"]
 [ext_resource type="AudioStream" uid="uid://b3lles5jvkijm" path="res://assets/audios/blocked/sword_hit_impact_04.wav" id="8_crf57"]
 
 [sub_resource type="Animation" id="Animation_mdgm5"]
@@ -152,9 +152,8 @@ bus = &"SE"
 
 [node name="ShootSE" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_rx48h")
-volume_db = -27.633
-pitch_scale = 1.15
+stream = ExtResource("7_h8ays")
+volume_db = -20.319
 bus = &"SE"
 
 [node name="BlockedSE" type="AudioStreamPlayer" parent="."]
