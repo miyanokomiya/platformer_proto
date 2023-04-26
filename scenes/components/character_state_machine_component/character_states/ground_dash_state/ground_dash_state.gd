@@ -24,11 +24,6 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if ctx.current_direction * direction < 0:
 		next_state_name = "ground"
 	
-	ctx.character.velocity.x = ctx.current_direction * ctx.DASH_SPEED
-	ctx.character.move_and_slide()
-
-
-func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	if !Input.is_action_pressed("action_dash"):
 		next_state_name = "ground"
 		ctx.has_dash_momentum = false
@@ -42,3 +37,6 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_released("action_main_attack"):
 		ctx.action_main_attack_release()
+	
+	ctx.character.velocity.x = ctx.current_direction * ctx.DASH_SPEED
+	ctx.character.move_and_slide()

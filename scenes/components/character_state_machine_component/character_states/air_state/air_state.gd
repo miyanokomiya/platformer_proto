@@ -32,15 +32,6 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	else:
 		ctx.animation_player.play("jump_fall")
 	
-	var direction = free_move(ctx)
-	ctx.character.move_and_slide()
-	
-	if !ctx.is_close_to_floor.call() && ctx.character.is_on_wall() && direction * ctx.current_direction > 0:
-		next_state_name = "wall"
-		return
-
-
-func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	if Input.is_action_just_pressed("action_dash"):
 		ctx.has_dash_momentum = true
 		ctx.set_after_effect_playing(true)
@@ -58,6 +49,12 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_released("action_main_attack"):
 		ctx.action_main_attack_release()
+	
+	var direction = free_move(ctx)
+	ctx.character.move_and_slide()
+	
+	if !ctx.is_close_to_floor.call() && ctx.character.is_on_wall() && direction * ctx.current_direction > 0:
+		next_state_name = "wall"
 
 
 func free_move(ctx: CharacterStateContext) -> int:

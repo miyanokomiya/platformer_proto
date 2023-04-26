@@ -24,10 +24,6 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	else:
 		ctx.animation_player.play("idle")
 	
-	ctx.character.move_and_slide()
-
-
-func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
 	
 	if Input.is_action_just_pressed("action_dash"):
@@ -42,6 +38,8 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_released("action_main_attack"):
 		ctx.action_main_attack_release()
+	
+	ctx.character.move_and_slide()
 
 
 func free_move(ctx: CharacterStateContext) -> bool:

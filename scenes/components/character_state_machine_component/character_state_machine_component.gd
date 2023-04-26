@@ -23,11 +23,6 @@ func _physics_process(delta):
 	state_transition()
 
 
-func _input(event):
-	current_state.state_input(state_context, event)
-	state_transition()
-
-
 func on_damage():
 	current_state.on_damage(state_context)
 	state_transition()

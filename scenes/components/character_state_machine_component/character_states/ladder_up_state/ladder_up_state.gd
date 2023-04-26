@@ -22,12 +22,11 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 	ctx.character.velocity.x = 0
 	ctx.character.velocity.y = -ctx.get_ladder_speed()
 	ctx.animation_player.play("ladder")
-	ctx.character.move_and_slide()
-
-
-func state_input(ctx: CharacterStateContext, _event: InputEvent):
+	
 	if Input.is_action_just_pressed("action_jump"):
 		if !Input.is_action_pressed("move_down"):
 			ctx.character.velocity.y = ctx.JUMP_VELOCITY
 			ctx.play_jump_se()
 		next_state_name = "air"
+	
+	ctx.character.move_and_slide()

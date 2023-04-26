@@ -19,15 +19,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		return
 	
 	character.velocity.y = ctx.gravity * 3 * delta
-	var direction = free_move(ctx)
-	ctx.character.move_and_slide()
 	
-	if !ctx.character.is_on_wall() || direction * ctx.current_direction >= 0:
-		character.velocity.y = 0
-		next_state_name = "air"
-
-
-func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
 	
 	if Input.is_action_just_pressed("action_jump"):
@@ -39,6 +31,13 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	
 	if Input.is_action_just_released("action_main_attack"):
 		ctx.action_main_attack_release()
+	
+	var direction = free_move(ctx)
+	ctx.character.move_and_slide()
+	
+	if !ctx.character.is_on_wall() || direction * ctx.current_direction >= 0:
+		character.velocity.y = 0
+		next_state_name = "air"
 
 
 func free_move(ctx: CharacterStateContext) -> int:

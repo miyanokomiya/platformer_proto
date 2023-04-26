@@ -40,10 +40,6 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 		ctx.character.velocity.x = 0
 		ctx.character.velocity.y = 0
 	
-	ctx.character.move_and_slide()
-
-
-func state_input(ctx: CharacterStateContext, _event: InputEvent):
 	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
 	
 	if Input.is_action_just_pressed("action_jump"):
@@ -67,6 +63,8 @@ func state_input(ctx: CharacterStateContext, _event: InputEvent):
 		if ctx.action_main_attack_release():
 			ctx.animation_player.play("ladder_buster")
 			attack_wait_timer.start()
+	
+	ctx.character.move_and_slide()
 
 
 func free_move(ctx: CharacterStateContext) -> int:
