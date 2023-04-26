@@ -30,7 +30,7 @@ func _physics_process(delta):
 	if died:
 		return
 	
-	velocity.y += gravity
+	velocity.y += gravity * delta
 	
 	if activated:
 		if ground_detector.is_colliding() && !wall_detector.is_colliding():

@@ -8,12 +8,12 @@ extends StaticBody2D
 @onready var shoot_se = %ShootSE
 @onready var projectile_component: ProjectimeComponent = $ProjectileComponent
 
-var hit = false
-var blocked = false
+enum SHOT_STATE{DEFAULT, HIT, BLOCKED}
+var current_state = SHOT_STATE.DEFAULT
 
 
 func _physics_process(delta):
-	if hit:
+	if current_state == SHOT_STATE.HIT:
 		return
 	
 	if terrain_ray_cast.is_colliding():
@@ -31,8 +31,11 @@ func shoot(from: Vector2, direction: Vector2):
 
 
 func on_hit():
+	if current_state != SHOT_STATE.DEFAULT:
+		return
+	
 	animation_player.play("hit")
-	hit = true
+	current_state = SHOT_STATE.HIT
 
 
 func _on_area_2d_body_entered(_body):
@@ -45,9 +48,12 @@ func _on_hitbox_component_hit():
 
 
 func _on_hitbox_component_blocked():
+	if current_state != SHOT_STATE.DEFAULT:
+		return
+	
 	blocked_se.play()
 	animation_player.play("stay")
-	blocked = true
+	current_state = SHOT_STATE.BLOCKED
 	projectile_component.y_angled_shoot(self, -PI * 0.75)
 
 

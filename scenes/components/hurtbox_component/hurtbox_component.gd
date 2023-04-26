@@ -6,11 +6,11 @@ signal blocked(hitbox_component: HitboxComponent)
 
 @export var health_component: HealthComponent
 @export var invincible_time: float = 0.0
+@export var invincible = false
 
 @onready var timer = $Timer
 
 var colliding_hitboxes: Array[HitboxComponent] = []
-var invincible = false
 
 
 func _ready():
@@ -25,12 +25,12 @@ func _physics_process(_delta):
 
 
 func accept_hitbox(hitbox_component: HitboxComponent):
-	if health_component == null:
-		return
-	
 	if invincible:
 		hitbox_component.blocked.emit()
 		blocked.emit(hitbox_component)
+		return
+	
+	if health_component == null:
 		return
 	
 	var damage = hitbox_component.get_damage()

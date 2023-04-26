@@ -7,11 +7,12 @@ extends StaticBody2D
 @onready var shoot_se = %ShootSE
 @onready var projectile_component = $ProjectileComponent
 
-var broken = false
+enum SHOT_STATE{DEFAULT, HIT, BLOCKED}
+var current_state = SHOT_STATE.DEFAULT
 
 
 func _physics_process(delta):
-	if broken:
+	if current_state == SHOT_STATE.BLOCKED:
 		return
 	
 	if terrain_ray_cast.is_colliding():
@@ -28,7 +29,7 @@ func shoot(from: Vector2, direction: Vector2):
 
 
 func break_shot():
-	broken = true
+	current_state = SHOT_STATE.BLOCKED
 	animation_player.play("break")
 
 
