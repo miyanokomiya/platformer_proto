@@ -30,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyai3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpt0o"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -628,7 +628,7 @@ size = Vector2(30, 15)
 radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o72sn"]
-size = Vector2(100, 120)
+size = Vector2(100, 130)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fvkg7"]
 particles_animation = true
@@ -664,7 +664,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_lf7td")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_jyai3")
+whiten_material = SubResource("ShaderMaterial_tpt0o")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_2x8nw")]
 collision_layer = 4
@@ -676,7 +676,7 @@ shape = SubResource("CircleShape2D_wr0yv")
 debug_color = Color(0.717647, 0.470588, 0.290196, 0.419608)
 
 [node name="OffScreenComponent" parent="." instance=ExtResource("6_tfqto")]
-visible = false
+position = Vector2(0, 8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -715,12 +715,11 @@ visible = false
 target_position = Vector2(-18, 0)
 
 [node name="PlayerDetectArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea"]
-position = Vector2(-50, 60)
+position = Vector2(-50, 65)
 shape = SubResource("RectangleShape2D_o72sn")
 debug_color = Color(0.662745, 0.443137, 0.690196, 0.419608)
 
