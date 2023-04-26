@@ -33,6 +33,10 @@ func turn_h():
 
 func _physics_process(delta):
 	if died:
+		if current_state == STATE.IDLE:
+			animation_player.play("die")
+		else:
+			animation_player.play("die_shell")
 		return
 	
 	match current_state:
@@ -47,7 +51,12 @@ func _physics_process(delta):
 					stop_and_turn()
 			
 			move_and_slide()
+		STATE.SHELL:
+			animation_player.play("shell")
+			velocity = Vector2.ZERO
+			move_and_slide()
 		STATE.ROLLING:
+			animation_player.play("rolling")
 			velocity = Vector2(direction * rolling_speed, velocity.y + gravity * delta)
 			var colliding = move_and_collide(velocity * delta, true)
 			move_and_slide()
@@ -72,8 +81,8 @@ func stop_and_turn():
 
 
 func start_rolling():
-	current_state = STATE.ROLLING
-	animation_player.play("rolling")
+	if current_state == STATE.SHELL:
+		current_state = STATE.ROLLING
 
 
 func on_activate_timer_timeout():
@@ -82,16 +91,8 @@ func on_activate_timer_timeout():
 
 func on_died():
 	died = true
-	if current_state == STATE.IDLE:
-		animation_player.play("die")
-	else:
-		animation_player.play("die_shell")
 
 
 func _on_player_detect_area_body_entered(_body):
 	if current_state == STATE.IDLE:
 		current_state = STATE.SHELL
-		velocity = Vector2.ZERO
-		animation_player.play("shell")
-		await animation_player.animation_finished
-		start_rolling()
