@@ -8,6 +8,7 @@ class_name CharacterStateFuctory
 @export var air_stagger_state_scene: PackedScene
 @export var wall_state_scene: PackedScene
 @export var wall_kicked_scene: PackedScene
+@export var jumped_scene: PackedScene
 @export var ladder_state_scene: PackedScene
 @export var ladder_down_state_scene: PackedScene
 @export var ladder_up_state_scene: PackedScene
@@ -29,6 +30,8 @@ func get_state(state_name: String) -> CharacterState:
 			return wall_state_scene.instantiate()
 		"wall_kicked":
 			return wall_kicked_scene.instantiate()
+		"jumped":
+			return jumped_scene.instantiate()
 		"ladder":
 			return ladder_state_scene.instantiate()
 		"ladder_down":

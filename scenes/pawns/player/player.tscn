@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=68 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bi1hxqbxw4b2f" path="res://scenes/components/character_state_machine_component/character_states/ladder_down_state/ladder_down_state.tscn" id="20_hong7"]
 [ext_resource type="PackedScene" uid="uid://bvrvurjh8h6l" path="res://scenes/components/character_state_machine_component/character_states/ladder_up_state/ladder_up_state.tscn" id="21_1dice"]
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
+[ext_resource type="PackedScene" uid="uid://bfm62nhlsa545" path="res://scenes/components/character_state_machine_component/character_states/jumped_state/jumped.tscn" id="22_3c1vj"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
 [ext_resource type="AudioStream" uid="uid://cy0jspxgajwds" path="res://assets/audios/charges/sci-fi_power_up_04.wav" id="35_u0jx0"]
 
@@ -56,7 +57,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sjhdb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl1mn"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -1001,7 +1002,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_sjhdb")
+whiten_material = SubResource("ShaderMaterial_kl1mn")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -1049,6 +1050,7 @@ air_state_scene = ExtResource("5_iy66u")
 air_stagger_state_scene = ExtResource("14_uadgv")
 wall_state_scene = ExtResource("7_idwji")
 wall_kicked_scene = ExtResource("8_dbhk6")
+jumped_scene = ExtResource("22_3c1vj")
 ladder_state_scene = ExtResource("19_iafpo")
 ladder_down_state_scene = ExtResource("20_hong7")
 ladder_up_state_scene = ExtResource("21_1dice")

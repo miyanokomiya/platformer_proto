@@ -1,22 +1,25 @@
 extends CharacterAirState
 
 @onready var timer = $Timer
-@onready var audio_stream_player = $AudioStreamPlayer
+
+var released = false
 
 
 func on_enter(ctx: CharacterStateContext):
 	super.on_enter(ctx)
-	audio_stream_player.play()
 	timer.start()
+	released = false
 
 
 func state_process(ctx: CharacterStateContext, delta: float):
+	if !Input.is_action_pressed("action_jump"):
+		released = true
+	
 	if timer.is_stopped():
+		if released:
+			# Short jump should be consistent height
+			ctx.character.velocity.y = max(ctx.JUMP_VELOCITY * 0.2, ctx.character.velocity.y)
+		
 		next_state_name = "air"
 
 	super.state_process(ctx, delta)
-
-
-func free_move(ctx: CharacterStateContext) -> int:
-	ctx.character.velocity.x = ctx.wall_kicked_spped() * ctx.current_direction * -1
-	return sign(Input.get_axis("move_left", "move_right"))

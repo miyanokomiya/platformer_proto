@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfm62nhlsa545"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/jumped_state/jumped.gd" id="1_rm5va"]
+
+[node name="JumpedState" type="Node"]
+script = ExtResource("1_rm5va")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
