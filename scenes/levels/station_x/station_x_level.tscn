@@ -284,7 +284,7 @@ shape = SubResource("RectangleShape2D_a4mg3")
 
 [node name="MainLayer" type="Node" parent="." groups=["main_layer"]]
 
-[node name="Player" parent="MainLayer" instance=ExtResource("3_ne5dv")]
+[node name="Player" parent="MainLayer" groups=["Player"] instance=ExtResource("3_ne5dv")]
 z_index = 1
 position = Vector2(198, 152)
 

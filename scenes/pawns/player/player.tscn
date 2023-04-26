@@ -56,7 +56,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fa4gg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sjhdb"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -1001,7 +1001,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_fa4gg")
+whiten_material = SubResource("ShaderMaterial_sjhdb")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
