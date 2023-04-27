@@ -29,7 +29,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0q1cl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71x5o"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -282,6 +282,7 @@ script = ExtResource("1_wk3rk")
 max_health = 2.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_xuhdu")]
+position = Vector2(0, -11)
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../HealthComponent")
@@ -293,9 +294,10 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_0q1cl")
+whiten_material = SubResource("ShaderMaterial_71x5o")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_k2j0g")]
+position = Vector2(0, -11)
 collision_layer = 4
 collision_mask = 2
 
@@ -304,6 +306,7 @@ shape = SubResource("CircleShape2D_wr0yv")
 debug_color = Color(0.717647, 0.470588, 0.290196, 0.419608)
 
 [node name="OffScreenComponent" parent="." instance=ExtResource("6_v713h")]
+position = Vector2(0, -12)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -312,25 +315,27 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1, 0.5)
+position = Vector2(1, -10.5)
 shape = SubResource("RectangleShape2D_n75fr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
 texture = ExtResource("1_bbx0x")
 hframes = 6
 
 [node name="GroundDetector" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-11, 0)
+position = Vector2(-11, -12)
 target_position = Vector2(0, 20)
 
 [node name="WallDetector" type="RayCast2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -12)
 target_position = Vector2(-15, 0)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_fvkg7")
+position = Vector2(0, -12)
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_ttb0o")

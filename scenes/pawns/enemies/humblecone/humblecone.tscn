@@ -29,7 +29,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5t4a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6d2h"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -196,7 +196,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("HurtboxComponent/CollisionShape2D:shape:size")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
@@ -208,7 +208,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:position")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1),
@@ -220,7 +220,7 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:shape:size")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1),
@@ -232,7 +232,7 @@ tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/path = NodePath("HitboxComponent/CollisionShape2D:position")
-tracks/4/interp = 1
+tracks/4/interp = 0
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1),
@@ -413,7 +413,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("HurtboxComponent/CollisionShape2D:shape:size")
-tracks/1/interp = 1
+tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
@@ -425,7 +425,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:position")
-tracks/2/interp = 1
+tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.8),
@@ -437,7 +437,7 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:shape:size")
-tracks/3/interp = 1
+tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.8),
@@ -449,7 +449,7 @@ tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/path = NodePath("HitboxComponent/CollisionShape2D:position")
-tracks/4/interp = 1
+tracks/4/interp = 0
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.8),
@@ -492,6 +492,7 @@ script = ExtResource("1_dtcx8")
 max_health = 2.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_kj604")]
+position = Vector2(0, -20)
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../HealthComponent")
@@ -504,9 +505,10 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_wg4d4")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_b5t4a")
+whiten_material = SubResource("ShaderMaterial_i6d2h")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_tf866")]
+position = Vector2(0, -20)
 collision_layer = 4
 collision_mask = 2
 
@@ -516,14 +518,15 @@ shape = SubResource("RectangleShape2D_ky3ld")
 debug_color = Color(0.717647, 0.470588, 0.290196, 0.419608)
 
 [node name="OffScreenComponent" parent="." instance=ExtResource("6_fx138")]
+position = Vector2(0, -20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 4)
+position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_7hr0l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
 texture = ExtResource("1_wsnph")
-flip_h = true
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -533,16 +536,16 @@ libraries = {
 }
 
 [node name="PlayerDetectArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea"]
-position = Vector2(48, 0)
+position = Vector2(-47, -31)
 shape = SubResource("RectangleShape2D_v6e1a")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_4g78f")
+position = Vector2(0, -20)
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_7ob2y")

@@ -6,6 +6,7 @@ extends EnemyBase
 @onready var hurtbox_component = $HurtboxComponent
 @onready var block_timer = $BlockTimer
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_detected = false
 var blocked = false
 var died = false
@@ -15,6 +16,11 @@ func _ready():
 	super._ready()
 	health_component.died.connect(on_died)
 	block_timer.timeout.connect(on_block_timer_timeout)
+
+
+func _physics_process(delta):
+	velocity.y += gravity * delta
+	move_and_slide()
 
 
 func start_block():
