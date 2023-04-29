@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=28 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
@@ -10,7 +10,7 @@
 [ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="5_jajt0"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="8_xfik6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_elvw0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3t5g"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -31,6 +31,116 @@ size = Vector2(50, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t0oa"]
 size = Vector2(14, 29)
+
+[sub_resource type="Animation" id="Animation_2ndx2"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -72), Vector2(0, -71), Vector2(0, -70), Vector2(0, -70), Vector2(0, -71), Vector2(0, -72)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShoulderLSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -72), Vector2(1, -71), Vector2(2, -70), Vector2(1, -71), Vector2(0, -71), Vector2(0, -72)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShoulderRSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -72), Vector2(-1, -71), Vector2(-2, -70), Vector2(-1, -71), Vector2(0, -71), Vector2(0, -72)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Head:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 2), Vector2(0, 3), Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3cwuk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -72)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShoulderLSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -72)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShoulderRSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -72)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Head:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_meklq"]
+_data = {
+"RESET": SubResource("Animation_3cwuk"),
+"idle": SubResource("Animation_2ndx2")
+}
 
 [sub_resource type="Animation" id="Animation_2e6gh"]
 resource_name = "idle"
@@ -285,12 +395,12 @@ script = ExtResource("1_rgi86")
 fallen_block_scene = ExtResource("2_esogr")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ow6lv")]
-max_health = 100.0
+max_health = 50.0
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_elvw0")
+whiten_material = SubResource("ShaderMaterial_e3t5g")
 
 [node name="BodySprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -413,6 +523,13 @@ texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 5
 
+[node name="BodyPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_meklq")
+}
+
 [node name="HandLPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 autoplay = "idle"
@@ -441,8 +558,13 @@ position = Vector2(-54, -48)
 
 [node name="ActionTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
 one_shot = true
 
+[node name="BlockDetectRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-53, -81)
+target_position = Vector2(-204, 0)
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit" from="HandL/PunchHitbox" to="." method="_on_punch_hitbox_hit"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

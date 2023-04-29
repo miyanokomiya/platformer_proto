@@ -2,6 +2,7 @@ extends Node2D
 
 @export var fallen_block_scene: PackedScene
 
+@onready var body_player = %BodyPlayer
 @onready var hand_l_player = %HandLPlayer
 @onready var hand_r_player = %HandRPlayer
 @onready var hand_l = %HandL
@@ -11,9 +12,10 @@ extends Node2D
 @onready var right_hand_default_marker = %RightHandDefaultMarker
 @onready var action_timer = %ActionTimer
 @onready var right_hand_block_marker = %RightHandBlockMarker
+@onready var block_detect_ray_cast = %BlockDetectRayCast
 
 
-enum STATE{IDLE, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
+enum STATE{IDLE, DIED, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
 var current_state = STATE.IDLE
 
 var MAX_PUNCH_RANGE = 260
@@ -28,10 +30,15 @@ func _ready():
 func _physics_process(delta):
 	match current_state:
 		STATE.IDLE:
+			body_player.play("idle")
 			hand_l_player.play("idle")
 			hand_r_player.play("idle")
 			if action_timer.is_stopped():
 				action_timer.start()
+		STATE.DIED:
+			body_player.pause()
+			hand_l_player.pause()
+			hand_r_player.pause()
 		STATE.LEFT_PUNCH_READY:
 			pass
 		STATE.LEFT_PUNCH:
@@ -82,7 +89,7 @@ func stop_left_punch():
 func right_grab_block():
 	current_state = STATE.RIGHT_GRAB_READY
 	var tween = create_tween()
-	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 1.0).set_ease(Tween.EASE_IN)
+	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 0.5).set_ease(Tween.EASE_IN)
 	await tween.finished
 	hand_r_player.play("grab_block")
 	await hand_r_player.animation_finished
@@ -107,7 +114,7 @@ func keep_fallen_block():
 
 func right_block_seek():
 	current_state = STATE.RIGHT_BLOCK_SEEK
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	right_block_drop()
 
 
@@ -133,11 +140,18 @@ func right_block_drop():
 
 
 func _on_punch_hitbox_hit():
-	stop_left_punch()
+	if current_state == STATE.LEFT_PUNCH:
+		stop_left_punch()
 
 
 func _on_action_timer_timeout():
-	if randf() < 0.5:
+	if block_detect_ray_cast.is_colliding():
+		left_punch()
+	elif randf() < 0.5:
 		right_grab_block()
 	else:
 		left_punch()
+
+
+func _on_health_component_died():
+	queue_free()
