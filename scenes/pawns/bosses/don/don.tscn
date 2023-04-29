@@ -1,33 +1,33 @@
-[gd_scene load_steps=20 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=25 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
 [ext_resource type="PackedScene" uid="uid://ctjne2mukdxi" path="res://scenes/field_objects/station_x/fallen_block/fallen_block.tscn" id="2_esogr"]
 [ext_resource type="Texture2D" uid="uid://dkfcksqr300f3" path="res://assets/sprites/bosses/don/don_hands.png" id="2_pngsy"]
+[ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="3_ow6lv"]
+[ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_ahgat"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="4_qt027"]
-[ext_resource type="Texture2D" uid="uid://bvgkf21r5mxli" path="res://assets/sprites/levels/station_x/block_big/frame0000.png" id="5_1508s"]
-[ext_resource type="Texture2D" uid="uid://bs3uu3q8sk62u" path="res://assets/sprites/levels/station_x/block_big/frame0001.png" id="6_twb5i"]
-[ext_resource type="Texture2D" uid="uid://df2i1s6imfv6u" path="res://assets/sprites/levels/station_x/block_big/frame0002.png" id="7_wjbdu"]
+[ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="5_jajt0"]
+[ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="8_xfik6"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_u3clt"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_1508s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_twb5i")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_wjbdu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_twb5i")
-}],
-"loop": true,
-"name": &"default",
-"speed": 1.0
-}]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_elvw0"]
+resource_local_to_scene = true
+shader = ExtResource("5_jajt0")
+shader_parameter/mix_weight = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e47tk"]
+size = Vector2(35, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrll0"]
+size = Vector2(32, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7hgh"]
+size = Vector2(20, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkaki"]
+size = Vector2(50, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t0oa"]
 size = Vector2(14, 29)
@@ -284,26 +284,29 @@ position = Vector2(274, 157)
 script = ExtResource("1_rgi86")
 fallen_block_scene = ExtResource("2_esogr")
 
-[node name="Blocks" type="Node2D" parent="."]
-modulate = Color(0.454902, 0.454902, 0.454902, 1)
-position = Vector2(-54, -24)
+[node name="HealthComponent" parent="." instance=ExtResource("3_ow6lv")]
+max_health = 100.0
 
-[node name="BlockSprite" type="AnimatedSprite2D" parent="Blocks"]
-position = Vector2(-25, 0)
-sprite_frames = SubResource("SpriteFrames_u3clt")
-frame = 3
-frame_progress = 0.367371
-
-[node name="TargetBlock" type="AnimatedSprite2D" parent="Blocks"]
-unique_name_in_owner = true
-sprite_frames = SubResource("SpriteFrames_u3clt")
-frame = 3
-frame_progress = 0.367371
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
+hurtbox_component = NodePath("../Head/HurtboxComponent")
+sprite = NodePath("../Head/HeadSprite")
+whiten_material = SubResource("ShaderMaterial_elvw0")
 
 [node name="BodySprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
 texture = ExtResource("1_4badi")
 vframes = 5
+
+[node name="HurtboxComponent" parent="BodySprite" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+position = Vector2(0, 72)
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../../HealthComponent")
+invincible = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodySprite/HurtboxComponent"]
+position = Vector2(1.5, -57.5)
+shape = SubResource("RectangleShape2D_e47tk")
 
 [node name="ShoulderLSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -325,11 +328,42 @@ texture = ExtResource("1_4badi")
 vframes = 5
 frame = 1
 
+[node name="HurtboxComponent" parent="Head" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../../HealthComponent")
+invincible_time = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HurtboxComponent"]
+position = Vector2(2, -106.5)
+shape = SubResource("RectangleShape2D_qrll0")
+
+[node name="HurtboxComponent2" parent="Head" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../../HealthComponent")
+invincible = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HurtboxComponent2"]
+position = Vector2(2, -90)
+shape = SubResource("RectangleShape2D_f7hgh")
+
 [node name="ShieldSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
 texture = ExtResource("1_4badi")
 vframes = 5
 frame = 4
+
+[node name="HurtboxComponent" parent="ShieldSprite" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+position = Vector2(0, 72)
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../../HealthComponent")
+invincible = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldSprite/HurtboxComponent"]
+position = Vector2(2, -16.5)
+shape = SubResource("RectangleShape2D_rkaki")
 
 [node name="HandR" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -395,11 +429,15 @@ libraries = {
 
 [node name="BlockDropMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-146, -128)
+position = Vector2(-146, -138)
 
 [node name="RightHandDefaultMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-77, -23)
+
+[node name="RightHandBlockMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-54, -48)
 
 [node name="ActionTimer" type="Timer" parent="."]
 unique_name_in_owner = true

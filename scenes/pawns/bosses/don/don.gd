@@ -7,10 +7,10 @@ extends Node2D
 @onready var hand_l = %HandL
 @onready var punch_ray_cast = %PunchRayCast
 @onready var hand_r = %HandR
-@onready var target_block = %TargetBlock
 @onready var block_drop_marker = %BlockDropMarker
 @onready var right_hand_default_marker = %RightHandDefaultMarker
 @onready var action_timer = %ActionTimer
+@onready var right_hand_block_marker = %RightHandBlockMarker
 
 
 enum STATE{IDLE, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
@@ -22,7 +22,7 @@ var fallen_block: Node2D
 
 
 func _ready():
-	pass
+	right_grab_block()
 
 
 func _physics_process(delta):
@@ -43,6 +43,9 @@ func _physics_process(delta):
 				return
 
 			if punch_ray_cast.is_colliding():
+				var collider = punch_ray_cast.get_collider()
+				if collider && collider.has_method("shove"):
+					collider.shove(Vector2.LEFT * 500)
 				stop_left_punch()
 				return
 		STATE.LEFT_PUNCH_BACK:
@@ -79,7 +82,7 @@ func stop_left_punch():
 func right_grab_block():
 	current_state = STATE.RIGHT_GRAB_READY
 	var tween = create_tween()
-	tween.tween_property(hand_r, "global_position", target_block.global_position - Vector2(0, 24), 1.0).set_ease(Tween.EASE_IN)
+	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 1.0).set_ease(Tween.EASE_IN)
 	await tween.finished
 	hand_r_player.play("grab_block")
 	await hand_r_player.animation_finished
