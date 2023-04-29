@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctjne2mukdxi"]
+
+[ext_resource type="Texture2D" uid="uid://bvgkf21r5mxli" path="res://assets/sprites/levels/station_x/block_big/frame0000.png" id="1_1fkbj"]
+[ext_resource type="Script" path="res://scenes/field_objects/station_x/fallen_block/fallen_block.gd" id="1_2hkm0"]
+[ext_resource type="Texture2D" uid="uid://bs3uu3q8sk62u" path="res://assets/sprites/levels/station_x/block_big/frame0001.png" id="2_2n7mn"]
+[ext_resource type="Texture2D" uid="uid://df2i1s6imfv6u" path="res://assets/sprites/levels/station_x/block_big/frame0002.png" id="3_xm1fp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gnlh4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1fkbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2n7mn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xm1fp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2n7mn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_742cf"]
+size = Vector2(48, 48)
+
+[node name="FallenBlock" type="CharacterBody2D"]
+script = ExtResource("1_2hkm0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gnlh4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_742cf")
