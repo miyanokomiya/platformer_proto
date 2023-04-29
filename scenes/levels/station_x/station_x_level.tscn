@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://spluk184vpgb"]
+[gd_scene load_steps=19 format=3 uid="uid://spluk184vpgb"]
 
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="2_52t0x"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="2_kunsm"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://sjkamyoxqama" path="res://scenes/pawns/enemies/ceilraidsnail/ceilraidsnail.tscn" id="8_1t7yv"]
 [ext_resource type="PackedScene" uid="uid://dss7qwefde8p" path="res://scenes/field_objects/ladder_top/ladder_top.tscn" id="8_jbfmd"]
 [ext_resource type="PackedScene" uid="uid://dbh1nbol5hser" path="res://scenes/pawns/enemies/humblecone/humblecone.tscn" id="8_qsh05"]
+[ext_resource type="PackedScene" uid="uid://eju45ai0ljoe" path="res://scenes/pawns/bosses/don/don.tscn" id="10_dopmf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khw77"]
 texture = ExtResource("2_qvwoa")
@@ -367,6 +368,9 @@ pawn_scene = ExtResource("8_1t7yv")
 [node name="OnScreenSpawner6" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(1190, 9)
 pawn_scene = ExtResource("8_1t7yv")
+
+[node name="Don" parent="MainLayer" instance=ExtResource("10_dopmf")]
+position = Vector2(311, 151)
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
 
