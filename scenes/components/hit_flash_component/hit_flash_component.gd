@@ -9,10 +9,10 @@ var hit_flash_tween: Tween
 
 func _ready():
 	hurtbox_component.hit.connect(on_hit)
-	sprite.material = whiten_material
 
 
 func on_hit(_hitbox_component: HitboxComponent):
+	sprite.material = whiten_material
 	if hit_flash_tween != null && hit_flash_tween.is_valid():
 		hit_flash_tween.kill()
 	

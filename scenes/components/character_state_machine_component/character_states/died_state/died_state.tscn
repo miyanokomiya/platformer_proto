@@ -4,3 +4,4 @@
 
 [node name="DiedState" type="Node"]
 script = ExtResource("1_s21me")
+state_name = "died"

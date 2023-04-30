@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=73 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="8_ndnoh"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="11_y2o4e"]
+[ext_resource type="Shader" path="res://vfx/teleport/teleport.gdshader" id="12_4flpg"]
 [ext_resource type="PackedScene" uid="uid://bat620o01inha" path="res://scenes/components/character_state_machine_component/character_states/ground_stagger_state/ground_stagger_state.tscn" id="12_d5uef"]
 [ext_resource type="AudioStream" uid="uid://dd7woi48ris8p" path="res://assets/audios/player_dash.wav" id="12_ds52r"]
 [ext_resource type="PackedScene" uid="uid://ecoc7p1xpfg8" path="res://scenes/components/random_audio_player_component/random_audio_stream_player_2d_component.tscn" id="13_5crkc"]
@@ -35,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
 [ext_resource type="PackedScene" uid="uid://bfm62nhlsa545" path="res://scenes/components/character_state_machine_component/character_states/jumped_state/jumped.tscn" id="22_3c1vj"]
 [ext_resource type="PackedScene" uid="uid://buf4o7t0gywum" path="res://scenes/components/character_state_machine_component/character_states/died_state/died_state.tscn" id="26_jwh20"]
+[ext_resource type="PackedScene" uid="uid://bn60ng5i1ffx6" path="res://scenes/components/character_state_machine_component/character_states/cutscene_state/cutscene_state.tscn" id="27_0liai"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
 [ext_resource type="AudioStream" uid="uid://cy0jspxgajwds" path="res://assets/audios/charges/sci-fi_power_up_04.wav" id="35_u0jx0"]
 
@@ -57,7 +59,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gm77"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sed23"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -188,6 +190,18 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sprite2D:material:shader_parameter/progress")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_hbewr"]
@@ -982,6 +996,65 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lprw6"]
+shader = ExtResource("12_4flpg")
+shader_parameter/progress = 0.0
+shader_parameter/noise_desnity = 60.0
+shader_parameter/beam_size = 0.02
+shader_parameter/color = Color(0, 1.02, 1.2, 1)
+
+[sub_resource type="Animation" id="Animation_j5qy1"]
+resource_name = "teleport_in"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_lprw6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 1),
+"transitions": PackedFloat32Array(1.51572, 1),
+"update": 0,
+"values": [0.6, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_ndnoh")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
 _data = {
 "RESET": SubResource("Animation_m1nvf"),
@@ -996,6 +1069,7 @@ _data = {
 "run": SubResource("Animation_0kouf"),
 "stagger": SubResource("Animation_w37ts"),
 "stand": SubResource("Animation_u0het"),
+"teleport_in": SubResource("Animation_j5qy1"),
 "wall_stick": SubResource("Animation_5dtx5")
 }
 
@@ -1102,7 +1176,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_0gm77")
+whiten_material = SubResource("ShaderMaterial_sed23")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -1155,6 +1229,7 @@ ladder_state_scene = ExtResource("19_iafpo")
 ladder_down_state_scene = ExtResource("20_hong7")
 ladder_up_state_scene = ExtResource("21_1dice")
 died_scene = ExtResource("26_jwh20")
+cutscene_scene = ExtResource("27_0liai")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
 state_context = NodePath("../CharacterStateContext")

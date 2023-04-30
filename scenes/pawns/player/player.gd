@@ -46,6 +46,16 @@ func _ready():
 	
 	if flip_h:
 		character_state_context.flip_character()
+	
+	teleport_in()
+
+
+func teleport_in():
+	switch_state("cutscene")
+	animation_player.play("teleport_in")
+	await animation_player.animation_finished
+	switch_state("ground")
+	
 
 
 func is_close_to_floor() -> bool:

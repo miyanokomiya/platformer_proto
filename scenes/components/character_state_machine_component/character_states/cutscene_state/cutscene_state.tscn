@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn60ng5i1ffx6"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/cutscene_state/cutscene_state.gd" id="1_atym7"]
+
+[node name="CutsceneState" type="Node"]
+script = ExtResource("1_atym7")
+state_name = "cutscene"
