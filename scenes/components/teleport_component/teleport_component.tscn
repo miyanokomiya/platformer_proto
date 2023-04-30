@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d18prx2rofjh4"]
+[gd_scene load_steps=5 format=3 uid="uid://d18prx2rofjh4"]
 
 [ext_resource type="Script" path="res://scenes/components/teleport_component/teleport_component.gd" id="1_yrht2"]
 [ext_resource type="Shader" path="res://vfx/teleport/teleport.gdshader" id="2_g0s55"]
+[ext_resource type="AudioStream" uid="uid://bt6f8wpnjxdxw" path="res://assets/audios/teleport/sci-fi_power_down_03.wav" id="3_qebld"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_knch1"]
 resource_local_to_scene = true
@@ -14,3 +15,8 @@ shader_parameter/color = Color(0, 1.02, 1.2, 1)
 [node name="TeleportComponent" type="Node"]
 script = ExtResource("1_yrht2")
 teleport_material = SubResource("ShaderMaterial_knch1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qebld")
+volume_db = -16.58
+bus = &"SE"
