@@ -86,7 +86,7 @@ stretch_mode = 2
 [node name="MiddleTexture" type="TextureRect" parent="VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = true
-custom_minimum_size = Vector2(12, 5)
+custom_minimum_size = Vector2(12, 49)
 layout_mode = 2
 texture = ExtResource("2_x107t")
 stretch_mode = 1
@@ -148,7 +148,7 @@ theme_override_constants/separation = 1
 
 [node name="BitTexture" type="TextureRect" parent="Control/VBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 6)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 texture = ExtResource("5_c31b8")
 stretch_mode = 1

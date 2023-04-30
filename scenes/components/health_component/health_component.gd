@@ -15,18 +15,24 @@ func _ready():
 	current_health = max_health
 
 
-func damage(value: float):
-	current_health = clamp(current_health - value, 0, max_health)
-	damaged.emit(value)
+func damage(value: float) -> float:
+	var next = clamp(current_health - value, 0, max_health)
+	var damage_value = current_health - next
+	current_health = next
+	damaged.emit(damage_value)
 	health_changed.emit()
 	check_death()
+	return damage_value
 
 
-func heal(value: float):
-	current_health = clamp(current_health + value, 0, max_health)
-	healed.emit(value)
+func heal(value: float) -> float:
+	var next = clamp(current_health + value, 0, max_health)
+	var heal_value = next - current_health
+	current_health = next
+	healed.emit(heal_value)
 	health_changed.emit()
 	check_death()
+	return heal_value
 
 
 func get_health_percent() -> float:

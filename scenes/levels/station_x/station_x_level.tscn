@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://spluk184vpgb"]
+[gd_scene load_steps=24 format=3 uid="uid://spluk184vpgb"]
 
 [ext_resource type="PackedScene" uid="uid://5l2lcs0e5ml7" path="res://scenes/components/level_manage_component/level_manage_component.tscn" id="1_utnwa"]
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="2_52t0x"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b1rm26e4amecn" path="res://scenes/field_objects/one_way_gate/one_way_gate.tscn" id="8_evvm3"]
 [ext_resource type="PackedScene" uid="uid://dss7qwefde8p" path="res://scenes/field_objects/ladder_top/ladder_top.tscn" id="8_jbfmd"]
 [ext_resource type="PackedScene" uid="uid://dbh1nbol5hser" path="res://scenes/pawns/enemies/humblecone/humblecone.tscn" id="8_qsh05"]
+[ext_resource type="PackedScene" uid="uid://du0hqdchr074i" path="res://scenes/items/life_energy/life_energy.tscn" id="9_dvbih"]
 [ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="12_ceiql"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khw77"]
@@ -332,6 +333,13 @@ shape = SubResource("RectangleShape2D_a4mg3")
 
 [node name="OneWayGate" parent="BackgroundLayer" instance=ExtResource("8_evvm3")]
 position = Vector2(1792, -192)
+
+[node name="LifeEnergy" parent="BackgroundLayer" instance=ExtResource("9_dvbih")]
+position = Vector2(239, 149)
+
+[node name="LifeEnergy2" parent="BackgroundLayer" instance=ExtResource("9_dvbih")]
+position = Vector2(255, 149)
+no_time_limit = true
 
 [node name="MainLayer" type="Node" parent="." groups=["main_layer"]]
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck7kxf20vxak4"]
+
+[ext_resource type="Script" path="res://scenes/components/time_disappear_component/time_disappear_component.gd" id="1_p8tt6"]
+
+[node name="TimeDisappearComponent" type="Node"]
+script = ExtResource("1_p8tt6")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
