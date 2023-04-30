@@ -2,8 +2,8 @@ extends Node
 class_name HealthComponent
 
 signal died
-signal damaged(value: float)
-signal healed(value: float)
+signal damaged(damage_value: float)
+signal healed(heal_value: float)
 signal health_changed
 
 @export var max_health: float = 10

@@ -16,6 +16,7 @@ class_name Player
 @onready var charge_particles = %ChargeParticles
 @onready var charge_particles_2 = %ChargeParticles2
 @onready var charge_se = %ChargeSE
+@onready var health_component = $HealthComponent
 
 
 var default_texture = preload("res://assets/sprites/aria/aria.png")
@@ -31,6 +32,8 @@ func _ready():
 	character_state_context.buster.connect(on_bustered)
 	character_state_context.flipped.connect(on_flipped)
 	buster_texture_timer.timeout.connect(on_buster_texture_timer_timeout)
+	
+	GlobalState.bind_player_health_component(health_component)
 	
 	character_state_context.character = self
 	character_state_context.animation_player = animation_player

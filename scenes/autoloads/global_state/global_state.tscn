@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2c1km2vvh0ma"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/global_state/global_state.gd" id="1_my2lp"]
+[ext_resource type="Resource" uid="uid://bfpctnaan1cv0" path="res://resources/status/health/player_health.tres" id="2_dnu2p"]
+
+[node name="GlobalState" type="Node"]
+script = ExtResource("1_my2lp")
+player_health = ExtResource("2_dnu2p")

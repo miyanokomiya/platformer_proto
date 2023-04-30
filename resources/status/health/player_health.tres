@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HealthResource" load_steps=2 format=3 uid="uid://bfpctnaan1cv0"]
+
+[ext_resource type="Script" path="res://resources/status/health/health_resource.gd" id="1_362wp"]
+
+[resource]
+script = ExtResource("1_362wp")
+id = "player"
+max_value = 16
+value = 16
