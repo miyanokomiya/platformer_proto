@@ -13,21 +13,37 @@ extends Node2D
 @onready var action_timer = %ActionTimer
 @onready var right_hand_block_marker = %RightHandBlockMarker
 @onready var block_detect_ray_cast = %BlockDetectRayCast
+@onready var right_arm_root_marker = %RightArmRootMarker
+@onready var left_arm_root_marker = %LeftArmRootMarker
+@onready var joint_r_group = %JointRGroup
+@onready var joint_l_group = %JointLGroup
+@onready var right_wrist_marker = %RightWristMarker
+@onready var left_wrist_marker = %LeftWristMarker
+@onready var left_hand_default_marker = %LeftHandDefaultMarker
+@onready var punch_collision = %PunchCollision
+@onready var punch_after_effect = %PunchAfterEffect
 
 
 enum STATE{IDLE, DIED, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
 var current_state = STATE.IDLE
 
-var MAX_PUNCH_RANGE = 260
+var MAX_PUNCH_RANGE = 280
+var PUNCH_SPEED = 750
 var current_punch_range = 0
 var fallen_block: Node2D
 
 
 func _ready():
-	right_grab_block()
+	hand_r.global_position = right_hand_default_marker.global_position
+	hand_l.global_position = left_hand_default_marker.global_position
+	# right_grab_block()
+	left_punch()
 
 
 func _physics_process(delta):
+	adjust_left_arm_joints()
+	adjust_right_arm_joints()
+	
 	match current_state:
 		STATE.IDLE:
 			body_player.play("idle")
@@ -43,8 +59,8 @@ func _physics_process(delta):
 			pass
 		STATE.LEFT_PUNCH:
 			if current_punch_range < MAX_PUNCH_RANGE:
-				current_punch_range += 800 * delta
-				hand_l.global_position.x -= 800 * delta
+				current_punch_range += PUNCH_SPEED * delta
+				hand_l.global_position.x -= PUNCH_SPEED * delta
 			else:
 				stop_left_punch()
 				return
@@ -66,18 +82,39 @@ func _physics_process(delta):
 			pass
 
 
+func adjust_left_arm_joints():
+	var joints = joint_r_group.get_children()
+	var from = right_arm_root_marker.global_position
+	var to = right_wrist_marker.global_position
+	for i in joints.size():
+		joints[i].global_position = from.lerp(to, float(i) / float(joints.size()))
+
+
+func adjust_right_arm_joints():
+	var joints = joint_l_group.get_children()
+	var from = left_arm_root_marker.global_position
+	var to = left_wrist_marker.global_position
+	for i in joints.size():
+		joints[i].global_position = from.lerp(to, float(i) / float(joints.size()))
+		
+
+
 func left_punch():
 	current_state = STATE.LEFT_PUNCH_READY
 	current_punch_range = 0
 	hand_l_player.play("punch")
+	punch_after_effect.play()
 	await hand_l_player.animation_finished
+	hand_l_player.play("punching")
 	current_state = STATE.LEFT_PUNCH
 
 
 func left_punch_back():
 	current_state = STATE.LEFT_PUNCH_BACK
+	hand_l_player.play("punched")
+	punch_after_effect.stop()
 	var tween = create_tween()
-	tween.tween_property(hand_l, "position", Vector2(23, -15), 1.0).set_ease(Tween.EASE_IN).set_delay(1.0)
+	tween.tween_property(hand_l, "global_position", left_hand_default_marker.global_position, 1.0).set_ease(Tween.EASE_IN).set_delay(1.0)
 	await tween.finished
 	current_state = STATE.IDLE
 
@@ -102,6 +139,7 @@ func right_grab_block():
 		add_child(fallen_block)
 	
 	fallen_block.grab()
+	keep_fallen_block()
 	right_block_seek()
 
 
@@ -154,4 +192,7 @@ func _on_action_timer_timeout():
 
 
 func _on_health_component_died():
+	if fallen_block:
+		fallen_block.queue_free()
+	
 	queue_free()

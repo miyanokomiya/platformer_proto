@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=32 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="4_qt027"]
 [ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="5_jajt0"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="8_xfik6"]
+[ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="9_vuyb6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3t5g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2jdw"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -31,6 +32,9 @@ size = Vector2(50, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t0oa"]
 size = Vector2(14, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpntc"]
+size = Vector2(32, 29)
 
 [sub_resource type="Animation" id="Animation_2ndx2"]
 resource_name = "idle"
@@ -209,10 +213,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(28, -15)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HandL/PunchHitbox/PunchCollision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_1toev"]
 resource_name = "punch"
-length = 0.3
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -232,17 +248,51 @@ tracks/1/path = NodePath("HandL:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.3, 0.5),
 "transitions": PackedFloat32Array(1.51572, 1, 1),
 "update": 0,
-"values": [Vector2(23, -15), Vector2(28, -15), Vector2(23, -15)]
+"values": [Vector2(23, -15), Vector2(30, -15), Vector2(30, -15)]
+}
+
+[sub_resource type="Animation" id="Animation_j206a"]
+resource_name = "punching"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandL/PunchHitbox/PunchCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1lvae"]
+resource_name = "punched"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandL/PunchHitbox/PunchCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_urkif"]
 _data = {
 "RESET": SubResource("Animation_x3bwf"),
 "idle": SubResource("Animation_2e6gh"),
-"punch": SubResource("Animation_1toev")
+"punch": SubResource("Animation_1toev"),
+"punched": SubResource("Animation_1lvae"),
+"punching": SubResource("Animation_j206a")
 }
 
 [sub_resource type="Animation" id="Animation_xe57f"]
@@ -272,6 +322,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(2, 2), Vector2(2, 2), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandR/RightWristMarker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 0.9, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(40, -10), Vector2(40, -10), Vector2(42, -8), Vector2(42, -8), Vector2(40, -10)]
 }
 
 [sub_resource type="Animation" id="Animation_4v7yw"]
@@ -323,6 +385,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HandR/RightWristMarker:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, -10)]
 }
 
 [sub_resource type="Animation" id="Animation_jnh20"]
@@ -400,7 +474,71 @@ max_health = 50.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_e3t5g")
+whiten_material = SubResource("ShaderMaterial_c2jdw")
+
+[node name="ShoulderRSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -72)
+texture = ExtResource("1_4badi")
+vframes = 5
+frame = 3
+
+[node name="JointRGroup" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="JointRSprite1" type="Sprite2D" parent="JointRGroup"]
+position = Vector2(-46, -77)
+texture = ExtResource("2_pngsy")
+offset = Vector2(3, 9)
+hframes = 7
+frame = 5
+
+[node name="JointRSprite2" type="Sprite2D" parent="JointRGroup"]
+position = Vector2(-45, -69)
+texture = ExtResource("2_pngsy")
+offset = Vector2(3, 9)
+hframes = 7
+frame = 5
+
+[node name="JointRSprite3" type="Sprite2D" parent="JointRGroup"]
+position = Vector2(-44, -61)
+texture = ExtResource("2_pngsy")
+offset = Vector2(3, 9)
+hframes = 7
+frame = 5
+
+[node name="JointRSprite4" type="Sprite2D" parent="JointRGroup"]
+position = Vector2(-45, -55)
+texture = ExtResource("2_pngsy")
+offset = Vector2(3, 9)
+hframes = 7
+frame = 5
+
+[node name="JointRSprite5" type="Sprite2D" parent="JointRGroup"]
+position = Vector2(-48, -49)
+texture = ExtResource("2_pngsy")
+offset = Vector2(3, 9)
+hframes = 7
+frame = 5
+
+[node name="JointRSprite6" type="Sprite2D" parent="JointRGroup"]
+position = Vector2(-48, -49)
+texture = ExtResource("2_pngsy")
+offset = Vector2(3, 9)
+hframes = 7
+frame = 5
+
+[node name="HandR" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-100, -40)
+
+[node name="HandRSprite" type="Sprite2D" parent="HandR"]
+texture = ExtResource("2_pngsy")
+hframes = 7
+frame = 1
+
+[node name="RightWristMarker" type="Marker2D" parent="HandR"]
+unique_name_in_owner = true
+position = Vector2(40, -10)
 
 [node name="BodySprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -408,6 +546,7 @@ texture = ExtResource("1_4badi")
 vframes = 5
 
 [node name="HurtboxComponent" parent="BodySprite" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+visible = false
 position = Vector2(0, 72)
 collision_layer = 4
 collision_mask = 8
@@ -424,12 +563,6 @@ texture = ExtResource("1_4badi")
 vframes = 5
 frame = 2
 
-[node name="ShoulderRSprite" type="Sprite2D" parent="."]
-position = Vector2(0, -72)
-texture = ExtResource("1_4badi")
-vframes = 5
-frame = 3
-
 [node name="Head" type="Node2D" parent="."]
 
 [node name="HeadSprite" type="Sprite2D" parent="Head"]
@@ -439,6 +572,7 @@ vframes = 5
 frame = 1
 
 [node name="HurtboxComponent" parent="Head" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+visible = false
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
@@ -449,6 +583,7 @@ position = Vector2(2, -106.5)
 shape = SubResource("RectangleShape2D_qrll0")
 
 [node name="HurtboxComponent2" parent="Head" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+visible = false
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
@@ -465,6 +600,7 @@ vframes = 5
 frame = 4
 
 [node name="HurtboxComponent" parent="ShieldSprite" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
+visible = false
 position = Vector2(0, 72)
 collision_layer = 4
 collision_mask = 8
@@ -474,15 +610,6 @@ invincible = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldSprite/HurtboxComponent"]
 position = Vector2(2, -16.5)
 shape = SubResource("RectangleShape2D_rkaki")
-
-[node name="HandR" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(-146, -94)
-
-[node name="HandRSprite" type="Sprite2D" parent="HandR"]
-texture = ExtResource("2_pngsy")
-hframes = 7
-frame = 1
 
 [node name="HandL" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -499,29 +626,67 @@ collision_mask = 2
 damage = 3
 oneshot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandL/PunchHitbox"]
+[node name="PunchCollision" type="CollisionShape2D" parent="HandL/PunchHitbox"]
+unique_name_in_owner = true
 position = Vector2(-7, -1.5)
 shape = SubResource("RectangleShape2D_7t0oa")
+disabled = true
 
 [node name="PunchRayCast" type="RayCast2D" parent="HandL"]
 unique_name_in_owner = true
 target_position = Vector2(-16, 0)
 
-[node name="JointLGroup" type="Node2D" parent="."]
+[node name="LeftWristMarker" type="Marker2D" parent="HandL"]
+unique_name_in_owner = true
+position = Vector2(45, 2)
 
-[node name="JointLSprite" type="Sprite2D" parent="JointLGroup"]
-position = Vector2(76, -14)
+[node name="StaticBody2D" type="StaticBody2D" parent="HandL"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandL/StaticBody2D"]
+position = Vector2(8, -0.5)
+shape = SubResource("RectangleShape2D_vpntc")
+one_way_collision = true
+debug_color = Color(0.72549, 0.372549, 0.768627, 0.419608)
+
+[node name="PunchAfterEffect" parent="HandL" node_paths=PackedStringArray("sprite") instance=ExtResource("9_vuyb6")]
+unique_name_in_owner = true
+sprite = NodePath("../HandLSprite")
+lifetime = 0.2
+effect_color = Color(1, 0.360784, 0.360784, 1)
+
+[node name="JointLGroup" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="JointLSprite1" type="Sprite2D" parent="JointLGroup"]
+position = Vector2(55, -14)
 texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 4
 
-[node name="JointRGroup" type="Node2D" parent="."]
-
-[node name="JointRSprite" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-44, -14)
+[node name="JointLSprite2" type="Sprite2D" parent="JointLGroup"]
+position = Vector2(55, -14)
 texture = ExtResource("2_pngsy")
 hframes = 7
-frame = 5
+frame = 4
+
+[node name="JointLSprite3" type="Sprite2D" parent="JointLGroup"]
+position = Vector2(55, -14)
+texture = ExtResource("2_pngsy")
+hframes = 7
+frame = 4
+
+[node name="JointLSprite4" type="Sprite2D" parent="JointLGroup"]
+position = Vector2(55, -14)
+texture = ExtResource("2_pngsy")
+hframes = 7
+frame = 4
+
+[node name="JointLSprite5" type="Sprite2D" parent="JointLGroup"]
+position = Vector2(55, -14)
+texture = ExtResource("2_pngsy")
+hframes = 7
+frame = 4
 
 [node name="BodyPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -550,11 +715,23 @@ position = Vector2(-146, -138)
 
 [node name="RightHandDefaultMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-77, -23)
+position = Vector2(-123, -84)
+
+[node name="LeftHandDefaultMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2, -15)
 
 [node name="RightHandBlockMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-54, -48)
+position = Vector2(-104, -41)
+
+[node name="RightArmRootMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-46, -83)
+
+[node name="LeftArmRootMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(58, -15)
 
 [node name="ActionTimer" type="Timer" parent="."]
 unique_name_in_owner = true

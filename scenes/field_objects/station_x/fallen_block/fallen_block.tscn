@@ -32,7 +32,7 @@ animations = [{
 size = Vector2(48, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7glo"]
-size = Vector2(44, 49)
+size = Vector2(37, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tp7d2"]
 size = Vector2(50, 50)
@@ -332,8 +332,12 @@ script = ExtResource("1_2hkm0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gnlh4")
+autoplay = "default"
+frame = 3
+frame_progress = 0.600796
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_742cf")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
@@ -345,12 +349,13 @@ oneshot = true
 
 [node name="HitCollision" type="CollisionShape2D" parent="HitboxComponent"]
 unique_name_in_owner = true
-position = Vector2(0, 4.5)
+position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_p7glo")
 debug_color = Color(0.784314, 0.396078, 0.478431, 0.419608)
 
 [node name="ExplodedHitbox" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("5_ooutt")

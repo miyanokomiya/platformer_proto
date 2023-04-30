@@ -28,7 +28,12 @@ func spawn_effect():
 		return
 	
 	var effect = sprite.duplicate() as Sprite2D
-	get_tree().get_first_node_in_group("background_layer").add_child(effect)
+	var layer = get_tree().get_first_node_in_group("background_layer")
+	if !layer:
+		return
+	
+	layer.add_child(effect)
+	
 	if flip_h:
 		effect.flip_h = !effect.flip_h
 	
