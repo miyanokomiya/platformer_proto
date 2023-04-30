@@ -4,6 +4,11 @@ signal player_current_health_changed(health: HealthResource)
 signal player_max_health_changed(health: HealthResource)
 
 @export var player_health: HealthResource
+@export var level_checkpoint: LevelCheckpointResource = LevelCheckpointResource.new()
+
+
+func update_level_checkpoint(checkpoint: LevelCheckpointResource):
+	level_checkpoint = checkpoint
 
 
 func reset_player_health():
