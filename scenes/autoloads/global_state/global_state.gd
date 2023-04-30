@@ -6,6 +6,10 @@ signal player_max_health_changed(health: HealthResource)
 @export var player_health: HealthResource
 
 
+func reset_player_health():
+	update_player_current_health(player_health.max_value)
+
+
 func update_player_current_health(value: float):
 	player_health.value = clamp(floor(value), 0, player_health.max_value)
 	player_current_health_changed.emit(player_health)

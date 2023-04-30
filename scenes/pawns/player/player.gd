@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal died
+
 @onready var character_state_machine = $CharacterStateMachine
 @onready var character_state_context = $CharacterStateContext
 @onready var animation_player = $AnimationPlayer
@@ -18,7 +20,6 @@ class_name Player
 @onready var charge_se = %ChargeSE
 @onready var health_component = $HealthComponent
 
-
 var default_texture = preload("res://assets/sprites/aria/aria.png")
 var buster_texture = preload("res://assets/sprites/aria/aria_buster.png")
 
@@ -33,6 +34,7 @@ func _ready():
 	character_state_context.flipped.connect(on_flipped)
 	buster_texture_timer.timeout.connect(on_buster_texture_timer_timeout)
 	
+	GlobalState.reset_player_health()
 	GlobalState.bind_player_health_component(health_component)
 	
 	character_state_context.character = self
@@ -123,3 +125,10 @@ func _on_charge_component_released(_level):
 	charge_particles.visible = false
 	charge_particles_2.emitting = false
 	charge_particles_2.visible = false
+
+
+func _on_health_component_died():
+	switch_state("died")
+	animation_player.play("died")
+	await animation_player.animation_finished
+	died.emit()

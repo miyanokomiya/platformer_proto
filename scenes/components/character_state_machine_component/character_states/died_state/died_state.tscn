@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://buf4o7t0gywum"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/died_state/died_state.gd" id="1_s21me"]
+
+[node name="DiedState" type="Node"]
+script = ExtResource("1_s21me")

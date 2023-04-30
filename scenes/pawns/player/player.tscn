@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=69 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://ymxrdbn5yv4h" path="res://scenes/components/character_state_machine_component/character_states/character_state_context.tscn" id="3_n1m2y"]
 [ext_resource type="PackedScene" uid="uid://cqj3wc1okgwqx" path="res://scenes/components/character_state_machine_component/character_state_machine_component.tscn" id="4_6g13u"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="4_i3utj"]
-[ext_resource type="Texture2D" uid="uid://c63oyhbl3ukjf" path="res://assets/sprites/aria/aria_buster.png" id="4_mwci4"]
 [ext_resource type="PackedScene" uid="uid://b8pamn41tkwr5" path="res://scenes/weapons/large_shot/large_shot.tscn" id="4_yjfg6"]
 [ext_resource type="PackedScene" uid="uid://c6ovpinuevnw3" path="res://scenes/components/character_state_machine_component/character_states/air_state/air_state.tscn" id="5_iy66u"]
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="5_vir1a"]
@@ -35,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bvrvurjh8h6l" path="res://scenes/components/character_state_machine_component/character_states/ladder_up_state/ladder_up_state.tscn" id="21_1dice"]
 [ext_resource type="PackedScene" uid="uid://ct2fvegc241m3" path="res://scenes/components/direction_component/direction_component.tscn" id="21_ufte6"]
 [ext_resource type="PackedScene" uid="uid://bfm62nhlsa545" path="res://scenes/components/character_state_machine_component/character_states/jumped_state/jumped.tscn" id="22_3c1vj"]
+[ext_resource type="PackedScene" uid="uid://buf4o7t0gywum" path="res://scenes/components/character_state_machine_component/character_states/died_state/died_state.tscn" id="26_jwh20"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
 [ext_resource type="AudioStream" uid="uid://cy0jspxgajwds" path="res://assets/audios/charges/sci-fi_power_up_04.wav" id="35_u0jx0"]
 
@@ -57,7 +57,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0wg4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jg3ff"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
@@ -151,7 +151,43 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_mwci4")]
+"values": [ExtResource("8_ndnoh")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite2D:material")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sprite2D:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_hbewr"]
@@ -883,10 +919,74 @@ tracks/4/keys = {
 "values": [Vector2(-3.5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_bbr6x"]
+resource_name = "died"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_ndnoh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
 _data = {
 "RESET": SubResource("Animation_m1nvf"),
 "dash": SubResource("Animation_hbewr"),
+"died": SubResource("Animation_bbr6x"),
 "idle": SubResource("Animation_aew5q"),
 "jump_fall": SubResource("Animation_1c604"),
 "jump_high": SubResource("Animation_nx3m7"),
@@ -1002,7 +1102,7 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_b0wg4")
+whiten_material = SubResource("ShaderMaterial_jg3ff")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -1032,7 +1132,7 @@ shape = SubResource("RectangleShape2D_5rw22")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("4_mwci4")
+texture = ExtResource("8_ndnoh")
 hframes = 27
 
 [node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast", "charge_component_main") instance=ExtResource("3_n1m2y")]
@@ -1054,6 +1154,7 @@ jumped_scene = ExtResource("22_3c1vj")
 ladder_state_scene = ExtResource("19_iafpo")
 ladder_down_state_scene = ExtResource("20_hong7")
 ladder_up_state_scene = ExtResource("21_1dice")
+died_scene = ExtResource("26_jwh20")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
 state_context = NodePath("../CharacterStateContext")
@@ -1145,6 +1246,7 @@ lifetime = 1.5
 explosiveness = 0.7
 local_coords = true
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_hit"]
 [connection signal="charged" from="ChargeComponent" to="." method="_on_charge_component_charged"]
 [connection signal="released" from="ChargeComponent" to="." method="_on_charge_component_released"]

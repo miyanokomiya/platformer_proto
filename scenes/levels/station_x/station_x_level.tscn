@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://spluk184vpgb"]
+[gd_scene load_steps=21 format=3 uid="uid://spluk184vpgb"]
 
+[ext_resource type="PackedScene" uid="uid://5l2lcs0e5ml7" path="res://scenes/components/level_manage_component/level_manage_component.tscn" id="1_utnwa"]
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="2_52t0x"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="2_kunsm"]
 [ext_resource type="Texture2D" uid="uid://bonqtfg56i1j1" path="res://assets/sprites/levels/station_x/terrains.png" id="2_qvwoa"]
@@ -189,6 +190,9 @@ size = Vector2(320, 307)
 size = Vector2(20, 160)
 
 [node name="StationXLevel" type="Node2D"]
+
+[node name="LevelManageComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_utnwa")]
+player = NodePath("../MainLayer/Player")
 
 [node name="StationXTileMap" parent="." instance=ExtResource("2_52t0x")]
 layer_0/name = "Base"

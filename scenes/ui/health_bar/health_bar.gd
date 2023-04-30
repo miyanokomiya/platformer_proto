@@ -1,7 +1,7 @@
 extends PanelContainer
 
-@export var max_value: int = 10
-@export var value: int = 10
+@export var max_value: int = 3
+@export var value: int = 3
 
 @onready var middle_texture = %MiddleTexture
 @onready var bit_texture = %BitTexture
