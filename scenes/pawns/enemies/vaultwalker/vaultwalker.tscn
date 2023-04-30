@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://djmye8sm3kmmb"]
+[gd_scene load_steps=32 format=3 uid="uid://djmye8sm3kmmb"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/vaultwalker/vaultwalker.gd" id="1_eh1ct"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_lwmip"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bo4wtpiq4imlu" path="res://assets/sprites/enemies/vaultwalker.png" id="7_gx6eg"]
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="8_yvjx5"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="9_our87"]
+[ext_resource type="PackedScene" uid="uid://bjpf7yn6meg0k" path="res://scenes/components/item_drop_component/item_drop_component.tscn" id="10_ear03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjhbs"]
 size = Vector2(17, 18)
@@ -32,7 +33,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1jbi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdba5"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -837,7 +838,7 @@ debug_color = Color(0.862745, 0, 0.858824, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_u7pm8")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_x1jbi")
+whiten_material = SubResource("ShaderMaterial_rdba5")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_x3pc0")]
 collision_layer = 4
@@ -921,6 +922,8 @@ debug_color = Color(0.670588, 0.498039, 0.282353, 0.419608)
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
+
+[node name="ItemDropComponent" parent="." instance=ExtResource("10_ear03")]
 
 [connection signal="blocked" from="ShieldHurtboxComponent" to="." method="_on_shield_hurtbox_component_blocked"]
 [connection signal="area_entered" from="ShotDetectAreaHigh" to="." method="_on_shot_detect_area_high_area_entered"]

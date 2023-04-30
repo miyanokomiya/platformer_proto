@@ -6,6 +6,7 @@ extends EnemyBase
 @onready var activate_timer = $ActivateTimer
 @onready var health_component = $HealthComponent
 @onready var spike_animation_player = $SpikeAnimationPlayer
+@onready var item_drop_component = $ItemDropComponent
 
 enum STATE{IDLE, SHELL, ROLLING}
 var current_state = STATE.IDLE
@@ -90,6 +91,7 @@ func on_activate_timer_timeout():
 
 
 func on_died():
+	item_drop_component.try_drop()
 	died = true
 
 

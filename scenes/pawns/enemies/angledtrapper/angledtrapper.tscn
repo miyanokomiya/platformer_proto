@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://badggq5y3umih"]
+[gd_scene load_steps=27 format=3 uid="uid://badggq5y3umih"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/angledtrapper/angledtrapper.gd" id="1_bqj4r"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_ee2j1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="7_51w6s"]
 [ext_resource type="Texture2D" uid="uid://35hjbjcrwk3g" path="res://assets/sprites/enemies/angledtrapper/angledtrapper_broken.png" id="7_p6kp6"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="8_yx0yw"]
+[ext_resource type="PackedScene" uid="uid://bjpf7yn6meg0k" path="res://scenes/components/item_drop_component/item_drop_component.tscn" id="11_f1dfy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjhbs"]
 size = Vector2(18, 32)
@@ -30,7 +31,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_67dep"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q683l"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -432,7 +433,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_qcq6w")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_67dep")
+whiten_material = SubResource("ShaderMaterial_q683l")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_4bxr8")]
 collision_layer = 4
@@ -518,6 +519,8 @@ target_position = Vector2(0, -16)
 unique_name_in_owner = true
 position = Vector2(-2, 23)
 target_position = Vector2(0, 16)
+
+[node name="ItemDropComponent" parent="." instance=ExtResource("11_f1dfy")]
 
 [connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]
 [connection signal="body_exited" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_exited"]

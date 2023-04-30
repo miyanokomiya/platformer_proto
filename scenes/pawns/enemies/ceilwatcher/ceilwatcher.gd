@@ -4,6 +4,7 @@ extends EnemyBase
 @onready var player_detect_area = $PlayerDetectArea
 @onready var health_component = $HealthComponent
 @onready var animation_player = $AnimationPlayer
+@onready var item_drop_component = $ItemDropComponent
 
 @export var h_flip: bool = false
 
@@ -51,5 +52,6 @@ func on_player_detect_area_body_exited(_body):
 
 
 func on_died():
+	item_drop_component.try_drop()
 	died = true
 	animation_player.play("die")

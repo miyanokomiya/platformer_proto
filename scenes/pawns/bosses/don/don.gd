@@ -185,7 +185,7 @@ func _on_punch_hitbox_hit():
 func _on_action_timer_timeout():
 	if block_detect_ray_cast.is_colliding():
 		left_punch()
-	elif randf() < 0.5:
+	elif RngManager.enemy_rng.randf() < 0.5:
 		right_grab_block()
 	else:
 		left_punch()

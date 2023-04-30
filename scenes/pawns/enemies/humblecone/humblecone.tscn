@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbh1nbol5hser"]
+[gd_scene load_steps=25 format=3 uid="uid://dbh1nbol5hser"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/humblecone/humblecone.gd" id="1_dtcx8"]
 [ext_resource type="Texture2D" uid="uid://re8oh77kg2mu" path="res://assets/sprites/enemies/humblecone.png" id="1_wsnph"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bu8kgcot4n6tt" path="res://scenes/components/off_screen_component/off_screen_component.tscn" id="6_fx138"]
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="7_mhdvp"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="8_3cqtt"]
+[ext_resource type="PackedScene" uid="uid://bjpf7yn6meg0k" path="res://scenes/components/item_drop_component/item_drop_component.tscn" id="10_2q7pj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjhbs"]
 size = Vector2(18, 32)
@@ -29,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7sh0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7la22"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -505,7 +506,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_wg4d4")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_q7sh0")
+whiten_material = SubResource("ShaderMaterial_7la22")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_tf866")]
 position = Vector2(0, -20)
@@ -563,6 +564,8 @@ bus = &"SE"
 [node name="BlockTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="ItemDropComponent" parent="." instance=ExtResource("10_2q7pj")]
 
 [connection signal="blocked" from="HurtboxComponent" to="." method="_on_hurtbox_component_blocked"]
 [connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]

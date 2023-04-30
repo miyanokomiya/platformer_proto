@@ -5,6 +5,7 @@ extends EnemyBase
 @onready var health_component = $HealthComponent
 @onready var hurtbox_component = $HurtboxComponent
 @onready var block_timer = $BlockTimer
+@onready var item_drop_component = $ItemDropComponent
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_detected = false
@@ -52,6 +53,7 @@ func _on_player_detect_area_body_exited(_body):
 
 
 func on_died():
+	item_drop_component.try_drop()
 	died = true
 	animation_player.play("die")
 

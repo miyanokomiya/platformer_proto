@@ -8,6 +8,7 @@ extends EnemyBase
 @onready var wall_top_detector = %WallTopDetector
 @onready var ceil_detector = %CeilDetector
 @onready var floor_detector = %FloorDetector
+@onready var item_drop_component = $ItemDropComponent
 
 var player_detected = false
 var broken = false
@@ -81,6 +82,7 @@ func _on_player_detect_area_body_exited(_body):
 
 
 func on_died():
+	item_drop_component.try_drop()
 	start_invicible()
 	broken = true
 	breaking = true

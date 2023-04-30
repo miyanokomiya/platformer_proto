@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://sjkamyoxqama"]
+[gd_scene load_steps=31 format=3 uid="uid://sjkamyoxqama"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/ceilraidsnail/ceilraidsnail.gd" id="1_1lpxh"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_1bnvr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="8_vm8gu"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="9_uuq4k"]
 [ext_resource type="AudioStream" uid="uid://derctjqhgpaar" path="res://assets/audios/unsheathe/knife_unsheathe_02.wav" id="10_tbbtc"]
+[ext_resource type="PackedScene" uid="uid://bjpf7yn6meg0k" path="res://scenes/components/item_drop_component/item_drop_component.tscn" id="11_jy2ha"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hecnq"]
 radius = 9.0
@@ -30,7 +31,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1c4d"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nh5uo"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -678,7 +679,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_lf7td")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_r1c4d")
+whiten_material = SubResource("ShaderMaterial_nh5uo")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_2x8nw")]
 collision_layer = 4
@@ -762,5 +763,7 @@ bus = &"SE"
 
 [node name="ActivateTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ItemDropComponent" parent="." instance=ExtResource("11_jy2ha")]
 
 [connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]

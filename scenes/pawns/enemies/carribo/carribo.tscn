@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cmy04to47158w"]
+[gd_scene load_steps=23 format=3 uid="uid://cmy04to47158w"]
 
 [ext_resource type="Texture2D" uid="uid://djedvu0l0c3k8" path="res://assets/sprites/enemies/carribo.png" id="1_bbx0x"]
 [ext_resource type="Script" path="res://scenes/pawns/enemies/carribo/carribo.gd" id="1_wk3rk"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bu8kgcot4n6tt" path="res://scenes/components/off_screen_component/off_screen_component.tscn" id="6_v713h"]
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="7_3218i"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="8_clpqq"]
+[ext_resource type="PackedScene" uid="uid://bjpf7yn6meg0k" path="res://scenes/components/item_drop_component/item_drop_component.tscn" id="10_rpdjt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6k1x"]
 size = Vector2(22, 24)
@@ -29,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4wy0f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q8jbs"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -294,7 +295,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_4wy0f")
+whiten_material = SubResource("ShaderMaterial_q8jbs")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_k2j0g")]
 position = Vector2(0, -11)
@@ -352,3 +353,5 @@ bus = &"SE"
 
 [node name="ActivateTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ItemDropComponent" parent="." instance=ExtResource("10_rpdjt")]

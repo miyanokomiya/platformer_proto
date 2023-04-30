@@ -22,6 +22,7 @@ buses/default_bus_layout="res://master_audio_bus.tres"
 [autoload]
 
 GlobalState="*res://scenes/autoloads/global_state/global_state.tscn"
+RngManager="*res://scenes/autoloads/rng_manager/rng_manager.tscn"
 
 [display]
 

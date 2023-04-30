@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfm207a62d7to"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/rng_manager/rng_manager.gd" id="1_lvmmy"]
+
+[node name="RNGManager" type="Node"]
+script = ExtResource("1_lvmmy")

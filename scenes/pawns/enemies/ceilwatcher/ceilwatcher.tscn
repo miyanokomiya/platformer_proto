@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://hecsiu8110dw"]
+[gd_scene load_steps=23 format=3 uid="uid://hecsiu8110dw"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/ceilwatcher/ceilwatcher.gd" id="1_vaf06"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_siiun"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bu8kgcot4n6tt" path="res://scenes/components/off_screen_component/off_screen_component.tscn" id="6_ne1rs"]
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="7_tctb3"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="8_pagcx"]
+[ext_resource type="PackedScene" uid="uid://bjpf7yn6meg0k" path="res://scenes/components/item_drop_component/item_drop_component.tscn" id="10_f21th"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hjhbs"]
 size = Vector2(17, 22)
@@ -29,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_blg7o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wakks"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -281,7 +282,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_hpx5q")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_blg7o")
+whiten_material = SubResource("ShaderMaterial_wakks")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_s1u3x")]
 collision_layer = 4
@@ -335,3 +336,5 @@ bus = &"SE"
 [node name="FlyingTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="ItemDropComponent" parent="." instance=ExtResource("10_f21th")]

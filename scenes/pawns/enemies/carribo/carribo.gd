@@ -5,6 +5,7 @@ extends EnemyBase
 @onready var animation_player = $AnimationPlayer
 @onready var activate_timer = $ActivateTimer
 @onready var health_component = $HealthComponent
+@onready var item_drop_component = $ItemDropComponent
 
 
 var speed = 30.0
@@ -56,5 +57,6 @@ func on_activate_timer_timeout():
 
 
 func on_died():
+	item_drop_component.try_drop()
 	died = true
 	animation_player.play("die")
