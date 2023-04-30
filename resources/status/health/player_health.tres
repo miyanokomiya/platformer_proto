@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_362wp")
 id = "player"
-max_value = 3
-value = 3
+max_value = 10
+value = 10
