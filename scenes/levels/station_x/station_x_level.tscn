@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://spluk184vpgb"]
+[gd_scene load_steps=23 format=3 uid="uid://spluk184vpgb"]
 
 [ext_resource type="PackedScene" uid="uid://5l2lcs0e5ml7" path="res://scenes/components/level_manage_component/level_manage_component.tscn" id="1_utnwa"]
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="2_52t0x"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c6w82b5erpp5g" path="res://scenes/field_objects/on_screen_spawner/on_screen_spawner.tscn" id="6_hg6q6"]
 [ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="7_5jf7q"]
 [ext_resource type="PackedScene" uid="uid://sjkamyoxqama" path="res://scenes/pawns/enemies/ceilraidsnail/ceilraidsnail.tscn" id="8_1t7yv"]
+[ext_resource type="PackedScene" uid="uid://b1rm26e4amecn" path="res://scenes/field_objects/one_way_gate/one_way_gate.tscn" id="8_evvm3"]
 [ext_resource type="PackedScene" uid="uid://dss7qwefde8p" path="res://scenes/field_objects/ladder_top/ladder_top.tscn" id="8_jbfmd"]
 [ext_resource type="PackedScene" uid="uid://dbh1nbol5hser" path="res://scenes/pawns/enemies/humblecone/humblecone.tscn" id="8_qsh05"]
 [ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="12_ceiql"]
@@ -328,6 +329,9 @@ position = Vector2(-9, -61.5)
 shape = SubResource("RectangleShape2D_a4mg3")
 
 [node name="BackgroundLayer" type="Node" parent="." groups=["background_layer"]]
+
+[node name="OneWayGate" parent="BackgroundLayer" instance=ExtResource("8_evvm3")]
+position = Vector2(1792, -192)
 
 [node name="MainLayer" type="Node" parent="." groups=["main_layer"]]
 
