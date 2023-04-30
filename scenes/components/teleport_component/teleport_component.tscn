@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d18prx2rofjh4"]
+
+[ext_resource type="Script" path="res://scenes/components/teleport_component/teleport_component.gd" id="1_yrht2"]
+[ext_resource type="Shader" path="res://vfx/teleport/teleport.gdshader" id="2_g0s55"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knch1"]
+resource_local_to_scene = true
+shader = ExtResource("2_g0s55")
+shader_parameter/progress = null
+shader_parameter/noise_desnity = 60.0
+shader_parameter/beam_size = 0.02
+shader_parameter/color = Color(0, 1.02, 1.2, 1)
+
+[node name="TeleportComponent" type="Node"]
+script = ExtResource("1_yrht2")
+teleport_material = SubResource("ShaderMaterial_knch1")

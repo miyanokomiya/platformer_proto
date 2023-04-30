@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=74 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c7bd6k68dqg15" path="res://scenes/components/character_state_machine_component/character_states/wall_state/wall_state.tscn" id="7_idwji"]
 [ext_resource type="PackedScene" uid="uid://bh8yf7v5eku2l" path="res://scenes/components/ladder_detect_component/ladder_detect_component.tscn" id="7_kdsuq"]
 [ext_resource type="PackedScene" uid="uid://bax4fd615m3h4" path="res://scenes/components/character_state_machine_component/character_states/wall_kicked_state/wall_kicked_state.tscn" id="8_dbhk6"]
+[ext_resource type="PackedScene" uid="uid://d18prx2rofjh4" path="res://scenes/components/teleport_component/teleport_component.tscn" id="8_gyvdc"]
 [ext_resource type="Texture2D" uid="uid://dyqeis1ucncch" path="res://assets/sprites/aria/aria.png" id="8_ndnoh"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="11_y2o4e"]
 [ext_resource type="Shader" path="res://vfx/teleport/teleport.gdshader" id="12_4flpg"]
@@ -59,12 +60,20 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sed23"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7cwn"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wy8ho"]
+resource_local_to_scene = true
+shader = ExtResource("12_4flpg")
+shader_parameter/progress = null
+shader_parameter/noise_desnity = 60.0
+shader_parameter/beam_size = 0.02
+shader_parameter/color = Color(0, 1.02, 1.2, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ni0j2"]
 size = Vector2(10, 22)
@@ -190,18 +199,6 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Sprite2D:material:shader_parameter/progress")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_hbewr"]
@@ -935,6 +932,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_bbr6x"]
 resource_name = "died"
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -995,13 +993,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lprw6"]
-shader = ExtResource("12_4flpg")
-shader_parameter/progress = 0.0
-shader_parameter/noise_desnity = 60.0
-shader_parameter/beam_size = 0.02
-shader_parameter/color = Color(0, 1.02, 1.2, 1)
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TeleportComponent")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_backwards"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_j5qy1"]
 resource_name = "teleport_in"
@@ -1009,50 +1014,40 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material")
+tracks/0/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("ShaderMaterial_lprw6")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/progress")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.05, 1),
-"transitions": PackedFloat32Array(1.51572, 1),
-"update": 0,
-"values": [0.6, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_ndnoh"), ExtResource("8_ndnoh")]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TeleportComponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("8_ndnoh")]
+"values": [{
+"args": [],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
@@ -1176,7 +1171,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_sed23")
+whiten_material = SubResource("ShaderMaterial_v7cwn")
+
+[node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
+sprite = NodePath("../Sprite2D")
+teleport_material = SubResource("ShaderMaterial_wy8ho")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
