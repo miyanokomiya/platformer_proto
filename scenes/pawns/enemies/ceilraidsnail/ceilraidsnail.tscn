@@ -31,7 +31,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpp1v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_npktr"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -680,7 +680,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_lf7td")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_wpp1v")
+whiten_material = SubResource("ShaderMaterial_npktr")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_2x8nw")]
 collision_layer = 4

@@ -1,5 +1,7 @@
 extends EnemyBase
 
+@export var in_place: bool = false
+
 @onready var ground_detector = %GroundDetector
 @onready var wall_detector = %WallDetector
 @onready var animation_player = $AnimationPlayer
@@ -44,7 +46,7 @@ func _physics_process(delta):
 		STATE.IDLE:
 			velocity.y -= gravity * delta
 			
-			if activated:
+			if activated && !in_place:
 				if ground_detector.is_colliding() && !wall_detector.is_colliding():
 					velocity.x = direction * speed
 				else:
