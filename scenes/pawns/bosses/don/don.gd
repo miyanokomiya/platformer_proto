@@ -2,6 +2,7 @@ extends Node2D
 
 signal died
 signal exploded
+signal activated
 
 @export var fallen_block_scene: PackedScene
 
@@ -94,6 +95,7 @@ func activate():
 	boss_hud.fill_health()
 	await boss_hud.health_filled
 	current_state = STATE.IDLE
+	activated.emit()
 
 
 func adjust_left_arm_joints():

@@ -12,19 +12,19 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control2/VBoxContainer2/DamagedBitTexture:visible")
+tracks/0/path = NodePath("DamagedBar1/VBoxContainer2/DamagedBitTexture1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 0.231373, 0.231373, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control2/VBoxContainer2/DamagedBitTexture:modulate")
+tracks/1/path = NodePath("DamagedBar2/VBoxContainer2/DamagedBitTexture2:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -40,26 +40,26 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control2/VBoxContainer2/DamagedBitTexture:visible")
+tracks/0/path = NodePath("DamagedBar1/VBoxContainer2/DamagedBitTexture1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 0.231373, 0.231373, 0.862745), Color(1, 0.231373, 0.231373, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control2/VBoxContainer2/DamagedBitTexture:modulate")
+tracks/1/path = NodePath("DamagedBar2/VBoxContainer2/DamagedBitTexture2:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [Color(1, 0.231373, 0.231373, 0.862745), Color(1, 0.231373, 0.231373, 0)]
+"values": [Color(1, 0.231373, 0.231373, 1), Color(1, 0.231373, 0.231373, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7eruv"]
@@ -71,6 +71,8 @@ _data = {
 [node name="HealthBar" type="PanelContainer"]
 size_flags_vertical = 8
 script = ExtResource("1_hmkhg")
+max_value = 25
+value = 25
 logo = ExtResource("5_ot8ao")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -109,10 +111,10 @@ offset_bottom = 10.0
 texture = ExtResource("5_ot8ao")
 stretch_mode = 2
 
-[node name="Control2" type="Control" parent="."]
+[node name="DamagedBar1" type="Control" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="DamagedBar1"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -124,7 +126,7 @@ offset_bottom = -13.0
 grow_vertical = 0
 theme_override_constants/separation = 1
 
-[node name="DamagedBitTexture" type="TextureRect" parent="Control2/VBoxContainer2"]
+[node name="DamagedBitTexture1" type="TextureRect" parent="DamagedBar1/VBoxContainer2"]
 unique_name_in_owner = true
 visible = false
 modulate = Color(1, 0.231373, 0.231373, 1)
@@ -133,10 +135,10 @@ layout_mode = 2
 texture = ExtResource("5_c31b8")
 stretch_mode = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="Bar1" type="Control" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Bar1"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -148,8 +150,55 @@ offset_bottom = -13.0
 grow_vertical = 0
 theme_override_constants/separation = 1
 
-[node name="BitTexture" type="TextureRect" parent="Control/VBoxContainer2"]
+[node name="BitTexture1" type="TextureRect" parent="Bar1/VBoxContainer2"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture = ExtResource("5_c31b8")
+stretch_mode = 1
+
+[node name="DamagedBar2" type="Control" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DamagedBar2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -15.0
+offset_right = 9.0
+offset_bottom = -13.0
+grow_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="DamagedBitTexture2" type="TextureRect" parent="DamagedBar2/VBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 0.231373, 0.231373, 1)
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+texture = ExtResource("5_c31b8")
+stretch_mode = 1
+
+[node name="Bar2" type="Control" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Bar2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -15.0
+offset_right = 9.0
+offset_bottom = -13.0
+grow_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="BitTexture2" type="TextureRect" parent="Bar2/VBoxContainer2"]
+unique_name_in_owner = true
+modulate = Color(0.509804, 1, 0.501961, 1)
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 texture = ExtResource("5_c31b8")

@@ -15,8 +15,10 @@ func _on_boss_gate_passed(player):
 	await tween.finished
 	player.animation_player.play("idle")
 	await get_tree().create_timer(1.0).timeout
-	player.switch_state("ground")
 	don.activate()
+	await don.activated
+	await get_tree().create_timer(1.0).timeout
+	player.switch_state("ground")
 
 
 func _on_don_died():
