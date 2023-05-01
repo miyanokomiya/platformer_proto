@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=37 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
@@ -11,8 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="8_xfik6"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="9_vuyb6"]
 [ext_resource type="Texture2D" uid="uid://c65i1xj25a8rb" path="res://assets/sprites/vfx/explosions/explosion-f.png" id="11_6es2i"]
+[ext_resource type="PackedScene" uid="uid://bviowmjlnp34h" path="res://scenes/effects/boss_explosion_se/boss_explosion_se.tscn" id="12_g15k3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lod0f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfe4h"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -638,6 +639,20 @@ tracks/20/keys = {
 "method": &"finish_explode"
 }]
 }
+tracks/21/type = "method"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("BossExplosionSE")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_meklq"]
 _data = {
@@ -990,7 +1005,7 @@ max_health = 1.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_lod0f")
+whiten_material = SubResource("ShaderMaterial_kfe4h")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -1277,6 +1292,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="BossExplosionSE" parent="." instance=ExtResource("12_g15k3")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit" from="HandL/PunchHitbox" to="." method="_on_punch_hitbox_hit"]
