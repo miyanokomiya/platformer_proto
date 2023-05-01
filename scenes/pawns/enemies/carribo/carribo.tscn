@@ -30,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q8jbs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_500v5"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -277,6 +277,7 @@ anim_speed_max = 1.0
 
 [node name="Carribo" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 129
 script = ExtResource("1_wk3rk")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_4i0uh")]
@@ -295,7 +296,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_q8jbs")
+whiten_material = SubResource("ShaderMaterial_500v5")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_k2j0g")]
 position = Vector2(0, -11)
@@ -329,6 +330,7 @@ hframes = 6
 unique_name_in_owner = true
 position = Vector2(-11, -12)
 target_position = Vector2(0, 20)
+collision_mask = 129
 
 [node name="WallDetector" type="RayCast2D" parent="."]
 unique_name_in_owner = true

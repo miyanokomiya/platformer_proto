@@ -20,17 +20,19 @@ func _on_area_2d_body_entered(body):
 		return
 	
 	var player = body as Player
+	var camera = get_viewport().get_camera_2d()
 	
 	get_tree().paused = true
 	area_gate.unlock()
 	await area_gate.unlocked
-	
+	camera.process_mode  = Node.PROCESS_MODE_ALWAYS
 	if player.get_current_state().state_name == "ground":
 		player.animation_player.process_mode  = Node.PROCESS_MODE_ALWAYS
 	var tween = create_tween()
 	tween.tween_property(player, "global_position", Vector2(exit_marker.global_position.x, player.global_position.y), 0.7)
 	await tween.finished
 	
+	camera.process_mode  = Node.PROCESS_MODE_INHERIT
 	player.animation_player.process_mode  = Node.PROCESS_MODE_INHERIT
 	area_gate.lock()
 	await area_gate.locked

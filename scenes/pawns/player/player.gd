@@ -55,7 +55,11 @@ func teleport_in():
 	animation_player.play("teleport_in")
 	await animation_player.animation_finished
 	switch_state("ground")
-	
+
+
+func instant_death():
+	hurt_se.play()
+	health_component.damage(10000)
 
 
 func is_close_to_floor() -> bool:

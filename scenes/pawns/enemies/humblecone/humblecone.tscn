@@ -30,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7la22"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxq1y"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -487,6 +487,7 @@ anim_speed_max = 1.0
 
 [node name="Humblecone" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 129
 script = ExtResource("1_dtcx8")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_c308q")]
@@ -506,7 +507,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_wg4d4")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_7la22")
+whiten_material = SubResource("ShaderMaterial_oxq1y")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_tf866")]
 position = Vector2(0, -20)

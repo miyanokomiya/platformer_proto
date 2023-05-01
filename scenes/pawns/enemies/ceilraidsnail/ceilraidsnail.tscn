@@ -31,7 +31,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nh5uo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpp1v"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -661,6 +661,7 @@ anim_speed_max = 1.0
 
 [node name="Ceilraidsnail" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 129
 script = ExtResource("1_1lpxh")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_1bnvr")]
@@ -679,7 +680,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_lf7td")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_nh5uo")
+whiten_material = SubResource("ShaderMaterial_wpp1v")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_2x8nw")]
 collision_layer = 4

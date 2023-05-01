@@ -30,9 +30,12 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		next_state_name = "ground_dash"
 	
 	if Input.is_action_just_pressed("action_jump"):
-		ctx.character.velocity.y = ctx.JUMP_VELOCITY
-		ctx.play_jump_se()
-		next_state_name = "jumped"
+		if Input.is_action_pressed("move_down"):
+			ctx.character.set_collision_mask_value(8, false)
+		else:
+			ctx.character.velocity.y = ctx.JUMP_VELOCITY
+			ctx.play_jump_se()
+			next_state_name = "jumped"
 	
 	if Input.is_action_just_pressed("action_main_attack"):
 		ctx.action_main_attack()

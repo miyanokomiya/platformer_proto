@@ -33,7 +33,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdba5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hcyt"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -809,6 +809,7 @@ size = Vector2(128, 25)
 
 [node name="Vaultwalker" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 129
 script = ExtResource("1_eh1ct")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_lwmip")]
@@ -838,7 +839,7 @@ debug_color = Color(0.862745, 0, 0.858824, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_u7pm8")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_rdba5")
+whiten_material = SubResource("ShaderMaterial_5hcyt")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_x3pc0")]
 collision_layer = 4
