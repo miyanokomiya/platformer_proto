@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=38 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
@@ -12,8 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="9_vuyb6"]
 [ext_resource type="Texture2D" uid="uid://c65i1xj25a8rb" path="res://assets/sprites/vfx/explosions/explosion-f.png" id="11_6es2i"]
 [ext_resource type="PackedScene" uid="uid://bviowmjlnp34h" path="res://scenes/effects/boss_explosion_se/boss_explosion_se.tscn" id="12_g15k3"]
+[ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="12_k0637"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfe4h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_duduq"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -1000,12 +1001,12 @@ script = ExtResource("1_rgi86")
 fallen_block_scene = ExtResource("2_esogr")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ow6lv")]
-max_health = 1.0
+max_health = 25.0
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_kfe4h")
+whiten_material = SubResource("ShaderMaterial_duduq")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -1282,6 +1283,9 @@ process_material = SubResource("ParticleProcessMaterial_8ca35")
 texture = ExtResource("11_6es2i")
 lifetime = 0.5
 explosiveness = 0.3
+
+[node name="BossHUD" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_k0637")]
+health_component = NodePath("../HealthComponent")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

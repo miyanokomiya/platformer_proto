@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmn3jcq2iyobq"]
+
+[ext_resource type="PackedScene" uid="uid://7maujdm4i7cr" path="res://scenes/ui/health_bar/health_bar.tscn" id="1_ajloa"]
+[ext_resource type="Script" path="res://scenes/ui/boss_hud/boss_hud.gd" id="1_jkx3k"]
+[ext_resource type="AudioStream" uid="uid://byhpm52hnvx01" path="res://assets/audios/heal/retro_ui_menu_popup_07.wav" id="3_vn171"]
+
+[node name="BossHUD" type="CanvasLayer"]
+script = ExtResource("1_jkx3k")
+
+[node name="HealthBar" parent="." instance=ExtResource("1_ajloa")]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -178.0
+offset_right = -1.0
+offset_bottom = -111.0
+grow_horizontal = 0
+grow_vertical = 0
+max_value = 25
+value = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vn171")
+volume_db = -19.746
+pitch_scale = 0.9
+bus = &"SE"

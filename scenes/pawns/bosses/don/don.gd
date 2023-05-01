@@ -25,6 +25,7 @@ signal exploded
 @onready var left_hand_default_marker = %LeftHandDefaultMarker
 @onready var punch_collision = %PunchCollision
 @onready var punch_after_effect = %PunchAfterEffect
+@onready var boss_hud = $BossHUD
 
 
 enum STATE{DEACTIVATED, IDLE, DIED, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
@@ -39,6 +40,7 @@ var fallen_block: Node2D
 func _ready():
 	hand_r.global_position = right_hand_default_marker.global_position
 	hand_l.global_position = left_hand_default_marker.global_position
+	boss_hud.visible = false
 
 
 func _physics_process(delta):
@@ -88,6 +90,9 @@ func _physics_process(delta):
 
 
 func activate():
+	boss_hud.visible = true
+	boss_hud.fill_health()
+	await boss_hud.health_filled
 	current_state = STATE.IDLE
 
 

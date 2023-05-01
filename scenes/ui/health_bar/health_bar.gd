@@ -2,16 +2,21 @@ extends PanelContainer
 
 @export var max_value: int = 6
 @export var value: int = 6
+@export var logo: Texture2D
 
 @onready var middle_texture = %MiddleTexture
 @onready var bit_texture = %BitTexture
 @onready var damaged_bit_texture = %DamagedBitTexture
 @onready var animation_player = $AnimationPlayer
+@onready var logo_texture = %LogoTexture
 
 var BIT_SIZE = 2
 
 
 func _ready():
+	if logo_texture:
+		logo_texture.texture = logo
+	
 	update_view()
 
 
