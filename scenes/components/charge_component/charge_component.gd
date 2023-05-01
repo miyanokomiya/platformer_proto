@@ -40,6 +40,13 @@ func start_charge():
 	timer.start()
 
 
+func start_charge_if_not_started():
+	if is_charging_flag:
+		return
+	
+	start_charge()
+
+
 func release_charge() -> int:
 	var level = get_charge_level()
 	current_timer_index = 0
@@ -49,6 +56,11 @@ func release_charge() -> int:
 	
 	released.emit(level)
 	return level
+
+
+func clear_charge():
+	current_timer_index = 0
+	release_charge()
 
 
 func on_charged():

@@ -79,15 +79,24 @@ func play_land_se():
 		land_se.play()
 
 
-func action_main_attack() -> bool:
-	buster.emit(0)
-	charge_component_main.start_charge()
+func action_main_attack(dry_run = false) -> bool:
+	if !dry_run:
+		buster.emit(0)
+	
 	return true
 
 
-func action_main_attack_release() -> bool:
+func action_charge():
+	charge_component_main.start_charge_if_not_started()
+
+
+func action_main_attack_release(dry_run = false) -> bool:
+	if dry_run:
+		charge_component_main.clear_charge()
+		return false
+	
 	var level = charge_component_main.release_charge()
-	if level > 0:
+	if level > 0 && !dry_run:
 		buster.emit(level)
 		return true
 	

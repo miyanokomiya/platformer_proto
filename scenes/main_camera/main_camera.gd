@@ -55,7 +55,7 @@ func clear_limit(id: int):
 
 func acquire_target():
 	if target:
-		target_position = target.global_position + Vector2.UP * 24
+		target_position = target.global_position + Vector2.UP * 12
 	
 	if bounds_limits.size() == 0:
 		return

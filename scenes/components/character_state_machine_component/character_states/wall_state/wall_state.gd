@@ -29,6 +29,9 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if Input.is_action_just_pressed("action_main_attack"):
 		ctx.action_main_attack()
 	
+	if Input.is_action_pressed("action_main_attack"):
+		ctx.action_charge()
+	
 	if Input.is_action_just_released("action_main_attack"):
 		ctx.action_main_attack_release()
 	

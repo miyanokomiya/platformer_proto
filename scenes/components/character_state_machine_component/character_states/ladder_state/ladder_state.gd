@@ -56,6 +56,9 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 			ctx.animation_player.play("ladder_buster")
 			attack_wait_timer.start()
 	
+	if Input.is_action_pressed("action_main_attack"):
+		ctx.action_charge()
+	
 	if Input.is_action_just_released("action_main_attack"):
 		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
 			ctx.flip_character()

@@ -267,7 +267,7 @@ size = Vector2(248, 112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajngj"]
 resource_local_to_scene = true
-size = Vector2(304, 180)
+size = Vector2(424, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qd28"]
 resource_local_to_scene = true
@@ -316,109 +316,6 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(65709, 786433, 1, 131245, 786433, 2, 196781, 786433, 3, 65710, 851969, 1, 131246, 851969, 2, 196782, 851969, 3, 262317, 786433, 1, 327853, 786433, 2, 393389, 786433, 3, 262318, 851969, 1, 327854, 851969, 2, 393390, 851969, 3, 458925, 786433, 1, 524461, 786433, 2, 589997, 786433, 3, 458926, 851969, 1, 524462, 851969, 2, 589998, 851969, 3, 655533, 786433, 1, 721069, 786433, 2, 786605, 786433, 3, 655534, 851969, 1, 721070, 851969, 2, 786606, 851969, 3, 852141, 786433, 1, 917677, 786433, 2, 983213, 786433, 3, 852142, 851969, 1, 917678, 851969, 2, 983214, 851969, 3, 1048749, 786433, 1, 1114285, 786433, 2, 1179821, 786433, 3, 1048750, 851969, 1, 1114286, 851969, 2, 1179822, 851969, 3, -65363, 786433, 0, -65362, 851969, 0, 173, 786433, 1, 174, 851969, 1, -1376133, 786433, 0, -1310597, 786433, 1, -1245061, 786433, 1, -1179525, 786433, 2, -1113989, 786433, 3, -1048453, 786433, 1, -982917, 786433, 2, -917381, 786433, 3, -851845, 786433, 1, -786309, 786433, 2, -720773, 786433, 3, -655237, 786433, 1, -589701, 786433, 2, -524165, 786433, 3, -458629, 786433, 1, -393093, 786433, 2, -327557, 786433, 3, -262021, 786433, 1, -196485, 786433, 2, -130949, 786433, 3, -1376132, 851969, 0, -1310596, 851969, 1, -1245060, 851969, 1, -1179524, 851969, 2, -1113988, 851969, 3, -1048452, 851969, 1, -982916, 851969, 2, -917380, 851969, 3, -851844, 851969, 1, -786308, 851969, 2, -720772, 851969, 3, -655236, 851969, 1, -589700, 851969, 2, -524164, 851969, 3, -458628, 851969, 1, -393092, 851969, 2, -327556, 851969, 3, -262020, 851969, 1, -196484, 851969, 2, -130948, 851969, 3)
 
-[node name="AreaMarkers" type="Node2D" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="AreaMarkers"]
-offset_right = 360.0
-offset_bottom = 180.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect2" type="ColorRect" parent="AreaMarkers"]
-offset_left = 360.0
-offset_right = 720.0
-offset_bottom = 180.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect4" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1080.0
-offset_right = 1440.0
-offset_bottom = 180.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect3" type="ColorRect" parent="AreaMarkers"]
-offset_left = 720.0
-offset_right = 1080.0
-offset_bottom = 180.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect5" type="ColorRect" parent="AreaMarkers"]
-offset_left = 720.0
-offset_top = -180.0
-offset_right = 1080.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect8" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1080.0
-offset_top = -360.0
-offset_right = 1440.0
-offset_bottom = -180.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect10" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1440.0
-offset_top = -180.0
-offset_right = 1800.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect11" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1800.0
-offset_top = -360.0
-offset_right = 2160.0
-offset_bottom = -180.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect13" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1800.0
-offset_right = 2160.0
-offset_bottom = 180.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect14" type="ColorRect" parent="AreaMarkers"]
-offset_left = 2160.0
-offset_top = -180.0
-offset_right = 2520.0
-color = Color(0.917647, 0.835294, 0.454902, 0.211765)
-
-[node name="ColorRect6" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1080.0
-offset_top = -180.0
-offset_right = 1440.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect9" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1440.0
-offset_top = -360.0
-offset_right = 1800.0
-offset_bottom = -180.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect12" type="ColorRect" parent="AreaMarkers"]
-offset_left = 1800.0
-offset_top = -180.0
-offset_right = 2160.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect15" type="ColorRect" parent="AreaMarkers"]
-offset_left = 2160.0
-offset_top = -360.0
-offset_right = 2520.0
-offset_bottom = -180.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect16" type="ColorRect" parent="AreaMarkers"]
-offset_left = 2160.0
-offset_right = 2520.0
-offset_bottom = 180.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
-[node name="ColorRect7" type="ColorRect" parent="AreaMarkers"]
-offset_left = 720.0
-offset_top = -360.0
-offset_right = 1080.0
-offset_bottom = -180.0
-color = Color(0.917647, 1, 0.870588, 0.211765)
-
 [node name="CheckpointManageComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ldomc")]
 player = NodePath("../MainLayer/Player")
 
@@ -441,6 +338,16 @@ progress = 2
 position = Vector2(3168, -168)
 id = "4"
 progress = 3
+
+[node name="Checkpoint5" parent="CheckpointManageComponent" instance=ExtResource("5_cedo3")]
+position = Vector2(3944, -400)
+id = "5"
+progress = 4
+
+[node name="Checkpoint6" parent="CheckpointManageComponent" instance=ExtResource("5_cedo3")]
+position = Vector2(4960, 152)
+id = "6"
+progress = 5
 
 [node name="MainCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_kunsm")]
 target = NodePath("../MainLayer/Player")
@@ -597,7 +504,7 @@ position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_vrxj8")
 
 [node name="BoundsArea" parent="CameraMeta/ToBossBounds" index="1"]
-position = Vector2(8, -12)
+position = Vector2(68, -12)
 shape = SubResource("RectangleShape2D_ajngj")
 
 [node name="CameraBoundsBoss" parent="CameraMeta" node_paths=PackedStringArray("camera") instance=ExtResource("4_6uq7n")]
@@ -677,7 +584,7 @@ one_way_collision = true
 
 [node name="Player" parent="MainLayer" groups=["Player"] instance=ExtResource("3_ne5dv")]
 z_index = 1
-position = Vector2(2912, -168)
+position = Vector2(5072, 152)
 
 [node name="CarriboSpawner" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(498, 152)
@@ -828,6 +735,8 @@ unique_name_in_owner = true
 position = Vector2(5448, 152)
 
 [connection signal="passed" from="BackgroundLayer/BossGate" to="." method="_on_boss_gate_passed"]
+[connection signal="died" from="MainLayer/Don" to="." method="_on_don_died"]
+[connection signal="exploded" from="MainLayer/Don" to="." method="_on_don_exploded"]
 
 [editable path="CameraMeta/CameraBounds"]
 [editable path="CameraMeta/CameraBounds2"]

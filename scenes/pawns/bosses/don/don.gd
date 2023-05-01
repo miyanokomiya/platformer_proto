@@ -1,5 +1,8 @@
 extends Node2D
 
+signal died
+signal exploded
+
 @export var fallen_block_scene: PackedScene
 
 @onready var body_player = %BodyPlayer
@@ -54,7 +57,7 @@ func _physics_process(delta):
 			if action_timer.is_stopped():
 				action_timer.start()
 		STATE.DIED:
-			body_player.pause()
+			action_timer.stop()
 			hand_l_player.pause()
 			hand_r_player.pause()
 		STATE.LEFT_PUNCH_READY:
@@ -111,6 +114,10 @@ func left_punch():
 	hand_l_player.play("punch")
 	punch_after_effect.play()
 	await hand_l_player.animation_finished
+
+	if current_state == STATE.DIED:
+		return
+	
 	hand_l_player.play("punching")
 	current_state = STATE.LEFT_PUNCH
 
@@ -122,6 +129,10 @@ func left_punch_back():
 	var tween = create_tween()
 	tween.tween_property(hand_l, "global_position", left_hand_default_marker.global_position, 1.0).set_ease(Tween.EASE_IN).set_delay(1.0)
 	await tween.finished
+
+	if current_state == STATE.DIED:
+		return
+	
 	current_state = STATE.IDLE
 
 
@@ -134,8 +145,15 @@ func right_grab_block():
 	var tween = create_tween()
 	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 0.5).set_ease(Tween.EASE_IN)
 	await tween.finished
+
+	if current_state == STATE.DIED:
+		return
+	
 	hand_r_player.play("grab_block")
 	await hand_r_player.animation_finished
+
+	if current_state == STATE.DIED:
+		return
 	
 	fallen_block = fallen_block_scene.instantiate()
 	var layer = get_tree().get_first_node_in_group("background_layer")
@@ -159,6 +177,10 @@ func keep_fallen_block():
 func right_block_seek():
 	current_state = STATE.RIGHT_BLOCK_SEEK
 	await get_tree().create_timer(2.0).timeout
+
+	if current_state == STATE.DIED:
+		return
+	
 	right_block_drop()
 
 
@@ -175,12 +197,25 @@ func right_block_drop():
 	current_state = STATE.RIGHT_BLOCK_DROP
 	hand_r_player.play("release_block")
 	await hand_r_player.animation_finished
+
+	if current_state == STATE.DIED:
+		return
+	
 	fallen_block.drop()
 	fallen_block = null
 	var tween = create_tween()
 	tween.tween_property(hand_r, "global_position", right_hand_default_marker.global_position, 1.0).set_ease(Tween.EASE_IN)
 	await tween.finished
+
+	if current_state == STATE.DIED:
+		return
+	
 	current_state = STATE.IDLE
+
+
+func finish_explode():
+	exploded.emit()
+	queue_free()
 
 
 func _on_punch_hitbox_hit():
@@ -189,6 +224,9 @@ func _on_punch_hitbox_hit():
 
 
 func _on_action_timer_timeout():
+	if current_state == STATE.DIED:
+		return
+	
 	if block_detect_ray_cast.is_colliding():
 		left_punch()
 	elif RngManager.enemy_rng.randf() < 0.5:
@@ -201,4 +239,6 @@ func _on_health_component_died():
 	if fallen_block:
 		fallen_block.queue_free()
 	
-	queue_free()
+	current_state = STATE.DIED
+	body_player.play("died")
+	died.emit()
