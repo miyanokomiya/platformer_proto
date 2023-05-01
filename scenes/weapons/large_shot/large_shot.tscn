@@ -162,7 +162,6 @@ volume_db = -12.787
 bus = &"SE"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 scale = Vector2(3.6, 3.6)
 
 [connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]

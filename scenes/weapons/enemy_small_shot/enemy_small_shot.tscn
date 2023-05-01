@@ -1,12 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://8j2dyxxf2rgj"]
+[gd_scene load_steps=21 format=3 uid="uid://8elprp6h4hvx"]
 
-[ext_resource type="Texture2D" uid="uid://duqs5gj0hip3c" path="res://assets/sprites/shots/shots.png" id="1_07w6v"]
-[ext_resource type="Script" path="res://scenes/weapons/small_shot/small_shot.gd" id="1_ry1je"]
-[ext_resource type="PackedScene" uid="uid://cltyyd03qhp1x" path="res://scenes/components/projectile_component/projectile_component.tscn" id="2_ltm0r"]
-[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="3_r32ob"]
-[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="4_ti380"]
-[ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="5_o7nb8"]
-[ext_resource type="AudioStream" uid="uid://cic8tlt7mnvyi" path="res://assets/audios/blocked/knife_hit_small_05.wav" id="5_twwa3"]
+[ext_resource type="Script" path="res://scenes/weapons/enemy_small_shot/enemy_small_shot.gd" id="1_ojxcx"]
+[ext_resource type="PackedScene" uid="uid://cltyyd03qhp1x" path="res://scenes/components/projectile_component/projectile_component.tscn" id="2_b7jkx"]
+[ext_resource type="Texture2D" uid="uid://c3s6kf35fikxf" path="res://assets/sprites/shots/enemy_shot_small.png" id="3_b2kjt"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="4_xqkah"]
+[ext_resource type="AudioStream" uid="uid://dfs6c76mpcgk4" path="res://assets/audios/hits/kick_soft_jab_impact_03.wav" id="5_s3pks"]
+[ext_resource type="AudioStream" uid="uid://dri0tya08krt" path="res://assets/audios/shots/retro_laser_gun_shoot_33.wav" id="6_33w1g"]
+[ext_resource type="AudioStream" uid="uid://cic8tlt7mnvyi" path="res://assets/audios/blocked/knife_hit_small_05.wav" id="7_5luyh"]
 
 [sub_resource type="Animation" id="Animation_mdgm5"]
 length = 0.001
@@ -37,8 +37,9 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ualya"]
 resource_name = "flying"
-length = 0.2
+length = 0.45
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,10 +47,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [1, 2]
+"values": [0, 1, 2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -74,10 +75,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3, 4]
+"values": [0]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -106,7 +107,7 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_p38ty"]
+[sub_resource type="Animation" id="Animation_2a3l5"]
 resource_name = "stay"
 length = 0.1
 tracks/0/type = "value"
@@ -139,17 +140,17 @@ _data = {
 "RESET": SubResource("Animation_mdgm5"),
 "flying": SubResource("Animation_ualya"),
 "hit": SubResource("Animation_l81si"),
-"stay": SubResource("Animation_p38ty")
+"stay": SubResource("Animation_2a3l5")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yra2f"]
-radius = 4.0
+radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nyv0"]
-radius = 4.0
+radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aioff"]
-radius = 4.0
+radius = 2.0
 
 [sub_resource type="Gradient" id="Gradient_u4itg"]
 offsets = PackedFloat32Array(0, 0.237624, 0.821782, 1)
@@ -177,23 +178,22 @@ orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_15ddi")
 color_ramp = SubResource("GradientTexture1D_0qsdm")
 
-[node name="SmallShot" type="StaticBody2D"]
-collision_layer = 8
+[node name="EnemySmallShot" type="StaticBody2D"]
+collision_layer = 16
 collision_mask = 0
-script = ExtResource("1_ry1je")
+script = ExtResource("1_ojxcx")
 
-[node name="ProjectileComponent" parent="." instance=ExtResource("2_ltm0r")]
-speed = 300
+[node name="ProjectileComponent" parent="." instance=ExtResource("2_b7jkx")]
+speed = 120
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "stay"
 libraries = {
 "": SubResource("AnimationLibrary_2f8kg")
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_07w6v")
-hframes = 5
+texture = ExtResource("3_b2kjt")
+hframes = 3
 frame = 1
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -209,12 +209,13 @@ visible = false
 shape = SubResource("CircleShape2D_8nyv0")
 
 [node name="TerrainRayCast" type="RayCast2D" parent="."]
-target_position = Vector2(7, 0)
+target_position = Vector2(4, 0)
+collision_mask = 129
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_r32ob")]
+[node name="HitboxComponent" parent="." instance=ExtResource("4_xqkah")]
 visible = false
-collision_layer = 8
-collision_mask = 4
+collision_layer = 16
+collision_mask = 2
 oneshot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -230,19 +231,19 @@ one_shot = true
 explosiveness = 0.8
 
 [node name="HitSE" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ti380")
+stream = ExtResource("5_s3pks")
 volume_db = -23.11
 pitch_scale = 3.05
 bus = &"SE"
 
 [node name="ShootSE" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("5_o7nb8")
+stream = ExtResource("6_33w1g")
 volume_db = -24.867
 bus = &"SE"
 
 [node name="BlockedSE" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_twwa3")
+stream = ExtResource("7_5luyh")
 bus = &"SE"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

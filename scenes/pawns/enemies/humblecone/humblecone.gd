@@ -1,11 +1,14 @@
 extends EnemyBase
 
+@export var shot_scene: PackedScene
+
 @onready var player_detect_area = $PlayerDetectArea
 @onready var animation_player = $AnimationPlayer
 @onready var health_component = $HealthComponent
 @onready var hurtbox_component = $HurtboxComponent
 @onready var block_timer = $BlockTimer
 @onready var item_drop_component = $ItemDropComponent
+@onready var shot_marker = $ShotMarker
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_detected = false
@@ -41,6 +44,23 @@ func start_invicible():
 func end_invicible():
 	hurtbox_component.invincible = false
 	blocked = false
+
+
+func shoot():
+	var layer = get_tree().get_first_node_in_group("foreground_layer")
+	if !layer:
+		return
+	
+	var shot1 = shot_scene.instantiate()
+	var shot2 = shot_scene.instantiate()
+	layer.add_child(shot1)
+	layer.add_child(shot2)
+	var direction = Vector2.LEFT
+	if flip_h:
+		direction.x *= -1
+	
+	shot1.shoot(shot_marker.global_position, direction)
+	shot2.shoot(shot_marker.global_position, direction + Vector2.UP / 2.0)
 
 
 func _on_player_detect_area_body_entered(_body):

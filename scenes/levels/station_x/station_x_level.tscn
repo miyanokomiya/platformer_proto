@@ -444,7 +444,7 @@ position = Vector2(3320, -192)
 
 [node name="Player" parent="MainLayer" groups=["Player"] instance=ExtResource("3_ne5dv")]
 z_index = 1
-position = Vector2(2688, -168)
+position = Vector2(960, -168)
 
 [node name="CarriboSpawner" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(498, 152)

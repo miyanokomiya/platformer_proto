@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://dbh1nbol5hser"]
+[gd_scene load_steps=26 format=3 uid="uid://dbh1nbol5hser"]
 
 [ext_resource type="Script" path="res://scenes/pawns/enemies/humblecone/humblecone.gd" id="1_dtcx8"]
 [ext_resource type="Texture2D" uid="uid://re8oh77kg2mu" path="res://assets/sprites/enemies/humblecone.png" id="1_wsnph"]
+[ext_resource type="PackedScene" uid="uid://8elprp6h4hvx" path="res://scenes/weapons/enemy_small_shot/enemy_small_shot.tscn" id="2_0iqm1"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_c308q"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="3_kj604"]
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_wg4d4"]
@@ -30,7 +31,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxq1y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xej5f"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -458,6 +459,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(-1, 6.5), Vector2(-1, 4)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rk5si"]
 _data = {
@@ -489,6 +504,7 @@ anim_speed_max = 1.0
 collision_layer = 4
 collision_mask = 129
 script = ExtResource("1_dtcx8")
+shot_scene = ExtResource("2_0iqm1")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_c308q")]
 max_health = 2.0
@@ -507,7 +523,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_wg4d4")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_oxq1y")
+whiten_material = SubResource("ShaderMaterial_xej5f")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_tf866")]
 position = Vector2(0, -20)
@@ -567,6 +583,9 @@ wait_time = 2.0
 one_shot = true
 
 [node name="ItemDropComponent" parent="." instance=ExtResource("10_2q7pj")]
+
+[node name="ShotMarker" type="Marker2D" parent="."]
+position = Vector2(0, -15)
 
 [connection signal="blocked" from="HurtboxComponent" to="." method="_on_hurtbox_component_blocked"]
 [connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]
