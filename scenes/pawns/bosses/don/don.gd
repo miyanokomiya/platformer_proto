@@ -24,8 +24,8 @@ extends Node2D
 @onready var punch_after_effect = %PunchAfterEffect
 
 
-enum STATE{IDLE, DIED, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
-var current_state = STATE.IDLE
+enum STATE{DEACTIVATED, IDLE, DIED, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
+var current_state = STATE.DEACTIVATED
 
 var MAX_PUNCH_RANGE = 280
 var PUNCH_SPEED = 750
@@ -36,8 +36,6 @@ var fallen_block: Node2D
 func _ready():
 	hand_r.global_position = right_hand_default_marker.global_position
 	hand_l.global_position = left_hand_default_marker.global_position
-	# right_grab_block()
-	left_punch()
 
 
 func _physics_process(delta):
@@ -45,6 +43,10 @@ func _physics_process(delta):
 	adjust_right_arm_joints()
 	
 	match current_state:
+		STATE.DEACTIVATED:
+			body_player.play("idle")
+			hand_l_player.play("idle")
+			hand_r_player.play("idle")
 		STATE.IDLE:
 			body_player.play("idle")
 			hand_l_player.play("idle")
@@ -80,6 +82,10 @@ func _physics_process(delta):
 			keep_fallen_block()
 		STATE.RIGHT_BLOCK_DROP:
 			pass
+
+
+func activate():
+	current_state = STATE.IDLE
 
 
 func adjust_left_arm_joints():

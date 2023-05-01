@@ -62,6 +62,15 @@ func instant_death():
 	health_component.damage(10000)
 
 
+func face_right(left = false):
+	if left:
+		if character_state_context.current_direction > 0:
+			character_state_context.flip_character()
+	else:
+		if character_state_context.current_direction < 0:
+			character_state_context.flip_character()
+
+
 func is_close_to_floor() -> bool:
 	return close_floor_ray_cast.is_colliding()
 

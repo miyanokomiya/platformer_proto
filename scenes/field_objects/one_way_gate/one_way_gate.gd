@@ -1,9 +1,13 @@
 extends Node2D
 
+signal passed(player: Player)
+
 @onready var area_gate = $AreaGate
 @onready var exit_marker = $ExitMarker
 
 @export var flip_h: bool = false
+## If supplied, make it next camera bounds during the gate's transition
+@export var next_camera_bounds: CameraBounds
 
 
 func _ready():
@@ -25,7 +29,10 @@ func _on_area_2d_body_entered(body):
 	get_tree().paused = true
 	area_gate.unlock()
 	await area_gate.unlocked
-	camera.process_mode  = Node.PROCESS_MODE_ALWAYS
+	if next_camera_bounds:
+		next_camera_bounds.set_bounds()
+	
+	camera.process_mode = Node.PROCESS_MODE_ALWAYS
 	if player.get_current_state().state_name == "ground":
 		player.animation_player.process_mode  = Node.PROCESS_MODE_ALWAYS
 	var tween = create_tween()
@@ -37,3 +44,4 @@ func _on_area_2d_body_entered(body):
 	area_gate.lock()
 	await area_gate.locked
 	get_tree().paused = false
+	passed.emit(player)

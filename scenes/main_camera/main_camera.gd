@@ -34,6 +34,7 @@ func set_bounds(id: int, center: Vector2, size: Vector2):
 	var next_limit_bottom = center.y + size.y / 2
 	var next_limit_left = center.x - size.x / 2
 	
+	bounds_limits = bounds_limits.filter(func(item): return item["id"] != id)
 	bounds_limits.append({
 		"id": id,
 		"bounds": [next_limit_top, next_limit_right, next_limit_bottom, next_limit_left],
