@@ -15,6 +15,8 @@ signal flipped(h_flip: bool)
 @export var ladder_detect_component: LadderDetectComponent
 @export var almost_floor_raycast: RayCast2D
 @export var charge_component_main: ChargeComponent
+@export var front_stickable_wall_raycast: RayCast2D
+@export var back_stickable_wall_raycast: RayCast2D
 
 var character: CharacterBody2D
 var animation_player: AnimationPlayer

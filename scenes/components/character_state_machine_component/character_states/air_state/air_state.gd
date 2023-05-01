@@ -56,8 +56,9 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
-	if !ctx.is_close_to_floor.call() && ctx.character.is_on_wall() && direction * ctx.current_direction > 0:
-		next_state_name = "wall"
+	if !ctx.is_close_to_floor.call() && direction * ctx.current_direction > 0:
+		if ctx.front_stickable_wall_raycast.is_colliding() || ctx.back_stickable_wall_raycast.is_colliding():
+			next_state_name = "wall"
 
 
 func free_move(ctx: CharacterStateContext) -> int:

@@ -87,6 +87,7 @@ move_down={
 2d_physics/layer_6="Ladder"
 2d_physics/layer_7="Pickable Item"
 2d_physics/layer_8="Passable Floor"
+2d_physics/layer_9="Stickable Wall"
 
 [rendering]
 

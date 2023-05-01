@@ -60,14 +60,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_stfpf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_138cb"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qky1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hx6rg"]
 resource_local_to_scene = true
 shader = ExtResource("12_4flpg")
 shader_parameter/progress = null
@@ -1172,11 +1172,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_stfpf")
+whiten_material = SubResource("ShaderMaterial_138cb")
 
 [node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
 sprite = NodePath("../Sprite2D")
-teleport_material = SubResource("ShaderMaterial_8qky1")
+teleport_material = SubResource("ShaderMaterial_hx6rg")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -1209,12 +1209,14 @@ position = Vector2(0, -16)
 texture = ExtResource("8_ndnoh")
 hframes = 27
 
-[node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast", "charge_component_main") instance=ExtResource("3_n1m2y")]
+[node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast", "charge_component_main", "front_stickable_wall_raycast", "back_stickable_wall_raycast") instance=ExtResource("3_n1m2y")]
 jump_se = NodePath("../Audios/JumpSE")
 land_se = NodePath("../Audios/LandSE")
 ladder_detect_component = NodePath("../LadderDetectComponent")
 almost_floor_raycast = NodePath("../AlmostFloorRayCast")
 charge_component_main = NodePath("../ChargeComponent")
+front_stickable_wall_raycast = NodePath("../FrontStickableWallRayCast")
+back_stickable_wall_raycast = NodePath("../BackStickableWallRayCast")
 
 [node name="CharacterStateFuctory" parent="." instance=ExtResource("3_1hrum")]
 ground_state_scene = ExtResource("3_i5wyf")
@@ -1250,12 +1252,28 @@ position = Vector2(0, -11)
 target_position = Vector2(0, 13)
 
 [node name="BackWallRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-8, -6)
 target_position = Vector2(-5, 0)
+collision_mask = 256
 
 [node name="FrontWallRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(6, -6)
 target_position = Vector2(5, 0)
+collision_mask = 256
+
+[node name="FrontStickableWallRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(6, -24)
+target_position = Vector2(3, 0)
+collision_mask = 256
+
+[node name="BackStickableWallRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-8, -24)
+target_position = Vector2(-3, 0)
+collision_mask = 256
 
 [node name="BusterDirection" parent="." instance=ExtResource("21_ufte6")]
 unique_name_in_owner = true

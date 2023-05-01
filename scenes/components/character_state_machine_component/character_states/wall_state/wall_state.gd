@@ -35,7 +35,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
-	if !ctx.character.is_on_wall() || direction * ctx.current_direction >= 0:
+	if !ctx.back_stickable_wall_raycast.is_colliding() || direction * ctx.current_direction >= 0:
 		character.velocity.y = 0
 		next_state_name = "air"
 
