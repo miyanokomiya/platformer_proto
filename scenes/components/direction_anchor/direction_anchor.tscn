@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdqny6j5cggy6"]
+
+[ext_resource type="Script" path="res://scenes/components/direction_anchor/direction_anchor.gd" id="1_fqtm4"]
+
+[node name="DirectionAnchor" type="Node2D"]
+script = ExtResource("1_fqtm4")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(10, 0)
+collision_mask = 0
+collide_with_bodies = false
+
+[node name="ToMarker" type="Marker2D" parent="."]
+visible = false
+position = Vector2(1, 0)

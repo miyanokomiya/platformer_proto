@@ -35,9 +35,9 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	else:
 		ctx.animation_player.play("jump_fall")
 	
-	if Input.is_action_just_pressed("action_dash"):
-		ctx.has_dash_momentum = true
-		ctx.set_after_effect_playing(true)
+	# if Input.is_action_just_pressed("action_dash"):
+	#	ctx.has_dash_momentum = true
+	#	ctx.set_after_effect_playing(true)
 	
 	if Input.is_action_just_pressed("action_jump") && ctx.is_close_to_front_wall.call():
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY

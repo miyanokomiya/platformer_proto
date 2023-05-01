@@ -1,6 +1,6 @@
 extends EnemyBase
 
-@export_range(0.0, 10000.0) var wait_time: float = 1.0
+@export var wait_time: float = 1.0
 
 @onready var ground_detector = %GroundDetector
 @onready var wall_detector = %WallDetector
@@ -24,6 +24,8 @@ func _ready():
 	if wait_time > 0.0:
 		activate_timer.wait_time = wait_time
 		activate_timer.start()
+	elif wait_time < 0.0:
+		activated = false
 	else:
 		activated = true
 

@@ -8,7 +8,7 @@ extends EnemyBase
 @onready var hurtbox_component = $HurtboxComponent
 @onready var block_timer = $BlockTimer
 @onready var item_drop_component = $ItemDropComponent
-@onready var shot_marker = $ShotMarker
+@onready var direction_anchor = $DirectionAnchor
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_detected = false
@@ -55,12 +55,10 @@ func shoot():
 	var shot2 = shot_scene.instantiate()
 	layer.add_child(shot1)
 	layer.add_child(shot2)
-	var direction = Vector2.LEFT
-	if flip_h:
-		direction.x *= -1
 	
-	shot1.shoot(shot_marker.global_position, direction)
-	shot2.shoot(shot_marker.global_position, direction + Vector2.UP / 2.0)
+	var direction = direction_anchor.get_global_direction()
+	shot1.shoot(direction_anchor.global_position, direction)
+	shot2.shoot(direction_anchor.global_position, direction + Vector2.UP / 2.0)
 
 
 func _on_player_detect_area_body_entered(_body):
