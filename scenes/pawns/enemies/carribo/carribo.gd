@@ -1,5 +1,7 @@
 extends EnemyBase
 
+@export_range(0.0, 10000.0) var wait_time: float = 1.0
+
 @onready var ground_detector = %GroundDetector
 @onready var wall_detector = %WallDetector
 @onready var animation_player = $AnimationPlayer
@@ -19,7 +21,11 @@ func _ready():
 	super._ready()
 	health_component.died.connect(on_died)
 	activate_timer.timeout.connect(on_activate_timer_timeout)
-	activate_timer.start()
+	if wait_time > 0.0:
+		activate_timer.wait_time = wait_time
+		activate_timer.start()
+	else:
+		activated = true
 
 
 func turn_h():

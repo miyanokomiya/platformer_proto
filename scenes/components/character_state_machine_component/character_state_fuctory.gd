@@ -14,6 +14,7 @@ class_name CharacterStateFuctory
 @export var ladder_up_state_scene: PackedScene
 @export var died_scene: PackedScene
 @export var cutscene_scene: PackedScene
+@export var ragdoll_scene: PackedScene
 
 
 func get_state(state_name: String) -> CharacterState:
@@ -44,5 +45,7 @@ func get_state(state_name: String) -> CharacterState:
 			return died_scene.instantiate()
 		"cutscene":
 			return cutscene_scene.instantiate()
+		"ragdoll":
+			return ragdoll_scene.instantiate()
 		_:
 			return

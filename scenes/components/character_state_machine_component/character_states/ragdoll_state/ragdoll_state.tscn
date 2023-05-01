@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbys5700knuml"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ragdoll_state/ragdoll_state.gd" id="1_lm7tn"]
+
+[node name="CutsceneState" type="Node"]
+script = ExtResource("1_lm7tn")
+state_name = "ragdoll"

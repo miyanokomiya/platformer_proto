@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctjne2mukdxi"]
+[gd_scene load_steps=19 format=3 uid="uid://ctjne2mukdxi"]
 
 [ext_resource type="Texture2D" uid="uid://bvgkf21r5mxli" path="res://assets/sprites/levels/station_x/block_big/frame0000.png" id="1_1fkbj"]
 [ext_resource type="Script" path="res://scenes/field_objects/station_x/fallen_block/fallen_block.gd" id="1_2hkm0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/components/hitbox_component/hitbox_component.gd" id="5_ooutt"]
 [ext_resource type="Texture2D" uid="uid://b12u6tg2a0hst" path="res://assets/sprites/vfx/explosions/explosion-a.png" id="6_dllau"]
 [ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="7_w54cs"]
+[ext_resource type="AudioStream" uid="uid://cmdt30rb6it56" path="res://assets/audios/hits/rock_impact_heavy_slam_04.wav" id="8_tokqn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gnlh4"]
 animations = [{
@@ -29,7 +30,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_742cf"]
-size = Vector2(48, 48)
+size = Vector2(46, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7glo"]
 size = Vector2(37, 49)
@@ -106,7 +107,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/path = NodePath("BodyCollision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -194,7 +195,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/path = NodePath("BodyCollision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -296,7 +297,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/path = NodePath("BodyCollision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -337,12 +338,11 @@ autoplay = "default"
 frame = 3
 frame_progress = 0.600796
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_742cf")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
-collision_layer = 16
+collision_layer = 24
 collision_mask = 2
 script = ExtResource("5_ooutt")
 damage = 5
@@ -388,6 +388,12 @@ libraries = {
 stream = ExtResource("7_w54cs")
 volume_db = -23.363
 pitch_scale = 1.2
+bus = &"SE"
+
+[node name="LandSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tokqn")
+volume_db = -22.38
+pitch_scale = 1.8
 bus = &"SE"
 
 [connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]

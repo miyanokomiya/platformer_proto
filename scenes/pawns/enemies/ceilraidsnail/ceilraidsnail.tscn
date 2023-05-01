@@ -31,7 +31,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_npktr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y1lpt"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -663,6 +663,9 @@ anim_speed_max = 1.0
 collision_layer = 4
 collision_mask = 129
 script = ExtResource("1_1lpxh")
+flip_h = null
+flip_v = null
+in_place = null
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_1bnvr")]
 max_health = 3.0
@@ -680,7 +683,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_lf7td")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_npktr")
+whiten_material = SubResource("ShaderMaterial_y1lpt")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_2x8nw")]
 collision_layer = 4

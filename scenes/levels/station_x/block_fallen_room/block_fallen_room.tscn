@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://buqfew6e44lrx"]
+
+[ext_resource type="Script" path="res://scenes/levels/station_x/block_fallen_room/block_fallen_room.gd" id="1_lnqg4"]
+[ext_resource type="PackedScene" uid="uid://ctjne2mukdxi" path="res://scenes/field_objects/station_x/fallen_block/fallen_block.tscn" id="2_7cb4v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8q2d"]
+size = Vector2(240, 344)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj75r"]
+size = Vector2(240, 40)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_olw0i"]
+
+[node name="BlockFallenRoom" type="Node2D"]
+position = Vector2(3488, -168)
+script = ExtResource("1_lnqg4")
+block_scene = ExtResource("2_7cb4v")
+
+[node name="FallTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="RoomArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea"]
+position = Vector2(0, -172)
+shape = SubResource("RectangleShape2D_x8q2d")
+debug_color = Color(0.482353, 0.470588, 0.909804, 0.180392)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_rj75r")
+
+[node name="ShadowRaycasts" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -256)
+
+[node name="RayCast2D1" type="RayCast2D" parent="ShadowRaycasts"]
+position = Vector2(-96, -88)
+target_position = Vector2(0, 350)
+
+[node name="RayCast2D2" type="RayCast2D" parent="ShadowRaycasts"]
+position = Vector2(-48, -88)
+target_position = Vector2(0, 350)
+
+[node name="RayCast2D3" type="RayCast2D" parent="ShadowRaycasts"]
+position = Vector2(0, -88)
+target_position = Vector2(0, 350)
+
+[node name="RayCast2D4" type="RayCast2D" parent="ShadowRaycasts"]
+position = Vector2(48, -88)
+target_position = Vector2(0, 350)
+
+[node name="RayCast2D5" type="RayCast2D" parent="ShadowRaycasts"]
+position = Vector2(96, -88)
+target_position = Vector2(0, 350)
+
+[node name="ShadowBase" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.682353)
+scale = Vector2(48, 3)
+texture = SubResource("CanvasTexture_olw0i")
+
+[connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
+[connection signal="body_entered" from="RoomArea" to="." method="_on_room_area_body_entered"]
+[connection signal="body_exited" from="RoomArea" to="." method="_on_room_area_body_exited"]

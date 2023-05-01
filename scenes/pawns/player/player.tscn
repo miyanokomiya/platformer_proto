@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=75 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -39,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://buf4o7t0gywum" path="res://scenes/components/character_state_machine_component/character_states/died_state/died_state.tscn" id="26_jwh20"]
 [ext_resource type="PackedScene" uid="uid://bn60ng5i1ffx6" path="res://scenes/components/character_state_machine_component/character_states/cutscene_state/cutscene_state.tscn" id="27_0liai"]
 [ext_resource type="AudioStream" uid="uid://dlqp5sqqf6gwf" path="res://assets/audios/hits/snow_digging_scooping_shoveling_12.wav" id="28_ba21n"]
+[ext_resource type="PackedScene" uid="uid://cbys5700knuml" path="res://scenes/components/character_state_machine_component/character_states/ragdoll_state/ragdoll_state.tscn" id="29_xr82m"]
 [ext_resource type="AudioStream" uid="uid://cy0jspxgajwds" path="res://assets/audios/charges/sci-fi_power_up_04.wav" id="35_u0jx0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euhxd"]
@@ -60,14 +61,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_138cb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekdkm"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hx6rg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4lly"]
 resource_local_to_scene = true
 shader = ExtResource("12_4flpg")
 shader_parameter/progress = null
@@ -1172,11 +1173,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_138cb")
+whiten_material = SubResource("ShaderMaterial_ekdkm")
 
 [node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
 sprite = NodePath("../Sprite2D")
-teleport_material = SubResource("ShaderMaterial_hx6rg")
+teleport_material = SubResource("ShaderMaterial_d4lly")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
@@ -1232,6 +1233,7 @@ ladder_down_state_scene = ExtResource("20_hong7")
 ladder_up_state_scene = ExtResource("21_1dice")
 died_scene = ExtResource("26_jwh20")
 cutscene_scene = ExtResource("27_0liai")
+ragdoll_scene = ExtResource("29_xr82m")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
 state_context = NodePath("../CharacterStateContext")
