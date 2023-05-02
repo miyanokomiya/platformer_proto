@@ -53,3 +53,7 @@ func _on_hitbox_component_denied():
 	
 	denied_se.play()
 	animation_player.play("break")
+
+
+func _on_hitbox_component_broken():
+	break_shot()

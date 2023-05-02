@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="12_k0637"]
 [ext_resource type="PackedScene" uid="uid://d00cyggfmj43n" path="res://scenes/weapons/enemy_fine_laser/enemy_fine_laser.tscn" id="12_p4ovl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxw1i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bos7i"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -1149,7 +1149,7 @@ max_health = 50.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_kxw1i")
+whiten_material = SubResource("ShaderMaterial_bos7i")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -1248,6 +1248,7 @@ collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
 invincible_time = 0.5
+density = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HurtboxComponent"]
 position = Vector2(2, -106.5)

@@ -37,12 +37,12 @@ func start_block():
 
 
 func start_invicible():
-	hurtbox_component.blocked = true
+	hurtbox_component.block = true
 	blocked = true
 
 
 func end_invicible():
-	hurtbox_component.blocked = false
+	hurtbox_component.block = false
 	blocked = false
 
 

@@ -140,6 +140,7 @@ collision_layer = 8
 collision_mask = 4
 damage = 4
 oneshot = true
+density = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_aioff")
@@ -172,6 +173,7 @@ pitch_scale = 1.11
 bus = &"SE"
 
 [connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]
+[connection signal="broken" from="HitboxComponent" to="." method="_on_hitbox_component_broken"]
 [connection signal="denied" from="HitboxComponent" to="." method="_on_hitbox_component_denied"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

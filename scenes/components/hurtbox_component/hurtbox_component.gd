@@ -9,6 +9,8 @@ signal denied(hitbox_component: HitboxComponent)
 @export var invincible_time: float = 0.0
 @export var invincible = false
 @export var block = false
+## The higher, the more difficult this hurtbox is passed through
+@export var density: int = 0
 
 @onready var timer = $Timer
 
@@ -30,11 +32,13 @@ func accept_hitbox(hitbox_component: HitboxComponent):
 	if block:
 		hitbox_component.blocked.emit()
 		blocked.emit(hitbox_component)
+		check_break(hitbox_component)
 		return
 	
 	if invincible:
 		hitbox_component.denied.emit()
 		denied.emit(hitbox_component)
+		check_break(hitbox_component)
 		return
 	
 	if health_component == null:
@@ -43,12 +47,18 @@ func accept_hitbox(hitbox_component: HitboxComponent):
 	var damage = hitbox_component.get_damage()
 	health_component.damage(damage)
 	hitbox_component.hit.emit()
+	check_break(hitbox_component)
 	hit.emit(hitbox_component)
 	
 	if invincible_time > 0:
 		invincible = true
 		timer.wait_time = invincible_time
 		timer.start()
+
+
+func check_break(hitbox_component: HitboxComponent):
+	if hitbox_component.density <= density:
+		hitbox_component.broken.emit()
 
 
 func on_area_entered(other_area: Area2D):
