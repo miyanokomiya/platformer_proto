@@ -39,8 +39,8 @@ func update_view():
 	bit_texture_2.visible = v2 > 0
 
 
-func update_value(v: int):
-	if v < value:
+func update_value(v: int, instant = false):
+	if v < value && !instant:
 		apply_damage(value - v)
 	else:
 		value = clamp(v, 0, max_value)

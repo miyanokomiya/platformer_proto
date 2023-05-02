@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://5l2lcs0e5ml7"]
+[gd_scene load_steps=3 format=3 uid="uid://5l2lcs0e5ml7"]
 
 [ext_resource type="Script" path="res://scenes/components/level_manage_component/level_manage_component.gd" id="1_poqi1"]
+[ext_resource type="PackedScene" uid="uid://tulrhu7b8vyn" path="res://scenes/ui/scene_transition_effect/scene_transition_effect.tscn" id="2_scg5w"]
 
 [node name="LevelManageComponent" type="Node"]
 script = ExtResource("1_poqi1")
+
+[node name="SceneTransitionEffect" parent="." instance=ExtResource("2_scg5w")]

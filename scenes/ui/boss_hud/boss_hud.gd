@@ -16,10 +16,9 @@ func _ready():
 
 
 func fill_health():
-	await get_tree().create_timer(0.5).timeout
 	health_bar.fill(health_component.current_health)
 	await health_bar.fill_finished
-	await get_tree().create_timer(0.5).timeout
+	health_filled.emit()
 
 
 func on_health_changed():

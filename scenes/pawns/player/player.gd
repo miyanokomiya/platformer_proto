@@ -47,7 +47,7 @@ func _ready():
 	if flip_h:
 		character_state_context.flip_character()
 	
-	teleport_in()
+	switch_state("cutscene")
 
 
 func teleport_in():

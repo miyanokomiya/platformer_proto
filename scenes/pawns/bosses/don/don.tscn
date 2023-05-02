@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bviowmjlnp34h" path="res://scenes/effects/boss_explosion_se/boss_explosion_se.tscn" id="12_g15k3"]
 [ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="12_k0637"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uthqs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ednwb"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -647,7 +647,7 @@ tracks/21/path = NodePath("BossExplosionSE")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
-"times": PackedFloat32Array(1.5),
+"times": PackedFloat32Array(1.9),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -1006,7 +1006,7 @@ max_health = 50.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_uthqs")
+whiten_material = SubResource("ShaderMaterial_ednwb")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
