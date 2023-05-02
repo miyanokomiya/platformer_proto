@@ -3,6 +3,7 @@ class_name HitboxComponent
 
 signal hit
 signal blocked
+signal denied
 
 @export var damage = 0
 @export var oneshot: bool = false

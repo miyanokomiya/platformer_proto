@@ -33,7 +33,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hcyt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jao3"]
 resource_local_to_scene = true
 shader = SubResource("Shader_4buxf")
 shader_parameter/mix_weight = 0.0
@@ -829,7 +829,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../HealthComponent")
-invincible = true
+block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldHurtboxComponent"]
 position = Vector2(-16, -36)
@@ -839,7 +839,7 @@ debug_color = Color(0.862745, 0, 0.858824, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_u7pm8")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_5hcyt")
+whiten_material = SubResource("ShaderMaterial_7jao3")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_x3pc0")]
 collision_layer = 4

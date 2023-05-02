@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=44 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_ahgat"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="4_qt027"]
 [ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="5_jajt0"]
+[ext_resource type="PackedScene" uid="uid://ctisy0mvjox46" path="res://scenes/components/float_joint_component/float_joint_component.tscn" id="7_guel8"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="8_xfik6"]
 [ext_resource type="Texture2D" uid="uid://6oqc8w68b7d7" path="res://assets/sprites/bosses/don/don_body.png" id="9_cx86v"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="9_vuyb6"]
@@ -16,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="12_k0637"]
 [ext_resource type="PackedScene" uid="uid://d00cyggfmj43n" path="res://scenes/weapons/enemy_fine_laser/enemy_fine_laser.tscn" id="12_p4ovl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l41vt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdxuc"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -226,7 +227,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("JointRGroup:visible")
+tracks/15/path = NodePath("HandR:visible")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -238,7 +239,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("HandR:visible")
+tracks/16/path = NodePath("BodySprite:visible")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -250,7 +251,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("BodySprite:visible")
+tracks/17/path = NodePath("ShoulderLSprite:visible")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -262,7 +263,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("ShoulderLSprite:visible")
+tracks/18/path = NodePath("Head:visible")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -274,7 +275,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Head:visible")
+tracks/19/path = NodePath("ShieldSprite:visible")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -286,7 +287,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("ShieldSprite:visible")
+tracks/20/path = NodePath("HandL:visible")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -298,62 +299,62 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("HandL:visible")
+tracks/21/path = NodePath("Head/HeadSprite:material")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [null]
 }
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("JointLGroup:visible")
+tracks/22/path = NodePath("Head/HeadSprite:frame")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [6]
 }
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("Head/HeadSprite:material")
+tracks/23/path = NodePath("LaserMarker:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
+"update": 0,
+"values": [Vector2(-52, 35)]
 }
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("Head/HeadSprite:frame")
+tracks/24/path = NodePath("FloatJointL:visible")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [true]
 }
 tracks/25/type = "value"
 tracks/25/imported = false
 tracks/25/enabled = true
-tracks/25/path = NodePath("LaserMarker:position")
+tracks/25/path = NodePath("FloatJointR:visible")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-52, 35)]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_2ndx2"]
@@ -547,7 +548,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("JointRGroup:visible")
+tracks/11/path = NodePath("HandR:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -559,7 +560,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("HandR:visible")
+tracks/12/path = NodePath("BodySprite:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -571,7 +572,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("BodySprite:visible")
+tracks/13/path = NodePath("ShoulderLSprite:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -583,7 +584,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("ShoulderLSprite:visible")
+tracks/14/path = NodePath("Head:visible")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -595,7 +596,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Head:visible")
+tracks/15/path = NodePath("ShieldSprite:visible")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -607,7 +608,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("ShieldSprite:visible")
+tracks/16/path = NodePath("HandL:visible")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -619,46 +620,22 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("HandL:visible")
+tracks/17/path = NodePath("Head/HeadSprite:material")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(7.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("JointLGroup:visible")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(7.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("Head/HeadSprite:material")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
 "times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [null]
 }
-tracks/20/type = "method"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath(".")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
+tracks/18/type = "method"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath(".")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
 "times": PackedFloat32Array(12),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -666,19 +643,43 @@ tracks/20/keys = {
 "method": &"finish_explode"
 }]
 }
-tracks/21/type = "method"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("BossExplosionSE")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/keys = {
+tracks/19/type = "method"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("BossExplosionSE")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
 "times": PackedFloat32Array(1.9),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"play"
 }]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("FloatJointL:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(7.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("FloatJointR:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(7.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_atwyi"]
@@ -691,7 +692,7 @@ tracks/0/path = NodePath("Head/HeadSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9]
@@ -830,6 +831,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HandL/LeftWristMarker:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(45, 2)]
+}
 
 [sub_resource type="Animation" id="Animation_2e6gh"]
 resource_name = "idle"
@@ -858,6 +871,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(3, 2), Vector2(3, 2), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandL/LeftWristMarker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(45, 2), Vector2(45, 2), Vector2(48, 4), Vector2(48, 4), Vector2(45, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_1toev"]
@@ -1124,7 +1149,7 @@ max_health = 50.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_l41vt")
+whiten_material = SubResource("ShaderMaterial_bdxuc")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -1132,46 +1157,41 @@ texture = ExtResource("1_4badi")
 vframes = 5
 frame = 3
 
-[node name="JointRGroup" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="FloatJointR" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_guel8")]
+position = Vector2(-48, -81)
+target = NodePath("../HandR/RightWristMarker")
 
-[node name="JointRSprite1" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-46, -77)
+[node name="JointRSprite1" type="Sprite2D" parent="FloatJointR"]
 texture = ExtResource("2_pngsy")
 offset = Vector2(3, 9)
 hframes = 7
 frame = 5
 
-[node name="JointRSprite2" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-45, -69)
+[node name="JointRSprite2" type="Sprite2D" parent="FloatJointR"]
 texture = ExtResource("2_pngsy")
 offset = Vector2(3, 9)
 hframes = 7
 frame = 5
 
-[node name="JointRSprite3" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-44, -61)
+[node name="JointRSprite3" type="Sprite2D" parent="FloatJointR"]
 texture = ExtResource("2_pngsy")
 offset = Vector2(3, 9)
 hframes = 7
 frame = 5
 
-[node name="JointRSprite4" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-45, -55)
+[node name="JointRSprite4" type="Sprite2D" parent="FloatJointR"]
 texture = ExtResource("2_pngsy")
 offset = Vector2(3, 9)
 hframes = 7
 frame = 5
 
-[node name="JointRSprite5" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-48, -49)
+[node name="JointRSprite5" type="Sprite2D" parent="FloatJointR"]
 texture = ExtResource("2_pngsy")
 offset = Vector2(3, 9)
 hframes = 7
 frame = 5
 
-[node name="JointRSprite6" type="Sprite2D" parent="JointRGroup"]
-position = Vector2(-48, -49)
+[node name="JointRSprite6" type="Sprite2D" parent="FloatJointR"]
 texture = ExtResource("2_pngsy")
 offset = Vector2(3, 9)
 hframes = 7
@@ -1201,7 +1221,7 @@ position = Vector2(0, 72)
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
-invincible = true
+block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodySprite/HurtboxComponent"]
 position = Vector2(1.5, -57.5)
@@ -1238,7 +1258,7 @@ visible = false
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
-invincible = true
+block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HurtboxComponent2"]
 position = Vector2(2, -90)
@@ -1256,7 +1276,7 @@ position = Vector2(0, 72)
 collision_layer = 4
 collision_mask = 8
 health_component = NodePath("../../HealthComponent")
-invincible = true
+block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldSprite/HurtboxComponent"]
 position = Vector2(2, -16.5)
@@ -1306,35 +1326,31 @@ sprite = NodePath("../HandLSprite")
 lifetime = 0.2
 effect_color = Color(1, 0.360784, 0.360784, 1)
 
-[node name="JointLGroup" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="FloatJointL" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_guel8")]
+position = Vector2(73, -13)
+target = NodePath("../HandL/LeftWristMarker")
 
-[node name="JointLSprite1" type="Sprite2D" parent="JointLGroup"]
-position = Vector2(55, -14)
+[node name="JointLSprite1" type="Sprite2D" parent="FloatJointL"]
 texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 4
 
-[node name="JointLSprite2" type="Sprite2D" parent="JointLGroup"]
-position = Vector2(55, -14)
+[node name="JointLSprite2" type="Sprite2D" parent="FloatJointL"]
 texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 4
 
-[node name="JointLSprite3" type="Sprite2D" parent="JointLGroup"]
-position = Vector2(55, -14)
+[node name="JointLSprite3" type="Sprite2D" parent="FloatJointL"]
 texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 4
 
-[node name="JointLSprite4" type="Sprite2D" parent="JointLGroup"]
-position = Vector2(55, -14)
+[node name="JointLSprite4" type="Sprite2D" parent="FloatJointL"]
 texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 4
 
-[node name="JointLSprite5" type="Sprite2D" parent="JointLGroup"]
-position = Vector2(55, -14)
+[node name="JointLSprite5" type="Sprite2D" parent="FloatJointL"]
 texture = ExtResource("2_pngsy")
 hframes = 7
 frame = 4
@@ -1362,7 +1378,7 @@ libraries = {
 
 [node name="BlockDropMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-146, -138)
+position = Vector2(-226, -149)
 
 [node name="RightHandDefaultMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true

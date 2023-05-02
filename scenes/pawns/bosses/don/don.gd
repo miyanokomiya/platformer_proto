@@ -19,8 +19,6 @@ signal activated
 @onready var block_detect_ray_cast = %BlockDetectRayCast
 @onready var right_arm_root_marker = %RightArmRootMarker
 @onready var left_arm_root_marker = %LeftArmRootMarker
-@onready var joint_r_group = %JointRGroup
-@onready var joint_l_group = %JointLGroup
 @onready var right_wrist_marker = %RightWristMarker
 @onready var left_wrist_marker = %LeftWristMarker
 @onready var left_hand_default_marker = %LeftHandDefaultMarker
@@ -41,6 +39,7 @@ var current_punch_range = 0
 var fallen_block: Node2D
 var desparated = false
 var DESPARETED_SPEED = 1.7
+var speed_scale = 1.0
 
 
 func _ready():
@@ -49,9 +48,6 @@ func _ready():
 	boss_hud.visible = false
 
 func _physics_process(delta):
-	adjust_left_arm_joints()
-	adjust_right_arm_joints()
-	
 	match current_state:
 		STATE.DEACTIVATED:
 			body_player.play("idle")
@@ -103,22 +99,6 @@ func activate():
 	await boss_hud.health_filled
 	current_state = STATE.IDLE
 	activated.emit()
-
-
-func adjust_left_arm_joints():
-	var joints = joint_r_group.get_children()
-	var from = right_arm_root_marker.global_position
-	var to = right_wrist_marker.global_position
-	for i in joints.size():
-		joints[i].global_position = from.lerp(to, float(i) / float(joints.size()))
-
-
-func adjust_right_arm_joints():
-	var joints = joint_l_group.get_children()
-	var from = left_arm_root_marker.global_position
-	var to = left_wrist_marker.global_position
-	for i in joints.size():
-		joints[i].global_position = from.lerp(to, float(i) / float(joints.size()))
 		
 
 
@@ -164,7 +144,7 @@ func left_punch_back():
 	hand_l_player.play("punched")
 	punch_after_effect.stop()
 	var tween = create_tween()
-	tween.tween_property(hand_l, "global_position", left_hand_default_marker.global_position, 1.0 / DESPARETED_SPEED).set_ease(Tween.EASE_IN).set_delay(1.0)
+	tween.tween_property(hand_l, "global_position", left_hand_default_marker.global_position, 1.2 / speed_scale).set_ease(Tween.EASE_IN).set_delay(1.0)
 	await tween.finished
 
 	if current_state == STATE.DIED:
@@ -180,7 +160,7 @@ func stop_left_punch():
 func right_grab_block():
 	current_state = STATE.RIGHT_GRAB_READY
 	var tween = create_tween()
-	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 0.5 / DESPARETED_SPEED).set_ease(Tween.EASE_IN)
+	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 0.4 / speed_scale).set_ease(Tween.EASE_IN)
 	await tween.finished
 
 	if current_state == STATE.DIED:
@@ -213,7 +193,7 @@ func keep_fallen_block():
 
 func right_block_seek():
 	current_state = STATE.RIGHT_BLOCK_SEEK
-	await get_tree().create_timer(2.0 / DESPARETED_SPEED).timeout
+	await get_tree().create_timer(2.0 / speed_scale).timeout
 
 	if current_state == STATE.DIED:
 		return
@@ -222,12 +202,13 @@ func right_block_seek():
 
 
 func seek_drop_position(delta: float):
-	hand_r.global_position.y = lerp(hand_r.global_position.y, block_drop_marker.global_position.y, delta)
+	hand_r.global_position.y = lerp(hand_r.global_position.y, block_drop_marker.global_position.y, 2.0 * delta)
 	var player = get_tree().get_first_node_in_group("Player") as Node2D
 	if !player:
 		return
 	
-	hand_r.global_position.x = lerp(hand_r.global_position.x, player.global_position.x, 1.5 * delta)
+	var to = max(block_drop_marker.global_position.x, player.global_position.x)
+	hand_r.global_position.x = lerp(hand_r.global_position.x, to, 2.0 * delta)
 
 
 func right_block_drop():
@@ -241,7 +222,7 @@ func right_block_drop():
 	fallen_block.drop()
 	fallen_block = null
 	var tween = create_tween()
-	tween.tween_property(hand_r, "global_position", right_hand_default_marker.global_position, 0.6 / DESPARETED_SPEED).set_ease(Tween.EASE_IN)
+	tween.tween_property(hand_r, "global_position", right_hand_default_marker.global_position, 0.4 / speed_scale).set_ease(Tween.EASE_IN)
 	await tween.finished
 
 	if current_state == STATE.DIED:
@@ -257,12 +238,14 @@ func speed_up():
 	body_player.speed_scale = DESPARETED_SPEED
 	hand_l_player.speed_scale = DESPARETED_SPEED
 	hand_r_player.speed_scale = DESPARETED_SPEED
+	speed_scale = DESPARETED_SPEED
 
 
 func speed_default():
 	body_player.speed_scale = 1.0
 	hand_l_player.speed_scale = 1.0
 	hand_r_player.speed_scale = 1.0
+	speed_scale = 1.0
 	desparated = false
 
 
@@ -304,6 +287,9 @@ func _on_health_component_died():
 	if fallen_block:
 		fallen_block.queue_free()
 	
+	head_laser.stop()
+	speed_default()
+	punch_after_effect.stop()
 	current_state = STATE.DIED
 	body_player.play("died")
 	died.emit()

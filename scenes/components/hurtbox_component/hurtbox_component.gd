@@ -3,10 +3,12 @@ class_name HurtboxComponent
 
 signal hit(hitbox_component: HitboxComponent)
 signal blocked(hitbox_component: HitboxComponent)
+signal denied(hitbox_component: HitboxComponent)
 
 @export var health_component: HealthComponent
 @export var invincible_time: float = 0.0
 @export var invincible = false
+@export var block = false
 
 @onready var timer = $Timer
 
@@ -25,9 +27,14 @@ func _physics_process(_delta):
 
 
 func accept_hitbox(hitbox_component: HitboxComponent):
-	if invincible:
+	if block:
 		hitbox_component.blocked.emit()
 		blocked.emit(hitbox_component)
+		return
+	
+	if invincible:
+		hitbox_component.denied.emit()
+		denied.emit(hitbox_component)
 		return
 	
 	if health_component == null:

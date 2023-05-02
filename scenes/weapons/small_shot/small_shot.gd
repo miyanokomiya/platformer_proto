@@ -7,6 +7,7 @@ extends StaticBody2D
 @onready var blocked_se = $BlockedSE
 @onready var shoot_se = %ShootSE
 @onready var projectile_component: ProjectimeComponent = $ProjectileComponent
+@onready var denied_se = $DeniedSE
 
 enum SHOT_STATE{DEFAULT, HIT, BLOCKED}
 var current_state = SHOT_STATE.DEFAULT
@@ -59,3 +60,11 @@ func _on_hitbox_component_blocked():
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+
+func _on_hitbox_component_denied():
+	if current_state != SHOT_STATE.DEFAULT:
+		return
+	
+	denied_se.play()
+	on_hit()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctisy0mvjox46"]
+
+[ext_resource type="Script" path="res://scenes/components/float_joint_component/float_joint_component.gd" id="1_v7hyp"]
+
+[node name="FloatJointComponent" type="Node2D"]
+script = ExtResource("1_v7hyp")
