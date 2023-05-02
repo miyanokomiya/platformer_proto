@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="12_k0637"]
 [ext_resource type="PackedScene" uid="uid://d00cyggfmj43n" path="res://scenes/weapons/enemy_fine_laser/enemy_fine_laser.tscn" id="12_p4ovl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdxuc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxw1i"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -728,7 +728,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rr3ip"]
 resource_name = "laser_shooting"
-length = 1.5
+length = 1.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -736,10 +736,10 @@ tracks/0/path = NodePath("Head/HeadSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8]
+"values": [9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8, 9, 8]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -748,10 +748,10 @@ tracks/1/path = NodePath("LaserMarker:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.7, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.6, 1.1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 3.03143, 3.03143, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-52, 35), Vector2(-52, 35), Vector2(-327, 35), Vector2(-326, -112), Vector2(-326, -112)]
+"values": [Vector2(-10, 35), Vector2(-52, 35), Vector2(-52, 35), Vector2(-327, 35), Vector2(-326, -112), Vector2(-326, -112)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -760,7 +760,7 @@ tracks/2/path = NodePath("HeadLaser")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 1.7),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -1149,7 +1149,7 @@ max_health = 50.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_bdxuc")
+whiten_material = SubResource("ShaderMaterial_kxw1i")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
