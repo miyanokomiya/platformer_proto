@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://eju45ai0ljoe"]
+[gd_scene load_steps=43 format=3 uid="uid://eju45ai0ljoe"]
 
 [ext_resource type="Texture2D" uid="uid://cjfjqs45n3txa" path="res://assets/sprites/bosses/don/don_parts.png" id="1_4badi"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/don/don.gd" id="1_rgi86"]
@@ -9,12 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="4_qt027"]
 [ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="5_jajt0"]
 [ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="8_xfik6"]
+[ext_resource type="Texture2D" uid="uid://6oqc8w68b7d7" path="res://assets/sprites/bosses/don/don_body.png" id="9_cx86v"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="9_vuyb6"]
 [ext_resource type="Texture2D" uid="uid://c65i1xj25a8rb" path="res://assets/sprites/vfx/explosions/explosion-f.png" id="11_6es2i"]
 [ext_resource type="PackedScene" uid="uid://bviowmjlnp34h" path="res://scenes/effects/boss_explosion_se/boss_explosion_se.tscn" id="12_g15k3"]
 [ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="12_k0637"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ednwb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2pi0h"]
 resource_local_to_scene = true
 shader = ExtResource("5_jajt0")
 shader_parameter/mix_weight = 0.0
@@ -328,6 +329,54 @@ tracks/23/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [null]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Head/HeadSprite:frame")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("LaserRayCast:target_position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-52, 124)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("LaserLine:visible")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("LaserLine/LaserHitbox/LaserCollision:disabled")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_2ndx2"]
@@ -654,12 +703,135 @@ tracks/21/keys = {
 "method": &"play"
 }]
 }
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("LaserLine:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("LaserLine/LaserHitbox/LaserCollision:disabled")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_atwyi"]
+resource_name = "laser_ready"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LaserRayCast:target_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-52, 124)]
+}
+
+[sub_resource type="Animation" id="Animation_g00cx"]
+resource_name = "laser_finished"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 8, 7, 6]
+}
+
+[sub_resource type="Animation" id="Animation_rr3ip"]
+resource_name = "laser_shooting"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/HeadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LaserRayCast:target_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-52, 124), Vector2(-52, 124), Vector2(-480, 124), Vector2(-480, -50)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LaserLine:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LaserLine/LaserHitbox/LaserCollision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_meklq"]
 _data = {
 "RESET": SubResource("Animation_3cwuk"),
 "died": SubResource("Animation_huv44"),
-"idle": SubResource("Animation_2ndx2")
+"idle": SubResource("Animation_2ndx2"),
+"laser_finished": SubResource("Animation_g00cx"),
+"laser_ready": SubResource("Animation_atwyi"),
+"laser_shooting": SubResource("Animation_rr3ip")
 }
 
 [sub_resource type="Animation" id="Animation_x3bwf"]
@@ -979,6 +1151,8 @@ _data = {
 "release_block": SubResource("Animation_jnh20")
 }
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wftuo"]
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0em5h"]
 particles_animation = true
 particles_anim_h_frames = 7
@@ -1006,7 +1180,7 @@ max_health = 50.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_ahgat")]
 hurtbox_component = NodePath("../Head/HurtboxComponent")
 sprite = NodePath("../Head/HeadSprite")
-whiten_material = SubResource("ShaderMaterial_ednwb")
+whiten_material = SubResource("ShaderMaterial_2pi0h")
 
 [node name="ShoulderRSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -72)
@@ -1099,9 +1273,10 @@ frame = 2
 
 [node name="HeadSprite" type="Sprite2D" parent="Head"]
 position = Vector2(0, -72)
-texture = ExtResource("1_4badi")
+texture = ExtResource("9_cx86v")
+hframes = 5
 vframes = 5
-frame = 1
+frame = 6
 
 [node name="HurtboxComponent" parent="Head" node_paths=PackedStringArray("health_component") instance=ExtResource("8_xfik6")]
 visible = false
@@ -1265,13 +1440,42 @@ position = Vector2(-46, -83)
 unique_name_in_owner = true
 position = Vector2(58, -15)
 
+[node name="LaserRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -89)
+target_position = Vector2(-52, 124)
+
+[node name="LaserLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -89)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(1, 0.180392, 0.180392, 1)
+
+[node name="LaserHitbox" parent="LaserLine" instance=ExtResource("4_qt027")]
+collision_layer = 16
+collision_mask = 2
+damage = 3
+
+[node name="LaserCollision" type="CollisionShape2D" parent="LaserLine/LaserHitbox"]
+unique_name_in_owner = true
+shape = SubResource("SegmentShape2D_wftuo")
+disabled = true
+
 [node name="ActionTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 0.5
 one_shot = true
 
 [node name="BlockDetectRayCast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-53, -81)
+target_position = Vector2(-204, 0)
+
+[node name="BlockBottomDetectRayCast" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-53, -20)
 target_position = Vector2(-204, 0)
 
 [node name="ExplodeParticles" type="GPUParticles2D" parent="."]
@@ -1299,6 +1503,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="BossExplosionSE" parent="." instance=ExtResource("12_g15k3")]
 
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit" from="HandL/PunchHitbox" to="." method="_on_punch_hitbox_hit"]
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

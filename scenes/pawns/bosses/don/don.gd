@@ -27,22 +27,28 @@ signal activated
 @onready var punch_collision = %PunchCollision
 @onready var punch_after_effect = %PunchAfterEffect
 @onready var boss_hud = $BossHUD
+@onready var laser_ray_cast = %LaserRayCast
+@onready var laser_line = %LaserLine
+@onready var laser_collision = %LaserCollision
+@onready var block_bottom_detect_ray_cast = %BlockBottomDetectRayCast
+@onready var health_component = $HealthComponent
 
 
-enum STATE{DEACTIVATED, IDLE, DIED, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
+enum STATE{DEACTIVATED, IDLE, DIED, HEAD_LASER, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
 var current_state = STATE.DEACTIVATED
 
 var MAX_PUNCH_RANGE = 280
 var PUNCH_SPEED = 750
 var current_punch_range = 0
 var fallen_block: Node2D
+var desparated = false
+var DESPARETED_SPEED = 1.7
 
 
 func _ready():
 	hand_r.global_position = right_hand_default_marker.global_position
 	hand_l.global_position = left_hand_default_marker.global_position
 	boss_hud.visible = false
-
 
 func _physics_process(delta):
 	adjust_left_arm_joints()
@@ -63,6 +69,10 @@ func _physics_process(delta):
 			action_timer.stop()
 			hand_l_player.pause()
 			hand_r_player.pause()
+		STATE.HEAD_LASER:
+			hand_l_player.play("idle")
+			hand_r_player.play("idle")
+			Callable(move_laser).call_deferred()
 		STATE.LEFT_PUNCH_READY:
 			pass
 		STATE.LEFT_PUNCH:
@@ -115,6 +125,39 @@ func adjust_right_arm_joints():
 		
 
 
+func head_laser():
+	current_state = STATE.HEAD_LASER
+	body_player.play("laser_ready")
+	await body_player.animation_finished
+
+	if current_state == STATE.DIED:
+		return
+	
+	body_player.play("laser_shooting")
+	await body_player.animation_finished
+
+	if current_state == STATE.DIED:
+		return
+	
+	body_player.play("laser_finished")
+	await body_player.animation_finished
+
+	if current_state == STATE.DIED:
+		return
+	
+	current_state = STATE.IDLE
+
+
+func move_laser():
+	var from = laser_ray_cast.global_position
+	var v = laser_ray_cast.target_position
+	if laser_ray_cast.is_colliding():
+		v = laser_ray_cast.get_collision_point() - from
+	
+	laser_line.points[1] = v
+	(laser_collision.shape as SegmentShape2D).b = v
+
+
 func left_punch():
 	current_state = STATE.LEFT_PUNCH_READY
 	current_punch_range = 0
@@ -134,7 +177,7 @@ func left_punch_back():
 	hand_l_player.play("punched")
 	punch_after_effect.stop()
 	var tween = create_tween()
-	tween.tween_property(hand_l, "global_position", left_hand_default_marker.global_position, 1.0).set_ease(Tween.EASE_IN).set_delay(1.0)
+	tween.tween_property(hand_l, "global_position", left_hand_default_marker.global_position, 1.0 / DESPARETED_SPEED).set_ease(Tween.EASE_IN).set_delay(1.0)
 	await tween.finished
 
 	if current_state == STATE.DIED:
@@ -150,7 +193,7 @@ func stop_left_punch():
 func right_grab_block():
 	current_state = STATE.RIGHT_GRAB_READY
 	var tween = create_tween()
-	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 0.5).set_ease(Tween.EASE_IN)
+	tween.tween_property(hand_r, "global_position", right_hand_block_marker.global_position, 0.5 / DESPARETED_SPEED).set_ease(Tween.EASE_IN)
 	await tween.finished
 
 	if current_state == STATE.DIED:
@@ -183,7 +226,7 @@ func keep_fallen_block():
 
 func right_block_seek():
 	current_state = STATE.RIGHT_BLOCK_SEEK
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(2.0 / DESPARETED_SPEED).timeout
 
 	if current_state == STATE.DIED:
 		return
@@ -197,7 +240,7 @@ func seek_drop_position(delta: float):
 	if !player:
 		return
 	
-	hand_r.global_position.x = lerp(hand_r.global_position.x, player.global_position.x, 2 * delta)
+	hand_r.global_position.x = lerp(hand_r.global_position.x, player.global_position.x, 1.5 * delta)
 
 
 func right_block_drop():
@@ -211,13 +254,29 @@ func right_block_drop():
 	fallen_block.drop()
 	fallen_block = null
 	var tween = create_tween()
-	tween.tween_property(hand_r, "global_position", right_hand_default_marker.global_position, 1.0).set_ease(Tween.EASE_IN)
+	tween.tween_property(hand_r, "global_position", right_hand_default_marker.global_position, 0.6 / DESPARETED_SPEED).set_ease(Tween.EASE_IN)
 	await tween.finished
 
 	if current_state == STATE.DIED:
 		return
 	
 	current_state = STATE.IDLE
+
+
+func speed_up():
+	if desparated:
+		return
+	
+	body_player.speed_scale = DESPARETED_SPEED
+	hand_l_player.speed_scale = DESPARETED_SPEED
+	hand_r_player.speed_scale = DESPARETED_SPEED
+
+
+func speed_default():
+	body_player.speed_scale = 1.0
+	hand_l_player.speed_scale = 1.0
+	hand_r_player.speed_scale = 1.0
+	desparated = false
 
 
 func finish_explode():
@@ -234,12 +293,27 @@ func _on_action_timer_timeout():
 	if current_state == STATE.DIED:
 		return
 	
+	#head_laser()
+	#return
+	
+	var v = RngManager.enemy_rng.randf()
 	if block_detect_ray_cast.is_colliding():
-		left_punch()
-	elif RngManager.enemy_rng.randf() < 0.5:
-		right_grab_block()
+		if v < 0.5:
+			left_punch()
+		else:
+			head_laser()
+	elif block_bottom_detect_ray_cast.is_colliding():
+		if v < 0.3:
+			right_grab_block()
+		elif v < 0.8:
+			head_laser()
+		else:
+			left_punch()
 	else:
-		left_punch()
+		if v < 0.7:
+			right_grab_block()
+		else:
+			left_punch()
 
 
 func _on_health_component_died():
@@ -249,3 +323,8 @@ func _on_health_component_died():
 	current_state = STATE.DIED
 	body_player.play("died")
 	died.emit()
+
+
+func _on_health_component_damaged(_damage_value):
+	if health_component.get_health_percent() <= 0.5:
+		speed_up()
