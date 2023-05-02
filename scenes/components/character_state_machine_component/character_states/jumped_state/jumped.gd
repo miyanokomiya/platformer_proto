@@ -1,5 +1,7 @@
 extends CharacterAirState
 
+# Turn off "can_stick_wall" in the inspector to prevent sticking wall right after jumping
+
 @onready var timer = $Timer
 
 var released = false

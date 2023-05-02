@@ -4,6 +4,7 @@
 
 [node name="JumpedState" type="Node"]
 script = ExtResource("1_rm5va")
+can_stick_wall = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

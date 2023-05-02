@@ -1,6 +1,8 @@
 extends CharacterState
 class_name CharacterAirState
 
+@export var can_stick_wall: bool = true
+
 
 func on_enter(ctx: CharacterStateContext):
 	if ctx.has_dash_momentum:
@@ -59,7 +61,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
-	if !ctx.is_close_to_floor.call() && direction * ctx.current_direction > 0:
+	if can_stick_wall && !ctx.is_close_to_floor.call() && direction * ctx.current_direction > 0:
 		if ctx.front_stickable_wall_raycast.is_colliding() || ctx.back_stickable_wall_raycast.is_colliding():
 			next_state_name = "wall"
 
