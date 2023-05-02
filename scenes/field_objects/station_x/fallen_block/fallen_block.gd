@@ -28,6 +28,7 @@ func _physics_process(delta):
 			move_and_slide()
 			if is_on_floor():
 				land_se.play()
+				CameraManager.apply_noise_shake()
 				current_state = STATE.IDLE
 			else:
 				Callable(activate_hitbox).call_deferred()
@@ -58,6 +59,7 @@ func drop():
 func shove(v: Vector2):
 	velocity = v
 	current_state = STATE.EXPLODED
+	CameraManager.apply_noise_shake()
 
 
 func activate_hitbox():

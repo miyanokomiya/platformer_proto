@@ -124,6 +124,7 @@ func on_flipped(h_flip: bool):
 
 func _on_hurtbox_component_hit(_hitbox_component):
 	hurt_se.play()
+	CameraManager.apply_noise_shake()
 	character_state_machine.on_damage()
 
 
