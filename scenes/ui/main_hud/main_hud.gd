@@ -10,8 +10,11 @@ func _ready():
 	health_bar.update_value(GlobalState.player_health.value)
 
 
-func on_player_current_health_changed(health: HealthResource):
-	health_bar.update_value(health.value)
+func on_player_current_health_changed(health: HealthResource, action: int):
+	if action == 2:
+		health_bar.fill(health.value)
+	else:
+		health_bar.update_value(health.value)
 
 
 func on_player_max_health_changed(health: HealthResource):

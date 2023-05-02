@@ -5,7 +5,6 @@ signal health_filled
 @export var health_component: HealthComponent
 
 @onready var health_bar = %HealthBar
-@onready var audio_stream_player = $AudioStreamPlayer
 
 
 func _ready():
@@ -17,16 +16,10 @@ func _ready():
 
 
 func fill_health():
-	await get_tree().create_timer(1.0).timeout
-	var tween = create_tween()
-	tween.tween_method(on_fill_tween, 0, health_component.current_health, health_component.current_health * 0.05)
-	await tween.finished
-	health_filled.emit()
-
-
-func on_fill_tween(value: int):
-	health_bar.update_value(value)
-	audio_stream_player.play()
+	await get_tree().create_timer(0.5).timeout
+	health_bar.fill(health_component.current_health)
+	await health_bar.fill_finished
+	await get_tree().create_timer(0.5).timeout
 
 
 func on_health_changed():

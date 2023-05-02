@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://7maujdm4i7cr"]
+[gd_scene load_steps=11 format=3 uid="uid://7maujdm4i7cr"]
 
 [ext_resource type="Texture2D" uid="uid://b2krmxvfca1h0" path="res://assets/sprites/hud/health_bar/health_bar_top.png" id="1_67s6i"]
 [ext_resource type="Script" path="res://scenes/ui/health_bar/health_bar.gd" id="1_hmkhg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dx4hfrdfvhhqc" path="res://assets/sprites/hud/health_bar/health_bar_bottom.png" id="3_qfhub"]
 [ext_resource type="Texture2D" uid="uid://nra45eyda8sb" path="res://assets/sprites/hud/health_bar/health_bit.png" id="5_c31b8"]
 [ext_resource type="Texture2D" uid="uid://b7wsst814o6by" path="res://assets/sprites/hud/health_bar/health_logo.png" id="5_ot8ao"]
+[ext_resource type="AudioStream" uid="uid://byhpm52hnvx01" path="res://assets/audios/heal/retro_ui_menu_popup_07.wav" id="7_ucqkn"]
 
 [sub_resource type="Animation" id="Animation_1uuwk"]
 length = 0.001
@@ -69,6 +70,7 @@ _data = {
 }
 
 [node name="HealthBar" type="PanelContainer"]
+process_mode = 3
 size_flags_vertical = 8
 script = ExtResource("1_hmkhg")
 max_value = 25
@@ -209,3 +211,9 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_7eruv")
 }
+
+[node name="FillSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ucqkn")
+volume_db = -19.746
+pitch_scale = 0.9
+bus = &"SE"

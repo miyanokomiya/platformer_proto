@@ -1,8 +1,11 @@
 extends PanelContainer
 
+signal fill_finished
+
 @export var max_value: int = 6
 @export var value: int = 6
 @export var logo: Texture2D
+@export_range(0.0, 0.1) var fill_interval: float = 0.05
 
 @onready var middle_texture = %MiddleTexture
 @onready var animation_player = $AnimationPlayer
@@ -11,6 +14,7 @@ extends PanelContainer
 @onready var damaged_bit_texture_2 = %DamagedBitTexture2
 @onready var bit_texture_1 = %BitTexture1
 @onready var bit_texture_2 = %BitTexture2
+@onready var fill_se = $FillSE
 
 var BIT_SIZE = 2
 var UNIT_AMOUNT = 25
@@ -65,3 +69,20 @@ func apply_damage(damage: int):
 	# Make these invisible to hide unavoidable minimum texture
 	damaged_bit_texture_1.visible = false
 	damaged_bit_texture_2.visible = false
+
+
+func fill(filled_value: int):
+	if value >= filled_value:
+		return
+	
+	get_tree().paused = true
+	var tween = create_tween()
+	tween.tween_method(on_fill_tween, value, min(max_value, filled_value), min(max_value, filled_value - value) * fill_interval)
+	await tween.finished
+	get_tree().paused = false
+	fill_finished.emit()
+
+
+func on_fill_tween(next_value: int):
+	update_value(next_value)
+	fill_se.play()
