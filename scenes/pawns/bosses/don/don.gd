@@ -27,11 +27,9 @@ signal activated
 @onready var punch_collision = %PunchCollision
 @onready var punch_after_effect = %PunchAfterEffect
 @onready var boss_hud = $BossHUD
-@onready var laser_ray_cast = %LaserRayCast
-@onready var laser_line = %LaserLine
-@onready var laser_collision = %LaserCollision
 @onready var block_bottom_detect_ray_cast = %BlockBottomDetectRayCast
 @onready var health_component = $HealthComponent
+@onready var head_laser = %HeadLaser
 
 
 enum STATE{DEACTIVATED, IDLE, DIED, HEAD_LASER, LEFT_PUNCH_READY, LEFT_PUNCH, LEFT_PUNCH_BACK, RIGHT_GRAB_READY, RIGHT_BLOCK_SEEK, RIGHT_BLOCK_DROP}
@@ -72,7 +70,6 @@ func _physics_process(delta):
 		STATE.HEAD_LASER:
 			hand_l_player.play("idle")
 			hand_r_player.play("idle")
-			Callable(move_laser).call_deferred()
 		STATE.LEFT_PUNCH_READY:
 			pass
 		STATE.LEFT_PUNCH:
@@ -125,7 +122,7 @@ func adjust_right_arm_joints():
 		
 
 
-func head_laser():
+func shoot_head_laser():
 	current_state = STATE.HEAD_LASER
 	body_player.play("laser_ready")
 	await body_player.animation_finished
@@ -146,16 +143,6 @@ func head_laser():
 		return
 	
 	current_state = STATE.IDLE
-
-
-func move_laser():
-	var from = laser_ray_cast.global_position
-	var v = laser_ray_cast.target_position
-	if laser_ray_cast.is_colliding():
-		v = laser_ray_cast.get_collision_point() - from
-	
-	laser_line.points[1] = v
-	(laser_collision.shape as SegmentShape2D).b = v
 
 
 func left_punch():
@@ -293,24 +280,21 @@ func _on_action_timer_timeout():
 	if current_state == STATE.DIED:
 		return
 	
-	#head_laser()
-	#return
-	
 	var v = RngManager.enemy_rng.randf()
 	if block_detect_ray_cast.is_colliding():
 		if v < 0.5:
 			left_punch()
 		else:
-			head_laser()
+			shoot_head_laser()
 	elif block_bottom_detect_ray_cast.is_colliding():
 		if v < 0.3:
 			right_grab_block()
 		elif v < 0.8:
-			head_laser()
+			shoot_head_laser()
 		else:
 			left_punch()
 	else:
-		if v < 0.7:
+		if v < 0.8:
 			right_grab_block()
 		else:
 			left_punch()
