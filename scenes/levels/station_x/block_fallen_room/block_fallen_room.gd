@@ -2,6 +2,7 @@ extends Node2D
 
 @export var block_scene: PackedScene
 @export var play_demo: bool = false
+@export var max_land_height: Node2D
 
 @onready var fall_timer = $FallTimer
 @onready var shadow_raycasts = %ShadowRaycasts
@@ -30,12 +31,24 @@ func spawn_block():
 	var shadow_layer = get_tree().get_first_node_in_group("foreground_layer")
 	shadow_layer = shadow_layer if shadow_layer else self
 	
-	var index = RngManager.enemy_rng.randi_range(0, shadow_raycasts.get_children().size() - 1)
+	var raycasts =  shadow_raycasts.get_children()
+	if raycasts.size() == 0:
+		deactivate()
+		return
+	
+	var index = RngManager.enemy_rng.randi_range(0, raycasts.size() - 1)
 	if play_demo:
 		index = 3
 	
-	var shadow_raycast = shadow_raycasts.get_children()[index] as RayCast2D
+	var shadow_raycast = raycasts[index] as RayCast2D
 	var point = shadow_raycast.get_collision_point()
+	
+	if max_land_height && point.y <= max_land_height.global_position.y:
+		shadow_raycasts.remove_child(shadow_raycast)
+		shadow_raycast.queue_free()
+		spawn_block()
+		return
+	
 	var max_distance = shadow_raycast.target_position.y
 	
 	var block = block_scene.instantiate() as CharacterBody2D
