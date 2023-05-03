@@ -60,7 +60,7 @@ func apply_patrol_velocity(delta: float):
 
 
 func check_patrol_target():
-	if get_current_patrol_position().distance_squared_to(global_position) > 10.0:
+	if get_current_patrol_position().distance_squared_to(global_position) > 100.0:
 		return
 	
 	current_patrol_target = 2 if current_patrol_target == 1 else 1
@@ -72,8 +72,6 @@ func shoot():
 	shoot_to(turret_direction_r)
 	shot_cooldown = true
 	shot_cooltime.start()
-	await shot_cooltime.timeout
-	shot_cooldown = false
 
 
 func shoot_to(anchor: DirectionAnchor):
@@ -94,8 +92,14 @@ func on_died():
 func _on_player_detect_area_body_entered(_body):
 	if current_state != STATE.DIED:
 		current_state = STATE.SHOOT
+		shot_cooldown = true
+		shot_cooltime.start()
 
 
 func _on_player_detect_area_body_exited(_body):
 	if current_state != STATE.DIED:
 		current_state = STATE.IDLE
+
+
+func _on_shot_cooltime_timeout():
+	shot_cooldown = false

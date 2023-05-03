@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqox3ctffx7wo"]
+
+[ext_resource type="Script" path="res://scenes/components/fallen_part_component/fallen_part_component.gd" id="1_3c430"]
+[ext_resource type="PackedScene" uid="uid://cf77kr1m5ummw" path="res://scenes/field_objects/fallen_part/fallen_part.tscn" id="2_pny6k"]
+
+[node name="FallenPartComponent" type="Node2D"]
+script = ExtResource("1_3c430")
+fallen_part_scene = ExtResource("2_pny6k")

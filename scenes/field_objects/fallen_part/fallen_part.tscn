@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf77kr1m5ummw"]
+
+[ext_resource type="PackedScene" uid="uid://bu8kgcot4n6tt" path="res://scenes/components/off_screen_component/off_screen_component.tscn" id="1_cylwn"]
+[ext_resource type="Script" path="res://scenes/field_objects/fallen_part/fallen_part.gd" id="1_fiodb"]
+
+[node name="FallenPart" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 129
+script = ExtResource("1_fiodb")
+
+[node name="OffScreenComponent" parent="." instance=ExtResource("1_cylwn")]
+script = null
+
+[connection signal="screen_exited" from="OffScreenComponent" to="." method="_on_off_screen_component_screen_exited"]
