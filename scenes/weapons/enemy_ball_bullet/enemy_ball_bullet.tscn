@@ -249,7 +249,7 @@ bus = &"SE"
 [node name="ShootSE" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_a5h0m")
-volume_db = -22.892
+volume_db = -26.183
 bus = &"SE"
 
 [node name="BlockedSE" type="AudioStreamPlayer" parent="."]

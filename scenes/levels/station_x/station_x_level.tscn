@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://spluk184vpgb"]
+[gd_scene load_steps=55 format=3 uid="uid://spluk184vpgb"]
 
 [ext_resource type="Script" path="res://scenes/levels/station_x/station_x_level.gd" id="1_r2bpu"]
 [ext_resource type="PackedScene" uid="uid://5l2lcs0e5ml7" path="res://scenes/components/level_manage_component/level_manage_component.tscn" id="1_utnwa"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dbh1nbol5hser" path="res://scenes/pawns/enemies/humblecone/humblecone.tscn" id="8_qsh05"]
 [ext_resource type="Texture2D" uid="uid://bvgkf21r5mxli" path="res://assets/sprites/levels/station_x/block_big/frame0000.png" id="9_i0okc"]
 [ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="12_ceiql"]
+[ext_resource type="PackedScene" uid="uid://0bfaiy4xk6er" path="res://scenes/pawns/enemies/suecypher/suecypher.tscn" id="13_o3ivf"]
 [ext_resource type="PackedScene" uid="uid://c56gijoaxn5hd" path="res://scenes/pawns/enemies/slidalgun/slidalgun.tscn" id="13_uycan"]
 [ext_resource type="PackedScene" uid="uid://du0hqdchr074i" path="res://scenes/items/life_energy/life_energy.tscn" id="14_8rx2h"]
 [ext_resource type="PackedScene" uid="uid://djmye8sm3kmmb" path="res://scenes/pawns/enemies/vaultwalker/vaultwalker.tscn" id="15_dqs6c"]
@@ -609,7 +610,10 @@ one_way_collision = true
 
 [node name="Player" parent="MainLayer" groups=["Player"] instance=ExtResource("3_ne5dv")]
 z_index = 1
-position = Vector2(4016, -400)
+position = Vector2(4144, -400)
+
+[node name="Suecypher" parent="MainLayer" instance=ExtResource("13_o3ivf")]
+position = Vector2(4368, -416)
 
 [node name="CarriboSpawner" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(498, 152)
