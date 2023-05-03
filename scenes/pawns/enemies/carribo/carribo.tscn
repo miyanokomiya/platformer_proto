@@ -30,7 +30,7 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e4wyr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d71wb"]
 resource_local_to_scene = true
 shader = SubResource("Shader_l7m31")
 shader_parameter/mix_weight = 0.0
@@ -258,8 +258,9 @@ _data = {
 "walk": SubResource("Animation_volad")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n75fr"]
-size = Vector2(20, 21)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7lrfg"]
+radius = 9.0
+height = 22.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fvkg7"]
 particles_animation = true
@@ -278,6 +279,7 @@ anim_speed_max = 1.0
 [node name="Carribo" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 129
+floor_constant_speed = true
 script = ExtResource("1_wk3rk")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_4i0uh")]
@@ -296,7 +298,7 @@ debug_color = Color(0.803922, 0.360784, 0.552941, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_h4sty")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_e4wyr")
+whiten_material = SubResource("ShaderMaterial_d71wb")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_k2j0g")]
 position = Vector2(0, -11)
@@ -318,8 +320,8 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -10.5)
-shape = SubResource("RectangleShape2D_n75fr")
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_7lrfg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -11)
@@ -329,7 +331,7 @@ hframes = 6
 [node name="GroundDetector" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-11, -12)
-target_position = Vector2(0, 20)
+target_position = Vector2(0, 31)
 collision_mask = 129
 
 [node name="WallDetector" type="RayCast2D" parent="."]

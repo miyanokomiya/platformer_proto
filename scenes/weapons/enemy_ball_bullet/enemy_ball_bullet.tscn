@@ -1,0 +1,275 @@
+[gd_scene load_steps=21 format=3 uid="uid://cusbqirbbwfwx"]
+
+[ext_resource type="Script" path="res://scenes/weapons/enemy_ball_bullet/enemy_ball_bullet.gd" id="1_nxoe7"]
+[ext_resource type="PackedScene" uid="uid://cltyyd03qhp1x" path="res://scenes/components/projectile_component/projectile_component.tscn" id="2_ir3ue"]
+[ext_resource type="Texture2D" uid="uid://ilr1vkge5wnc" path="res://assets/sprites/shots/ball_bullet.png" id="3_dtqv5"]
+[ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="4_sovuf"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="4_wvann"]
+[ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="4_xbj2o"]
+[ext_resource type="AudioStream" uid="uid://doo3nae8mqtu5" path="res://assets/audios/explosions/retro_explosion_general_09.wav" id="5_rdiv7"]
+[ext_resource type="AudioStream" uid="uid://deh3feblg3y04" path="res://assets/audios/shots/gun_pistol_shot_silenced_01.wav" id="6_a5h0m"]
+[ext_resource type="AudioStream" uid="uid://cic8tlt7mnvyi" path="res://assets/audios/blocked/knife_hit_small_05.wav" id="7_btgw8"]
+[ext_resource type="Texture2D" uid="uid://bfe01svjgy8sl" path="res://assets/sprites/vfx/explosions/explosion-d.png" id="8_66800"]
+
+[sub_resource type="Animation" id="Animation_mdgm5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LandParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ualya"]
+resource_name = "flying"
+length = 0.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_l81si"]
+resource_name = "hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LandParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2f8kg"]
+_data = {
+"RESET": SubResource("Animation_mdgm5"),
+"flying": SubResource("Animation_ualya"),
+"hit": SubResource("Animation_l81si")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yra2f"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8nyv0"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppgsy"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aioff"]
+radius = 4.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6c2ab"]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_78e6i"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="EnemyBallBullet" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_nxoe7")
+
+[node name="ProjectileComponent" parent="." instance=ExtResource("2_ir3ue")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2f8kg")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_dtqv5")
+
+[node name="LandArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LandArea"]
+shape = SubResource("CircleShape2D_yra2f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_8nyv0")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_sovuf")]
+max_health = 1.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_xbj2o")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_ppgsy")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_wvann")]
+visible = false
+collision_layer = 16
+collision_mask = 2
+damage = 2
+oneshot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_aioff")
+debug_color = Color(0.819608, 0.364706, 0.447059, 0.419608)
+
+[node name="HitSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rdiv7")
+volume_db = -19.161
+pitch_scale = 2.0
+bus = &"SE"
+
+[node name="ShootSE" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_a5h0m")
+volume_db = -22.892
+bus = &"SE"
+
+[node name="BlockedSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_btgw8")
+bus = &"SE"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3.6, 3.6)
+
+[node name="LandParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_6c2ab")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_78e6i")
+texture = ExtResource("8_66800")
+lifetime = 0.4
+one_shot = true
+
+[connection signal="body_entered" from="LandArea" to="." method="_on_land_area_body_entered"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

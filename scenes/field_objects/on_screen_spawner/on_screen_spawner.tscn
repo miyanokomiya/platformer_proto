@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/field_objects/on_screen_spawner/on_screen_spawner.gd" id="1_rropu"]
 
 [node name="OnScreenSpawner" type="VisibleOnScreenNotifier2D"]
-rect = Rect2(-50, -50, 100, 100)
+rect = Rect2(-70, -70, 140, 140)
 script = ExtResource("1_rropu")
 
 [connection signal="screen_entered" from="." to="." method="_on_screen_entered"]
