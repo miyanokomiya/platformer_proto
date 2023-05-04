@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dacgbljwuyxc3"]
+[gd_scene load_steps=17 format=3 uid="uid://dacgbljwuyxc3"]
 
 [ext_resource type="Texture2D" uid="uid://bf8kvwaidt2gd" path="res://assets/sprites/bosses/stinger/stinger.png" id="1_f66x7"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/stinger/stinger.gd" id="1_ot5ed"]
+[ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="2_nymm4"]
 [ext_resource type="PackedScene" uid="uid://cdqny6j5cggy6" path="res://scenes/components/direction_anchor/direction_anchor.tscn" id="3_5me0w"]
+[ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="4_r6vot"]
 
 [sub_resource type="Animation" id="Animation_cf7rh"]
 resource_name = "idle"
@@ -30,6 +32,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_n1ihy"]
@@ -82,6 +96,42 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(-14, -26)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxComponent/CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 41)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitboxComponent/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20.5)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_bl48b"]
 resource_name = "cross"
@@ -108,6 +158,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_xp50c"]
@@ -136,6 +198,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-4, 2)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_0y3w6"]
 resource_name = "ceil_stick"
@@ -162,6 +236,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_g33b7"]
@@ -202,6 +288,42 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(-14, -26)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(43, 23)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxComponent/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-14.5, -21.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_fonbx"]
 resource_name = "air"
@@ -229,11 +351,63 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_psjp6"]
+resource_name = "air_raid"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jj3nh"]
 _data = {
 "RESET": SubResource("Animation_n1ihy"),
 "air": SubResource("Animation_fonbx"),
+"air_raid": SubResource("Animation_psjp6"),
 "ceil_stick": SubResource("Animation_0y3w6"),
 "cross": SubResource("Animation_bl48b"),
 "idle": SubResource("Animation_cf7rh"),
@@ -244,6 +418,9 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_es1l4"]
 radius = 7.0
 height = 42.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hmog"]
+size = Vector2(14, 41)
 
 [node name="Stinger" type="CharacterBody2D"]
 collision_layer = 4
@@ -258,6 +435,14 @@ libraries = {
 position = Vector2(0, -21)
 shape = SubResource("CapsuleShape2D_es1l4")
 
+[node name="HitboxComponent" parent="." instance=ExtResource("2_nymm4")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_4hmog")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -23)
 texture = ExtResource("1_f66x7")
@@ -265,6 +450,13 @@ hframes = 8
 
 [node name="DirectionAnchor" parent="." instance=ExtResource("3_5me0w")]
 rotation = 3.14159
+
+[node name="AfterEffect" parent="." node_paths=PackedStringArray("sprite", "direction_anchor") instance=ExtResource("4_r6vot")]
+position = Vector2(0, -23)
+sprite = NodePath("../Sprite2D")
+flip_h = true
+direction_anchor = NodePath("../DirectionAnchor")
+effect_color = Color(1, 0, 0, 0.721569)
 
 [node name="Timers" type="Node" parent="."]
 

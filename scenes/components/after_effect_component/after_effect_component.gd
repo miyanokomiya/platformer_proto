@@ -4,6 +4,7 @@ class_name AfterEffectComponent
 @export var sprite: Sprite2D
 @export var lifetime: float = 0.3
 @export var flip_h: bool = false
+@export var direction_anchor: DirectionAnchor
 @export var effect_color: Color = Color.WHITE
 @export var effect_material: ShaderMaterial
 
@@ -35,6 +36,9 @@ func spawn_effect():
 	layer.add_child(effect)
 	
 	if flip_h:
+		effect.flip_h = !effect.flip_h
+	
+	if direction_anchor && direction_anchor.get_global_direction().x < 0:
 		effect.flip_h = !effect.flip_h
 	
 	effect.global_position = global_position

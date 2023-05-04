@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwcpckviquer"]
+[gd_scene load_steps=9 format=3 uid="uid://cwcpckviquer"]
 
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="1_l71tc"]
 [ext_resource type="PackedScene" uid="uid://dj7ijhocgp8d" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="3_awc7c"]
 [ext_resource type="PackedScene" uid="uid://bq4qga58cfmks" path="res://scenes/field_objects/camera_bounds/camera_bounds.tscn" id="3_o86qd"]
 [ext_resource type="PackedScene" uid="uid://dacgbljwuyxc3" path="res://scenes/pawns/bosses/stinger/stinger.tscn" id="5_0pmmo"]
+[ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="6_dpc5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5cr7"]
 resource_local_to_scene = true
@@ -48,5 +49,7 @@ position = Vector2(224, 176)
 target = NodePath("../Player")
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
+
+[node name="MainHUD" parent="." instance=ExtResource("6_dpc5t")]
 
 [editable path="CameraBounds"]
