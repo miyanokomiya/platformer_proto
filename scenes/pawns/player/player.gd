@@ -27,6 +27,7 @@ var buster_texture = preload("res://assets/sprites/aria/aria_buster.png")
 @export var small_shot: PackedScene
 @export var middle_shot: PackedScene
 @export var large_shot: PackedScene
+@export var default_state: String = "cutscene"
 
 func _ready():
 	character_state_machine.state_changed.connect(on_state_changed)
@@ -47,7 +48,7 @@ func _ready():
 	if flip_h:
 		character_state_context.flip_character()
 	
-	switch_state("cutscene")
+	switch_state(default_state)
 
 
 func teleport_in():
