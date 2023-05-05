@@ -13,6 +13,9 @@ func on_enter(ctx: CharacterStateContext):
 func state_process(ctx: CharacterStateContext, delta: float):
 	if timer.is_stopped():
 		next_state_name = "air"
+	
+	if ctx.character.velocity.y >= 0:
+		next_state_name = "air"
 
 	super.state_process(ctx, delta)
 
