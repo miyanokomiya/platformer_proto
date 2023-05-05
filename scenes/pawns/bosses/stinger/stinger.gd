@@ -33,6 +33,7 @@ func _physics_process(delta):
 			try_start_action()
 		STATE.DIED:
 			velocity = Vector2.ZERO
+			body_animation.pause()
 		STATE.LEAP_FORWARD:
 			after_effect.stop()
 			body_animation.play("air")
@@ -57,7 +58,7 @@ func _physics_process(delta):
 			move_stinger(delta)
 		STATE.STINGER_READY:
 			after_effect.play()
-			body_animation.play("air")
+			body_animation.play("cross")
 			ready_stinger()
 		STATE.STINGER_STUCK:
 			after_effect.stop()
@@ -174,3 +175,7 @@ func _on_ready_stinger_timer_timeout():
 		return
 	
 	current_state = STATE.STINGER
+
+
+func _on_health_component_died():
+	current_state = STATE.DIED

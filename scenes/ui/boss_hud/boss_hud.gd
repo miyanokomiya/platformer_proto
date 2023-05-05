@@ -3,6 +3,7 @@ extends CanvasLayer
 signal health_filled
 
 @export var health_component: HealthComponent
+@export var filled: bool = false
 
 @onready var health_bar = %HealthBar
 
@@ -13,6 +14,8 @@ func _ready():
 	
 	health_component.health_changed.connect(on_health_changed)
 	health_bar.update_max_value(health_component.max_health)
+	if filled:
+		health_bar.update_value(health_component.current_health)
 
 
 func fill_health():

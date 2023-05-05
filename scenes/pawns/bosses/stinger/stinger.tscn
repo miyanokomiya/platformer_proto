@@ -1,10 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://dacgbljwuyxc3"]
+[gd_scene load_steps=24 format=3 uid="uid://dacgbljwuyxc3"]
 
 [ext_resource type="Texture2D" uid="uid://bf8kvwaidt2gd" path="res://assets/sprites/bosses/stinger/stinger.png" id="1_f66x7"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/stinger/stinger.gd" id="1_ot5ed"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="2_nymm4"]
+[ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_t44jb"]
 [ext_resource type="PackedScene" uid="uid://cdqny6j5cggy6" path="res://scenes/components/direction_anchor/direction_anchor.tscn" id="3_5me0w"]
+[ext_resource type="PackedScene" uid="uid://cspcugxorotor" path="res://scenes/components/hurtbox_component/hurtbox_component.tscn" id="3_aavuo"]
+[ext_resource type="PackedScene" uid="uid://cfo1rpvdpemxj" path="res://scenes/components/hit_flash_component/hit_flash_component.tscn" id="4_hlxcl"]
 [ext_resource type="PackedScene" uid="uid://vig0a273l8q5" path="res://scenes/components/after_effect_component/after_effect_component.tscn" id="4_r6vot"]
+[ext_resource type="Shader" path="res://vfx/whiten/whiten.gdshader" id="5_gnq63"]
+[ext_resource type="PackedScene" uid="uid://dmn3jcq2iyobq" path="res://scenes/ui/boss_hud/boss_hud.tscn" id="10_n8gqx"]
 
 [sub_resource type="Animation" id="Animation_cf7rh"]
 resource_name = "idle"
@@ -366,6 +371,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_psjp6"]
 resource_name = "air_raid"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -376,7 +382,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -402,6 +408,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 41)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxComponent/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -20.5)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jj3nh"]
 _data = {
@@ -419,12 +449,25 @@ _data = {
 radius = 7.0
 height = 42.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18q3h"]
+size = Vector2(14, 41)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgykt"]
+resource_local_to_scene = true
+shader = ExtResource("5_gnq63")
+shader_parameter/mix_weight = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hmog"]
 size = Vector2(14, 41)
 
 [node name="Stinger" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_ot5ed")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_t44jb")]
+max_health = 50.0
 
 [node name="BodyAnimation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -434,6 +477,21 @@ libraries = {
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -21)
 shape = SubResource("CapsuleShape2D_es1l4")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_aavuo")]
+collision_layer = 4
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+invincible_time = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_18q3h")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_hlxcl")]
+hurtbox_component = NodePath("../HurtboxComponent")
+sprite = NodePath("../Sprite2D")
+whiten_material = SubResource("ShaderMaterial_vgykt")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_nymm4")]
 collision_layer = 4
@@ -446,7 +504,7 @@ shape = SubResource("RectangleShape2D_4hmog")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -23)
 texture = ExtResource("1_f66x7")
-hframes = 8
+hframes = 10
 
 [node name="DirectionAnchor" parent="." instance=ExtResource("3_5me0w")]
 rotation = 3.14159
@@ -486,5 +544,10 @@ unique_name_in_owner = true
 position = Vector2(0, -39)
 target_position = Vector2(0, -5)
 
+[node name="BossHUD" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_n8gqx")]
+health_component = NodePath("../HealthComponent")
+filled = true
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="timeout" from="Timers/ActionTimer" to="." method="_on_action_timer_timeout"]
 [connection signal="timeout" from="Timers/ReadyStingerTimer" to="." method="_on_ready_stinger_timer_timeout"]
