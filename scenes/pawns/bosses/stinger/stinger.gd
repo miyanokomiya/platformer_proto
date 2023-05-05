@@ -5,9 +5,9 @@ extends CharacterBody2D
 @onready var body_animation = $BodyAnimation
 @onready var direction_anchor = $DirectionAnchor
 @onready var action_timer = %ActionTimer
-@onready var ready_stinger_timer = %ReadyStingerTimer
 @onready var stinger_ray_cast = %StingerRayCast
 @onready var front_wall_ray_cast = %FrontWallRayCast
+@onready var front_wall_middle_ray_cast = %FrontWallMiddleRayCast
 @onready var ceil_ray_cast = %CeilRayCast
 @onready var after_effect = $AfterEffect
 
@@ -58,7 +58,7 @@ func _physics_process(delta):
 			move_stinger(delta)
 		STATE.STINGER_READY:
 			after_effect.play()
-			body_animation.play("cross")
+			body_animation.play("stinger_ready")
 			ready_stinger()
 		STATE.STINGER_STUCK:
 			after_effect.stop()
@@ -84,7 +84,7 @@ func try_start_action():
 
 
 func choose_action():
-	if current_state == STATE.DIED:
+	if !target || current_state == STATE.DIED:
 		return
 	
 	if current_state == STATE.CEIL_STICK:
@@ -98,8 +98,11 @@ func choose_action():
 	var v = RngManager.enemy_rng.randf() * 2.0
 	if v < 1.0:
 		current_state = STATE.STINGER_READY
+		face_to_target()
 	else:
 		current_state = STATE.LEAP_FORWARD
+		if front_wall_middle_ray_cast.is_colliding():
+			turn_h()
 
 
 func move_leap_forward(_delta: float):
@@ -145,6 +148,7 @@ func move_stinger(delta: float):
 	if stinger_ray_cast.is_colliding():
 		velocity = Vector2.ZERO
 		current_state = STATE.STINGER_STUCK
+		CameraManager.apply_noise_shake(2.0)
 		await get_tree().create_timer(0.5).timeout
 		if current_state == STATE.DIED:
 			return
@@ -155,26 +159,24 @@ func move_stinger(delta: float):
 
 
 func air_raid():
+	face_to_target()
 	attck_direction = global_position.direction_to(target.global_position)
 	current_state = STATE.AIR_RAID
 
 
 func ready_stinger():
 	velocity = Vector2.DOWN * 100
-	if ready_stinger_timer.is_stopped():
-		face_to_target()
-		ready_stinger_timer.start()
 
 
-func _on_action_timer_timeout():
-	choose_action()
-
-
-func _on_ready_stinger_timer_timeout():
+func trigger_stinger():
 	if current_state == STATE.DIED:
 		return
 	
 	current_state = STATE.STINGER
+
+
+func _on_action_timer_timeout():
+	choose_action()
 
 
 func _on_health_component_died():

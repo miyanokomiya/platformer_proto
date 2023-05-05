@@ -14,4 +14,4 @@ script = ExtResource("1_mlegr")
 effect_material = SubResource("ShaderMaterial_lylss")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.075
