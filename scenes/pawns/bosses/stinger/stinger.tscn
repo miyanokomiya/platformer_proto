@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://dacgbljwuyxc3"]
+[gd_scene load_steps=26 format=3 uid="uid://dacgbljwuyxc3"]
 
 [ext_resource type="Texture2D" uid="uid://bf8kvwaidt2gd" path="res://assets/sprites/bosses/stinger/stinger.png" id="1_f66x7"]
 [ext_resource type="Script" path="res://scenes/pawns/bosses/stinger/stinger.gd" id="1_ot5ed"]
+[ext_resource type="PackedScene" uid="uid://da061uuyq202m" path="res://scenes/weapons/enemy_stinger_shot/enemy_stinger_shot.tscn" id="2_m0dpy"]
 [ext_resource type="PackedScene" uid="uid://ddwtfhud2pam6" path="res://scenes/components/hitbox_component/hitbox_component.tscn" id="2_nymm4"]
 [ext_resource type="PackedScene" uid="uid://c7wv0n5n7l7x4" path="res://scenes/components/health_component/health_component.tscn" id="2_t44jb"]
 [ext_resource type="PackedScene" uid="uid://cdqny6j5cggy6" path="res://scenes/components/direction_anchor/direction_anchor.tscn" id="3_5me0w"]
@@ -262,6 +263,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -20.5)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_spread_shots"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_xp50c"]
@@ -747,7 +762,7 @@ _data = {
 radius = 7.0
 height = 42.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ck7rg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lq78t"]
 resource_local_to_scene = true
 shader = ExtResource("5_gnq63")
 shader_parameter/mix_weight = 0.0
@@ -760,6 +775,7 @@ size = Vector2(14, 41)
 [node name="Stinger" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_ot5ed")
+stinger_shot_scene = ExtResource("2_m0dpy")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_t44jb")]
 max_health = 50.0
@@ -786,7 +802,7 @@ shape = SubResource("RectangleShape2D_18q3h")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_hlxcl")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_ck7rg")
+whiten_material = SubResource("ShaderMaterial_lq78t")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_nymm4")]
 collision_layer = 4
@@ -825,6 +841,11 @@ one_shot = true
 unique_name_in_owner = true
 position = Vector2(-14, -26)
 target_position = Vector2(-22, 0)
+
+[node name="ShotRayCast" type="RayCast2D" parent="RayCasts"]
+unique_name_in_owner = true
+position = Vector2(0, -23)
+target_position = Vector2(-27, 0)
 
 [node name="FrontWallRayCast" type="RayCast2D" parent="RayCasts"]
 unique_name_in_owner = true

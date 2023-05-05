@@ -4,8 +4,14 @@ signal timeout
 
 @export var wait_time: float = 15.0
 @export var sprite: Sprite2D
+@export var auto_start: bool = false
 
 @onready var timer = $Timer
+
+
+func _ready():
+	if auto_start:
+		start()
 
 
 func _physics_process(_delta):

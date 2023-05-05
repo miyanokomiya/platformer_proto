@@ -1,14 +1,19 @@
 extends CharacterBody2D
 
 @export var target: Node2D
+@export var stinger_shot_scene: PackedScene
 
 @onready var body_animation = $BodyAnimation
 @onready var direction_anchor = $DirectionAnchor
+
 @onready var action_timer = %ActionTimer
+
 @onready var stinger_ray_cast = %StingerRayCast
 @onready var front_wall_ray_cast = %FrontWallRayCast
 @onready var front_wall_middle_ray_cast = %FrontWallMiddleRayCast
 @onready var ceil_ray_cast = %CeilRayCast
+@onready var shot_ray_cast = %ShotRayCast
+
 @onready var after_effect = $AfterEffect
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -19,7 +24,7 @@ enum STATE{\
 	WALL_STICK, CEIL_STICK,\
 	AIR_RAID,\
 	STINGER, STINGER_READY, STINGER_STUCK,\
-	CROSS}
+	CROSS, SPREAD_SHOTS, SPREAD_SHOTS_COOLDOWN}
 var current_state = STATE.IDLE
 
 var attck_direction = Vector2.RIGHT
@@ -63,6 +68,13 @@ func _physics_process(delta):
 		STATE.STINGER_STUCK:
 			after_effect.stop()
 			velocity = Vector2.ZERO
+		STATE.SPREAD_SHOTS:
+			after_effect.stop()
+			body_animation.play("cross")
+			velocity = Vector2.ZERO
+		STATE.SPREAD_SHOTS_COOLDOWN:
+			after_effect.stop()
+			velocity = Vector2.ZERO
 	
 	move_and_slide()
 
@@ -95,9 +107,12 @@ func choose_action():
 		air_raid()
 		return
 	
-	var v = RngManager.enemy_rng.randf() * 2.0
+	var v = RngManager.enemy_rng.randf() * 3.0
 	if v < 1.0:
 		current_state = STATE.STINGER_READY
+		face_to_target()
+	elif v < 1.0:
+		current_state = STATE.SPREAD_SHOTS
 		face_to_target()
 	else:
 		current_state = STATE.LEAP_FORWARD
@@ -173,6 +188,37 @@ func trigger_stinger():
 		return
 	
 	current_state = STATE.STINGER
+
+
+func trigger_spread_shots():
+	if current_state == STATE.DIED:
+		return
+	
+	current_state = STATE.SPREAD_SHOTS_COOLDOWN
+	var layer = get_tree().get_first_node_in_group("foreground_layer")
+	layer = layer if layer else self
+	
+	var anchor_d = direction_anchor.get_global_direction()
+	var origin = shot_ray_cast.global_position
+	var v = shot_ray_cast.target_position
+	if anchor_d.x > 0:
+		v.x *= -1
+	
+	for i in [0, 1, 2, 3]:
+		var shot = stinger_shot_scene.instantiate()
+		layer.add_child(shot)
+		if v.x > 0:
+			var d = v.rotated(-i * PI / 8.0)
+			shot.spawn(origin + d, d)
+		else:
+			var d = v.rotated(i * PI / 8.0)
+			shot.spawn(origin + d, d)
+		
+		await get_tree().create_timer(0.1).timeout
+		shot.shoot()
+	
+	await get_tree().create_timer(1.0).timeout
+	current_state = STATE.IDLE
 
 
 func _on_action_timer_timeout():
