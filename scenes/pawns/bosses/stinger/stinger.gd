@@ -27,7 +27,16 @@ enum STATE{\
 	CROSS, SPREAD_SHOTS, SPREAD_SHOTS_COOLDOWN}
 var current_state = STATE.IDLE
 
+var normal_action_table = SemiRandomTable.new()
+
 var attck_direction = Vector2.RIGHT
+
+
+func _ready():
+	normal_action_table.max_duplicated_count = 1
+	normal_action_table.add_item(STATE.STINGER_READY, 1.0)
+	normal_action_table.add_item(STATE.SPREAD_SHOTS, 1.0)
+	normal_action_table.add_item(STATE.LEAP_FORWARD, 1.0)
 
 
 func _physics_process(delta):
@@ -107,17 +116,20 @@ func choose_action():
 		air_raid()
 		return
 	
-	var v = RngManager.enemy_rng.randf() * 3.0
-	if v < 1.0:
-		current_state = STATE.STINGER_READY
-		face_to_target()
-	elif v < 1.0:
-		current_state = STATE.SPREAD_SHOTS
-		face_to_target()
-	else:
-		current_state = STATE.LEAP_FORWARD
-		if front_wall_middle_ray_cast.is_colliding():
-			turn_h()
+	var action = normal_action_table.pick(RngManager.enemy_rng.randf())
+	if !action:
+		return
+	
+	match action:
+		STATE.STINGER_READY:
+			face_to_target()
+		STATE.SPREAD_SHOTS:
+			face_to_target()
+		STATE.SPREAD_SHOTS:
+			if front_wall_middle_ray_cast.is_colliding():
+				turn_h()
+	
+	current_state = action
 
 
 func move_leap_forward(_delta: float):
