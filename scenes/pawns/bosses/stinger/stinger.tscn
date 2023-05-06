@@ -762,7 +762,7 @@ _data = {
 radius = 7.0
 height = 42.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsxjm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rovuh"]
 resource_local_to_scene = true
 shader = ExtResource("5_gnq63")
 shader_parameter/mix_weight = 0.0
@@ -803,7 +803,7 @@ shape = SubResource("RectangleShape2D_18q3h")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("4_hlxcl")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_vsxjm")
+whiten_material = SubResource("ShaderMaterial_rovuh")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_nymm4")]
 collision_layer = 4

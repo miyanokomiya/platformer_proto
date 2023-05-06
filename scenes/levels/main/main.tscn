@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dj7ijhocgp8d" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="3_awc7c"]
 [ext_resource type="PackedScene" uid="uid://bq4qga58cfmks" path="res://scenes/field_objects/camera_bounds/camera_bounds.tscn" id="3_o86qd"]
-[ext_resource type="PackedScene" uid="uid://dacgbljwuyxc3" path="res://scenes/pawns/bosses/stinger/stinger.tscn" id="5_0pmmo"]
+[ext_resource type="PackedScene" uid="uid://cx02jptdukfk7" path="res://scenes/pawns/bosses/roundtrip/roundtrip.tscn" id="5_oy23i"]
 [ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="6_dpc5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5cr7"]
@@ -44,7 +44,7 @@ z_index = 1
 position = Vector2(80, 176)
 default_state = "ground"
 
-[node name="Stinger" parent="MainLayer" node_paths=PackedStringArray("target") instance=ExtResource("5_0pmmo")]
+[node name="Roundtrip" parent="MainLayer" node_paths=PackedStringArray("target") instance=ExtResource("5_oy23i")]
 position = Vector2(224, 176)
 target = NodePath("../Player")
 
