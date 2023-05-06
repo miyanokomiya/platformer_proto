@@ -366,6 +366,7 @@ progress = 5
 target = NodePath("../MainLayer/Player")
 
 [node name="CameraMeta" type="Node2D" parent="."]
+visible = false
 
 [node name="CameraBounds" parent="CameraMeta" node_paths=PackedStringArray("camera") instance=ExtResource("4_6uq7n")]
 position = Vector2(189, 90)
@@ -610,7 +611,7 @@ one_way_collision = true
 
 [node name="Player" parent="MainLayer" groups=["Player"] instance=ExtResource("3_ne5dv")]
 z_index = 1
-position = Vector2(344, 152)
+position = Vector2(2648, 152)
 
 [node name="SuecypherSpawner1" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(1232, 72)

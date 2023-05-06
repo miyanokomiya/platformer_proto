@@ -62,7 +62,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	ctx.character.move_and_slide()
 	
 	if can_stick_wall && !ctx.is_close_to_floor.call() && direction * ctx.current_direction > 0:
-		if ctx.front_stickable_wall_raycast.is_colliding() || ctx.back_stickable_wall_raycast.is_colliding():
+		if ctx.front_stickable_wall_raycast.is_colliding():
 			next_state_name = "wall"
 
 

@@ -1,10 +1,15 @@
 extends CharacterState
 
+# WHen target wall is thin (not bigger than 16px?), "back_stickable_wall_raycast" misdetects at the second frame for some reason
+# Make extra frame threshold to avoid this misdetection
+var uncolliding_frame = 0
+
 
 func on_enter(ctx: CharacterStateContext):
 	ctx.animation_player.play("wall_stick")
 	ctx.flip_character()
 	ctx.set_after_effect_playing(false)
+	uncolliding_frame = 0
 
 
 func on_damage(_ctx: CharacterStateContext):
@@ -38,7 +43,12 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
 	
-	if !ctx.back_stickable_wall_raycast.is_colliding() || direction * ctx.current_direction >= 0:
+	if ctx.back_stickable_wall_raycast.is_colliding():
+		uncolliding_frame = 0
+	else:
+		uncolliding_frame += 1
+	
+	if uncolliding_frame >= 2 || direction * ctx.current_direction >= 0:
 		character.velocity.y = 0
 		next_state_name = "air"
 
