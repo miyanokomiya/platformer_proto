@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-enum STATE{DIED, IDLE, SETUP, GROUND_THROW}
+enum STATE{DIED, IDLE, SETUP, GROUND_THROW, STEP_FORWARD, STEP_BACK}
 var current_state = STATE.IDLE
 
 var normal_action_table = SemiRandomTable.new()
