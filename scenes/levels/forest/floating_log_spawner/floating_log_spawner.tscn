@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c614emrndcufe"]
+
+[ext_resource type="Script" path="res://scenes/levels/forest/floating_log_spawner/floating_log_spawner.gd" id="1_eldx5"]
+[ext_resource type="PackedScene" uid="uid://0tw065y3kk4h" path="res://scenes/field_objects/floating_log/floating_log.tscn" id="2_r027i"]
+
+[node name="FloatingLogSpawner" type="Node2D"]
+script = ExtResource("1_eldx5")
+floating_log_scene = ExtResource("2_r027i")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Mock" parent="." instance=ExtResource("2_r027i")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
