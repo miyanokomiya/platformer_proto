@@ -61,14 +61,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdnhn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jdpbi"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkb5c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8plsg"]
 resource_local_to_scene = true
 shader = ExtResource("12_4flpg")
 shader_parameter/progress = null
@@ -1194,6 +1194,7 @@ collision_layer = 2
 collision_mask = 641
 floor_constant_speed = true
 floor_snap_length = 5.0
+platform_on_leave = 2
 script = ExtResource("1_0u88g")
 small_shot = ExtResource("2_vdr3h")
 middle_shot = ExtResource("3_jsbgg")
@@ -1216,11 +1217,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_pdnhn")
+whiten_material = SubResource("ShaderMaterial_jdpbi")
 
 [node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
 sprite = NodePath("../Sprite2D")
-teleport_material = SubResource("ShaderMaterial_vkb5c")
+teleport_material = SubResource("ShaderMaterial_8plsg")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)
