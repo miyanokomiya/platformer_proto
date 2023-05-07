@@ -3,10 +3,15 @@ class_name CharacterAirState
 
 @export var can_stick_wall: bool = true
 
+# Keep minimum duration to pass the very floor
+var passing_floor_delay = 0.05
+
 
 func on_enter(ctx: CharacterStateContext):
 	if ctx.has_dash_momentum:
 		ctx.set_after_effect_playing(true)
+	
+	passing_floor_delay = 0.1
 
 
 func on_damage(_ctx: CharacterStateContext):
@@ -16,8 +21,11 @@ func on_damage(_ctx: CharacterStateContext):
 func state_process(ctx: CharacterStateContext, delta: float):
 	var character = ctx.character
 	
-	if !Input.is_action_pressed("move_down"):
-		ctx.character.set_collision_mask_value(8, true)
+	if !Input.is_action_pressed("move_down") || !Input.is_action_pressed("action_jump"):
+		if passing_floor_delay <= 0:
+			ctx.character.set_collision_mask_value(8, true)
+		else:
+			passing_floor_delay -= delta
 	
 	if character.is_on_floor():
 		next_state_name = "ground"
