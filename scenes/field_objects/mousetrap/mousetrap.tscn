@@ -350,7 +350,7 @@ size = Vector2(26, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfv3m"]
 size = Vector2(42, 38)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfnok"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqgiu"]
 resource_local_to_scene = true
 shader = ExtResource("6_bj1o3")
 shader_parameter/mix_weight = 0.0
@@ -413,7 +413,7 @@ position = Vector2(0, -50)
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_y8my7")]
 collision_layer = 4
-collision_mask = 8
+collision_mask = 24
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -425,7 +425,7 @@ debug_color = Color(0.568627, 0.545098, 0.32549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_8fq64")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_lfnok")
+whiten_material = SubResource("ShaderMaterial_lqgiu")
 
 [node name="EncloseSE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_tnxa0")
