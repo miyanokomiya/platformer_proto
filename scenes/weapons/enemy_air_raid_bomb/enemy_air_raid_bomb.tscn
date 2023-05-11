@@ -177,15 +177,13 @@ script = ExtResource("1_klpwl")
 speed = 250.0
 auto_rotation = false
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3.6, 3.6)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2f8kg")
 }
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_dw4vy")
-hframes = 3
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -208,14 +206,16 @@ shape = SubResource("CircleShape2D_ue5hh")
 disabled = true
 debug_color = Color(0.819608, 0.364706, 0.447059, 0.419608)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_dw4vy")
+hframes = 7
+frame = 2
+
 [node name="ExplodeSE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_fiuk8")
 volume_db = -23.363
 pitch_scale = 1.2
 bus = &"SE"
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(3.6, 3.6)
 
 [node name="ExplodeParticles" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_mn3ev")
@@ -226,6 +226,6 @@ texture = ExtResource("8_xhk1q")
 lifetime = 0.5
 one_shot = true
 
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="blocked" from="HitboxComponent" to="." method="_on_hitbox_component_blocked"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
