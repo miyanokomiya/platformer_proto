@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bbi4quqsy6td1"]
+[gd_scene load_steps=30 format=3 uid="uid://bbi4quqsy6td1"]
 
 [ext_resource type="Texture2D" uid="uid://pt7xa1lrm3wg" path="res://assets/sprites/field_objects/ground_trap_door/ground_trap_door_enemy.png" id="1_43x7s"]
 [ext_resource type="Script" path="res://scenes/field_objects/ground_trap_door/ground_trap_door.gd" id="1_mk3yh"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bqjmhuiusn5yv" path="res://assets/audios/doors/small_box_open_01.wav" id="11_icgb2"]
 [ext_resource type="PackedScene" uid="uid://cdqny6j5cggy6" path="res://scenes/components/direction_anchor/direction_anchor.tscn" id="11_t02pb"]
 [ext_resource type="AudioStream" uid="uid://8srb23h350e4" path="res://assets/audios/doors/small_box_close_01.wav" id="13_4o6th"]
+[ext_resource type="PackedScene" uid="uid://7nntdet4fwai" path="res://scenes/effects/flash_effect/flash_effect.tscn" id="14_o7hnn"]
 
 [sub_resource type="Animation" id="Animation_rcq8j"]
 length = 0.001
@@ -659,7 +660,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yrmb"]
 size = Vector2(17, 6)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_am8l2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omrjv"]
 resource_local_to_scene = true
 shader = ExtResource("7_h4wjq")
 shader_parameter/mix_weight = 0.0
@@ -718,7 +719,7 @@ disabled = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("6_hg7n3")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_am8l2")
+whiten_material = SubResource("ShaderMaterial_omrjv")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_qbfs8")
@@ -748,6 +749,10 @@ debug_color = Color(0.670588, 0.443137, 0.662745, 0.419608)
 
 [node name="InMarker" type="Marker2D" parent="."]
 position = Vector2(-6, 0)
+
+[node name="FlashEffect" parent="InMarker" instance=ExtResource("14_o7hnn")]
+unique_name_in_owner = true
+auto_start = false
 
 [node name="OpenSE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_icgb2")

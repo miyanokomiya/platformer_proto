@@ -8,6 +8,7 @@ extends Node2D
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var direction_anchor = $DirectionAnchor
 @onready var in_marker = $InMarker
+@onready var flash_effect = %FlashEffect
 
 enum STATE{CLOSED, OPEN, CLOSE, ATTACK, OPENED, ENEMY_DIED, PLAYER_IN}
 var current_state = STATE.CLOSED
@@ -45,6 +46,7 @@ func _physics_process(_delta):
 			animation_player.play("enemy_died")
 		STATE.OPENED:
 			animation_player.play("opened")
+			flash_effect.play()
 			if target_player:
 				if Input.is_action_just_pressed("action_jump") && Input.is_action_pressed("move_down"):
 					current_state = STATE.PLAYER_IN
@@ -52,6 +54,7 @@ func _physics_process(_delta):
 					target_player.face_right(flip_h)
 					target_player.switch_state("ground_in_trap")
 					animation_player.play("close_empty")
+					flash_effect.stop()
 					target_player.state_changed.connect(on_player_out, CONNECT_ONE_SHOT)
 		STATE.PLAYER_IN:
 			pass

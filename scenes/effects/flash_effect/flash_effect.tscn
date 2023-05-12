@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://7nntdet4fwai"]
+
+[ext_resource type="Texture2D" uid="uid://br4ylr43gm1xp" path="res://assets/sprites/vfx/flash.png" id="1_6qagp"]
+[ext_resource type="Script" path="res://scenes/effects/flash_effect/flash_effect.gd" id="1_86ohb"]
+
+[sub_resource type="Animation" id="Animation_v7gsc"]
+resource_name = "flash"
+length = 2.0
+loop_mode = 1
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ary36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_og62y"]
+resource_name = "stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_rxghd"]
+resource_name = "flash_middle"
+length = 2.0
+loop_mode = 1
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uls6w"]
+_data = {
+"RESET": SubResource("Animation_ary36"),
+"flash": SubResource("Animation_v7gsc"),
+"flash_middle": SubResource("Animation_rxghd"),
+"stop": SubResource("Animation_og62y")
+}
+
+[node name="FlashEffect" type="Node2D"]
+script = ExtResource("1_86ohb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6qagp")
+hframes = 13
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "flash"
+libraries = {
+"": SubResource("AnimationLibrary_uls6w")
+}
