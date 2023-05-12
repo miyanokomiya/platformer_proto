@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://tpfs7trjoish"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ground_out_trap_state/ground_out_trap_state.gd" id="1_vfsmk"]
+
+[node name="GroundOutTrapState" type="Node"]
+script = ExtResource("1_vfsmk")
+state_name = "ground_out_trap"

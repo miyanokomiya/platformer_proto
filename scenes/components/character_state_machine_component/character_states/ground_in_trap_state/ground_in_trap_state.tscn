@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://k7som4el36ns"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ground_in_trap_state/ground_in_trap_state.gd" id="1_rexx1"]
+
+[node name="GroundInTrapState" type="Node"]
+script = ExtResource("1_rexx1")
+state_name = "ground_in_trap"

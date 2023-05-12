@@ -15,6 +15,8 @@ class_name CharacterStateFuctory
 @export var died_scene: PackedScene
 @export var cutscene_scene: PackedScene
 @export var ragdoll_scene: PackedScene
+@export var ground_in_trap_scene: PackedScene
+@export var ground_out_trap_scene: PackedScene
 
 
 func get_state(state_name: String) -> CharacterState:
@@ -47,5 +49,9 @@ func get_state(state_name: String) -> CharacterState:
 			return cutscene_scene.instantiate()
 		"ragdoll":
 			return ragdoll_scene.instantiate()
+		"ground_in_trap":
+			return ground_in_trap_scene.instantiate()
+		"ground_out_trap":
+			return ground_out_trap_scene.instantiate()
 		_:
 			return

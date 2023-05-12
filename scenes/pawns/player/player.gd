@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal died
+signal state_changed
 
 @onready var character_state_machine = $CharacterStateMachine
 @onready var character_state_context = $CharacterStateContext
@@ -99,6 +100,7 @@ func switch_state(state_name: String):
 func on_state_changed():
 	sprite_2d.texture = default_texture
 	buster_texture_timer.stop()
+	state_changed.emit()
 
 
 func on_bustered(charge_level: int):

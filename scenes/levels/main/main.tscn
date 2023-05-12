@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cwcpckviquer"]
+[gd_scene load_steps=23 format=3 uid="uid://cwcpckviquer"]
 
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="1_l71tc"]
 [ext_resource type="PackedScene" uid="uid://dj7ijhocgp8d" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://jsr3uhee42rm" path="res://assets/sprites/levels/forest/forest_waterfall.png" id="7_4a3ip"]
 [ext_resource type="PackedScene" uid="uid://bbi4quqsy6td1" path="res://scenes/field_objects/ground_trap_door/ground_trap_door.tscn" id="7_nkgps"]
 [ext_resource type="PackedScene" uid="uid://ci7460cpuw0vi" path="res://scenes/field_objects/mousetrap/mousetrap.tscn" id="7_rujfx"]
-[ext_resource type="PackedScene" uid="uid://gohkg4cc55pp" path="res://scenes/field_objects/air_raid_bomb_spawner/air_raid_bomb_spawner.tscn" id="8_agc8c"]
 [ext_resource type="Texture2D" uid="uid://382oqyr10tdh" path="res://assets/sprites/levels/forest/foresst_artifacts.png" id="10_hbups"]
 [ext_resource type="Texture2D" uid="uid://i7rpgloi77ur" path="res://assets/sprites/levels/forest/forest_facility.png" id="11_wxiye"]
 
@@ -2169,6 +2168,15 @@ target = NodePath("../Player")
 
 [node name="GroundTrapDoor" parent="MainLayer" instance=ExtResource("7_nkgps")]
 position = Vector2(142, 240)
+with_enemy = false
+
+[node name="GroundTrapDoor3" parent="MainLayer" instance=ExtResource("7_nkgps")]
+position = Vector2(218, 241)
+
+[node name="GroundTrapDoor2" parent="MainLayer" instance=ExtResource("7_nkgps")]
+position = Vector2(295, 240)
+flip_h = true
+with_enemy = false
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
 
@@ -2183,15 +2191,6 @@ position = Vector2(423, 89)
 
 [node name="Mousetrap4" parent="ForegroundLayer" instance=ExtResource("7_rujfx")]
 position = Vector2(376, 26)
-
-[node name="AirRaidBombSpawner" parent="ForegroundLayer" node_paths=PackedStringArray("range_marker") instance=ExtResource("8_agc8c")]
-position = Vector2(665, -57)
-direction = 1
-auto_start = true
-range_marker = NodePath("../MarkerForAirRaidBombSpawner")
-
-[node name="MarkerForAirRaidBombSpawner" type="Marker2D" parent="ForegroundLayer"]
-position = Vector2(431, -167)
 
 [node name="MainHUD" parent="." instance=ExtResource("6_dpc5t")]
 
