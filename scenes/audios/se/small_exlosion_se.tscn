@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl6n2njse5ewb"]
+
+[ext_resource type="AudioStream" uid="uid://dh1x4qmkoywop" path="res://assets/audios/explosions/retro_explosion_general_08.wav" id="1_44p0k"]
+
+[node name="SmallExplosionSE" type="AudioStreamPlayer"]
+stream = ExtResource("1_44p0k")
+volume_db = -23.363
+pitch_scale = 1.2
+bus = &"SE"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cwcpckviquer"]
+[gd_scene load_steps=24 format=3 uid="uid://cwcpckviquer"]
 
 [ext_resource type="PackedScene" uid="uid://bv2vspwj6r5ex" path="res://scenes/levels/station_x/station_x_time_map2.tscn" id="1_l71tc"]
 [ext_resource type="PackedScene" uid="uid://dj7ijhocgp8d" path="res://scenes/pawns/player/player.tscn" id="1_m3vo5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="6_dpc5t"]
 [ext_resource type="Texture2D" uid="uid://cjh8enoxg3mry" path="res://assets/sprites/levels/forest/forest.png" id="7_1uh0y"]
 [ext_resource type="Texture2D" uid="uid://jsr3uhee42rm" path="res://assets/sprites/levels/forest/forest_waterfall.png" id="7_4a3ip"]
+[ext_resource type="PackedScene" uid="uid://bbi4quqsy6td1" path="res://scenes/field_objects/ground_trap_door/ground_trap_door.tscn" id="7_nkgps"]
 [ext_resource type="PackedScene" uid="uid://ci7460cpuw0vi" path="res://scenes/field_objects/mousetrap/mousetrap.tscn" id="7_rujfx"]
 [ext_resource type="PackedScene" uid="uid://gohkg4cc55pp" path="res://scenes/field_objects/air_raid_bomb_spawner/air_raid_bomb_spawner.tscn" id="8_agc8c"]
 [ext_resource type="Texture2D" uid="uid://382oqyr10tdh" path="res://assets/sprites/levels/forest/foresst_artifacts.png" id="10_hbups"]
@@ -2165,6 +2166,9 @@ default_state = "ground"
 [node name="Roundtrip" parent="MainLayer" node_paths=PackedStringArray("target") instance=ExtResource("5_oy23i")]
 position = Vector2(224, 176)
 target = NodePath("../Player")
+
+[node name="GroundTrapDoor" parent="MainLayer" instance=ExtResource("7_nkgps")]
+position = Vector2(142, 240)
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
 
