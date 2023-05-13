@@ -611,7 +611,7 @@ one_way_collision = true
 
 [node name="Player" parent="MainLayer" groups=["Player"] instance=ExtResource("3_ne5dv")]
 z_index = 1
-position = Vector2(2648, 152)
+position = Vector2(1384, 152)
 
 [node name="SuecypherSpawner1" parent="MainLayer" instance=ExtResource("6_hg6q6")]
 position = Vector2(1232, 72)
