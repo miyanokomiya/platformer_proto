@@ -1,6 +1,9 @@
 extends Area2D
 class_name CameraBounds
 
+signal activated
+signal deactivated
+
 @export var camera: MainCamera
 
 @onready var bounds_area = %BoundsArea
@@ -18,6 +21,7 @@ func set_bounds():
 	var bounds_center = bounds_area.global_position
 	var bounds_size = (bounds_area.shape as RectangleShape2D).size
 	camera.set_bounds(get_instance_id(), bounds_center, bounds_size)
+	activated.emit()
 
 
 func reset_bounds():
@@ -25,6 +29,7 @@ func reset_bounds():
 		return
 	
 	camera.clear_limit(get_instance_id())
+	deactivated.emit()
 
 
 func on_body_entered(_body: Node2D):

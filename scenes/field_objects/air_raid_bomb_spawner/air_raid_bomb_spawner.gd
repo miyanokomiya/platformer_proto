@@ -19,6 +19,7 @@ var BOMB_INTERVAL = 30
 var bomb_step = Vector2(BOMB_INTERVAL, 0)
 var bomb_count = 5
 var current_bomb_count = 0
+var activated = false
 
 
 func _ready():
@@ -32,6 +33,7 @@ func _ready():
 
 
 func start_shooting():
+	activated = true
 	interval_timer.wait_time = interval
 	interval_timer.start()
 	prediction_timer.wait_time = max(0, interval - 3.5)
@@ -40,8 +42,7 @@ func start_shooting():
 
 
 func stop_shooting():
-	interval_timer.stop()
-	shoot_timer.stop()
+	activated = false
 
 
 func get_bomb_position(index: int) -> Vector2:
@@ -71,7 +72,7 @@ func shoot():
 	current_bomb_count += 1
 	if current_bomb_count < bomb_count:
 		shoot_timer.start()
-	else:
+	elif activated:
 		start_shooting()
 
 
