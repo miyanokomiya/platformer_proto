@@ -63,14 +63,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ecbkr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuer4"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_01bu3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wl53"]
 resource_local_to_scene = true
 shader = ExtResource("12_4flpg")
 shader_parameter/progress = null
@@ -206,14 +206,14 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("CollisionShape2D:disabled")
+tracks/10/path = NodePath(".:collision_mask")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [641]
 }
 
 [sub_resource type="Animation" id="Animation_hbewr"]
@@ -1185,14 +1185,14 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CollisionShape2D:disabled")
+tracks/6/path = NodePath(".:collision_mask")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [512]
 }
 
 [sub_resource type="Animation" id="Animation_nuhcb"]
@@ -1273,14 +1273,14 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CollisionShape2D:disabled")
+tracks/6/path = NodePath(".:collision_mask")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [641]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
@@ -1409,11 +1409,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_ecbkr")
+whiten_material = SubResource("ShaderMaterial_cuer4")
 
 [node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
 sprite = NodePath("../Sprite2D")
-teleport_material = SubResource("ShaderMaterial_01bu3")
+teleport_material = SubResource("ShaderMaterial_1wl53")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -16)

@@ -660,7 +660,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yrmb"]
 size = Vector2(17, 6)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_omrjv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1628"]
 resource_local_to_scene = true
 shader = ExtResource("7_h4wjq")
 shader_parameter/mix_weight = 0.0
@@ -719,7 +719,7 @@ disabled = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("6_hg7n3")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_omrjv")
+whiten_material = SubResource("ShaderMaterial_m1628")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_qbfs8")
