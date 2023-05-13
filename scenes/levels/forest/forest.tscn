@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dnqa8anv46h7c"]
+[gd_scene load_steps=29 format=3 uid="uid://dnqa8anv46h7c"]
 
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="1_sx5ei"]
 [ext_resource type="PackedScene" uid="uid://5l2lcs0e5ml7" path="res://scenes/components/level_manage_component/level_manage_component.tscn" id="1_ykttb"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bvas5jnf436x" path="res://scenes/field_objects/death_area/death_area.tscn" id="4_f816x"]
 [ext_resource type="Texture2D" uid="uid://i7rpgloi77ur" path="res://assets/sprites/levels/forest/forest_facility.png" id="4_ixhl2"]
 [ext_resource type="PackedScene" uid="uid://bq4qga58cfmks" path="res://scenes/field_objects/camera_bounds/camera_bounds.tscn" id="4_ot1q5"]
-[ext_resource type="PackedScene" uid="uid://ci7460cpuw0vi" path="res://scenes/field_objects/mousetrap/mousetrap.tscn" id="5_qn0t6"]
 [ext_resource type="PackedScene" uid="uid://bd7ec5oqoasjo" path="res://scenes/ui/main_hud/main_hud.tscn" id="6_ktbcf"]
 [ext_resource type="PackedScene" uid="uid://c6w82b5erpp5g" path="res://scenes/field_objects/on_screen_spawner/on_screen_spawner.tscn" id="10_mq3e5"]
 [ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="11_fejna"]
@@ -2866,9 +2865,6 @@ facing = false
 direction_x = 1
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
-
-[node name="Mousetrap" parent="ForegroundLayer" instance=ExtResource("5_qn0t6")]
-position = Vector2(328, 153)
 
 [node name="MainHUD" parent="." instance=ExtResource("6_ktbcf")]
 

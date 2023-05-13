@@ -12,6 +12,7 @@ extends Node2D
 
 enum STATE{CLOSED, OPEN, CLOSE, ATTACK, OPENED, ENEMY_DIED, PLAYER_IN}
 var current_state = STATE.CLOSED
+var attack_target_detected = false
 var target_player: Player
 
 
@@ -82,7 +83,7 @@ func shoot():
 
 func closed():
 	current_state = STATE.CLOSED
-	if with_enemy:
+	if with_enemy && attack_target_detected:
 		attack_cooldown_timer.start()
 
 
@@ -90,13 +91,17 @@ func opened():
 	current_state = STATE.OPENED
 
 
+func ready_attack():
+	if with_enemy && current_state == STATE.CLOSED:
+		current_state = STATE.OPEN
+
+
 func on_player_out():
 	current_state = STATE.OPEN
 
 
 func _on_attack_cooldown_timer_timeout():
-	if with_enemy && current_state == STATE.CLOSED:
-		current_state = STATE.OPEN
+	ready_attack()
 
 
 func _on_health_component_died():
@@ -113,3 +118,15 @@ func _on_enter_area_body_entered(body):
 func _on_enter_area_body_exited(body):
 	if target_player == body:
 		target_player = null
+
+
+func _on_watch_area_body_entered(_body):
+	attack_target_detected = true
+	await get_tree().create_timer(0.5).timeout
+	if attack_cooldown_timer.is_stopped():
+		ready_attack()
+
+
+func _on_watch_area_body_exited(_body):
+	attack_target_detected = false
+	attack_cooldown_timer.stop()
