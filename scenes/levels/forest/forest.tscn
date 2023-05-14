@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dnqa8anv46h7c"]
+[gd_scene load_steps=47 format=3 uid="uid://dnqa8anv46h7c"]
 
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="1_sx5ei"]
 [ext_resource type="Script" path="res://scenes/levels/forest/forest.gd" id="1_uvd20"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dss7qwefde8p" path="res://scenes/field_objects/ladder_top/ladder_top.tscn" id="10_vao6l"]
 [ext_resource type="PackedScene" uid="uid://cmy04to47158w" path="res://scenes/pawns/enemies/carribo/carribo.tscn" id="11_fejna"]
 [ext_resource type="PackedScene" uid="uid://c56gijoaxn5hd" path="res://scenes/pawns/enemies/slidalgun/slidalgun.tscn" id="12_0edqn"]
+[ext_resource type="PackedScene" uid="uid://doiy78oon6s2n" path="res://scenes/pawns/enemies/monoloid/monoloid.tscn" id="17_n5v32"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8ttg"]
 texture = ExtResource("4_14kyx")
@@ -5131,7 +5132,7 @@ position = Vector2(1664, -32)
 
 [node name="Player" parent="MainLayer" instance=ExtResource("3_tk1bq")]
 z_index = 1
-position = Vector2(2744, 152)
+position = Vector2(3248, 32)
 
 [node name="GroundTrapDoor" parent="MainLayer" instance=ExtResource("4_bh2le")]
 position = Vector2(616, 168)
@@ -5170,6 +5171,30 @@ with_enemy = false
 
 [node name="GroundTrapDoor6" parent="MainLayer" instance=ExtResource("4_bh2le")]
 position = Vector2(2400, 152)
+
+[node name="OnScreenSpawner6" parent="MainLayer" instance=ExtResource("10_mq3e5")]
+position = Vector2(3352, 32)
+pawn_scene = ExtResource("17_n5v32")
+
+[node name="OnScreenSpawner7" parent="MainLayer" instance=ExtResource("10_mq3e5")]
+position = Vector2(3264, -128)
+pawn_scene = ExtResource("17_n5v32")
+
+[node name="OnScreenSpawner8" parent="MainLayer" instance=ExtResource("10_mq3e5")]
+position = Vector2(2640, -80)
+pawn_scene = ExtResource("17_n5v32")
+
+[node name="OnScreenSpawner9" parent="MainLayer" instance=ExtResource("10_mq3e5")]
+position = Vector2(2664, -240)
+pawn_scene = ExtResource("17_n5v32")
+
+[node name="OnScreenSpawner10" parent="MainLayer" instance=ExtResource("10_mq3e5")]
+position = Vector2(3224, -288)
+pawn_scene = ExtResource("17_n5v32")
+
+[node name="OnScreenSpawner11" parent="MainLayer" instance=ExtResource("10_mq3e5")]
+position = Vector2(3336, -288)
+pawn_scene = ExtResource("17_n5v32")
 
 [node name="ForegroundLayer" type="Node" parent="." groups=["foreground_layer"]]
 
