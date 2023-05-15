@@ -494,6 +494,9 @@ unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
 
+[node name="JumpTriggerMarker" type="Marker2D" parent="."]
+position = Vector2(0, -33)
+
 [connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]
 [connection signal="body_exited" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_exited"]
 [connection signal="timeout" from="ShotCooltime" to="." method="_on_shot_cooltime_timeout"]

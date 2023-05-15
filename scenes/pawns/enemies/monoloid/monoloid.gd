@@ -7,6 +7,7 @@ extends EnemyBase
 @onready var item_drop_component = $ItemDropComponent
 @onready var shot_cooltime = %ShotCooltime
 @onready var shot_direction = $ShotDirection
+@onready var jump_trigger_marker = $JumpTriggerMarker
 
 
 enum STATE{IDLE, DIED, SHOOT, SHOOT_COOLDOWN, JUMP, AIR_SHOOT, LANDED}
@@ -132,7 +133,7 @@ func _on_shot_cooltime_timeout():
 	if current_state == STATE.DIED:
 		return
 	
-	if target && !target.is_on_floor() && target.global_position.y < global_position.y:
+	if target && target.global_position.y < jump_trigger_marker.global_position.y:
 		jump()
 	else:
 		try_attack()
