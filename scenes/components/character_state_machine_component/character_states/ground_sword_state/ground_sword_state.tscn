@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://w1cml1l8qshj"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ground_sword_state/ground_sword_state.gd" id="1_j4cr0"]
+
+[node name="GroundDashState" type="Node"]
+script = ExtResource("1_j4cr0")
+state_name = "ground_sword"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
