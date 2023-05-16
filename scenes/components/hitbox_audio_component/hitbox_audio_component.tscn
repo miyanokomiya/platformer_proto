@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5mrrok3045in"]
+
+[ext_resource type="Script" path="res://scenes/components/hitbox_audio_component/hitbox_audio_component.gd" id="1_e8dwv"]
+
+[node name="HitboxAudioComponent" type="Node"]
+script = ExtResource("1_e8dwv")

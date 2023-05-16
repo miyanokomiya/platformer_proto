@@ -11,6 +11,9 @@ func on_enter(ctx: CharacterStateContext):
 	super.on_enter(ctx)
 	timer.start()
 	released = false
+	if Input.is_action_pressed("action_dash"):
+		ctx.has_dash_momentum = true
+		ctx.set_after_effect_playing(true)
 
 
 func state_process(ctx: CharacterStateContext, delta: float):

@@ -35,6 +35,8 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	
 	if Input.is_action_just_pressed("action_main_attack"):
 		ctx.action_main_attack()
+	elif Input.is_action_just_pressed("action_weapon"):
+		next_state_name = "ground_sword"
 	
 	if Input.is_action_pressed("action_main_attack"):
 		ctx.action_charge()

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://danrffbp11dst"]
+
+[ext_resource type="Script" path="res://scenes/components/hit_stop_component/hit_stop_component.gd" id="1_ri482"]
+
+[node name="HitStopComponent" type="Node"]
+process_mode = 3
+script = ExtResource("1_ri482")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
