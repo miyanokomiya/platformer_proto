@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=91 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -70,14 +70,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3xfs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2xa64"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbsde"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj8q3"]
 resource_local_to_scene = true
 shader = ExtResource("12_4flpg")
 shader_parameter/progress = null
@@ -1612,7 +1612,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [37, 38, 39, 40, 41, 42, 43]
+"values": [43, 44, 45, 46, 47, 48, 49]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1663,6 +1663,71 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_hqeoi"]
+resource_name = "ground_sword_2"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.075, 0.1, 0.125, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [37, 38, 39, 40, 41, 42]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordHitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHitbox/CollisionShape2D:shape:size")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.075, 0.1, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(42, 25), Vector2(42, 38), Vector2(42, 25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordHitbox/CollisionShape2D:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.075, 0.1, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(21, -25), Vector2(21, -17), Vector2(21, -10.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Audios/Sword1SE:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
 _data = {
 "RESET": SubResource("Animation_m1nvf"),
@@ -1672,6 +1737,7 @@ _data = {
 "ground_in_trap": SubResource("Animation_48epv"),
 "ground_out_trap": SubResource("Animation_nuhcb"),
 "ground_sword_1": SubResource("Animation_1nwno"),
+"ground_sword_2": SubResource("Animation_hqeoi"),
 "idle": SubResource("Animation_aew5q"),
 "jump_fall": SubResource("Animation_1c604"),
 "jump_high": SubResource("Animation_nx3m7"),
@@ -1791,11 +1857,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_u3xfs")
+whiten_material = SubResource("ShaderMaterial_2xa64")
 
 [node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
 sprite = NodePath("../Sprite2D")
-teleport_material = SubResource("ShaderMaterial_pbsde")
+teleport_material = SubResource("ShaderMaterial_yj8q3")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -24)
@@ -1840,7 +1906,7 @@ shape = SubResource("RectangleShape2D_5rw22")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
 texture = ExtResource("8_ndnoh")
-hframes = 44
+hframes = 50
 
 [node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast", "charge_component_main", "front_stickable_wall_raycast", "back_stickable_wall_raycast") instance=ExtResource("3_n1m2y")]
 jump_se = NodePath("../Audios/JumpSE")
