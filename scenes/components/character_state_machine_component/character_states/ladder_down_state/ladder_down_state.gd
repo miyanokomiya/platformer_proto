@@ -19,7 +19,7 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 	ctx.character.velocity.y = ctx.get_ladder_speed()
 	ctx.animation_player.play_backwards("ladder")
 	
-	if Input.is_action_just_pressed("action_jump"):
+	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		if Input.is_action_pressed("move_down"):
 			ctx.character.velocity.y = 0
 		else:

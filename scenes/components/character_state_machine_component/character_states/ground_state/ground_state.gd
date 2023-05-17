@@ -26,10 +26,10 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	
 	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
 	
-	if Input.is_action_just_pressed("action_dash"):
+	if GlobalInputBuffer.is_action_pressed("action_dash"):
 		next_state_name = "ground_dash"
 	
-	if Input.is_action_just_pressed("action_jump"):
+	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		if Input.is_action_pressed("move_down"):
 			ctx.character.set_collision_mask_value(8, false)
 		else:
@@ -40,9 +40,9 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if !Input.is_action_pressed("move_down"):
 		ctx.character.set_collision_mask_value(8, true)
 	
-	if Input.is_action_just_pressed("action_main_attack"):
+	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
 		ctx.action_main_attack()
-	elif Input.is_action_just_pressed("action_weapon"):
+	elif GlobalInputBuffer.is_action_pressed("action_weapon"):
 		next_state_name = "ground_sword"
 	
 	if Input.is_action_pressed("action_main_attack"):

@@ -42,13 +42,13 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 	
 	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
 	
-	if Input.is_action_just_pressed("action_jump"):
+	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		if !Input.is_action_pressed("move_down"):
 			ctx.character.velocity.y = ctx.JUMP_VELOCITY
 			ctx.play_jump_se()
 		next_state_name = "air"
 	
-	if Input.is_action_just_pressed("action_main_attack"):
+	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
 		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
 			ctx.flip_character()
 		

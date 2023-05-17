@@ -30,9 +30,8 @@ func init():
 func state_process(ctx: CharacterStateContext, delta: float):
 	if Input.is_action_pressed("action_main_attack"):
 		ctx.action_charge()
-	
-	if Input.is_action_just_released("action_main_attack"):
-		ctx.action_main_attack_release()
+	else:
+		ctx.action_main_attack_release(true)
 	
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
@@ -41,13 +40,14 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	ctx.character.velocity.x = move_toward(ctx.character.velocity.x, 0, initial_x_velocity * 0.2)
 	ctx.character.move_and_slide()
 	
-	if Input.is_action_just_pressed("action_dash"):
+	if GlobalInputBuffer.is_action_pressed("action_dash"):
 		dash_pressed = true
 	
-	if Input.is_action_just_pressed("action_jump"):
+	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		jump_pressed = true
 	
-	if Input.is_action_just_pressed("action_weapon"):
+	if GlobalInputBuffer.is_action_pressed("action_weapon", false) && sword_count == 1:
+		GlobalInputBuffer.consume_action("action_weapon")
 		sword_pressed_count += 1
 		# Override other action buffers
 		dash_pressed = false

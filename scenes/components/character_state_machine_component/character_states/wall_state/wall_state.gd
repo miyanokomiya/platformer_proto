@@ -27,11 +27,11 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	
 	ctx.has_dash_momentum = Input.is_action_pressed("action_dash")
 	
-	if Input.is_action_just_pressed("action_jump"):
+	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		next_state_name = "wall_kicked"
 	
-	if Input.is_action_just_pressed("action_main_attack"):
+	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
 		ctx.action_main_attack()
 	
 	if Input.is_action_pressed("action_main_attack"):

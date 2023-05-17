@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://hrfys53yexip"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/global_input_buffer/global_input_buffer.gd" id="1_i0wd1"]
+
+[node name="GlobalInputBuffer" type="Node"]
+process_mode = 3
+script = ExtResource("1_i0wd1")

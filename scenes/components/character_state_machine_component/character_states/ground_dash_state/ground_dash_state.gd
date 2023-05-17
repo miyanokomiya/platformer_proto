@@ -28,14 +28,14 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		next_state_name = "ground"
 		ctx.has_dash_momentum = false
 	
-	if Input.is_action_just_pressed("action_jump"):
+	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		ctx.play_jump_se()
 		next_state_name = "jumped"
 	
-	if Input.is_action_just_pressed("action_main_attack"):
+	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
 		ctx.action_main_attack()
-	elif Input.is_action_just_pressed("action_weapon"):
+	elif GlobalInputBuffer.is_action_pressed("action_weapon"):
 		next_state_name = "ground_sword"
 	
 	if Input.is_action_pressed("action_main_attack"):

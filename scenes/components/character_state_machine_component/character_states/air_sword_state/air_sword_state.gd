@@ -8,9 +8,8 @@ func on_enter(ctx: CharacterStateContext):
 func state_process(ctx: CharacterStateContext, delta: float):
 	if Input.is_action_pressed("action_main_attack"):
 		ctx.action_charge()
-	
-	if Input.is_action_just_released("action_main_attack"):
-		ctx.action_main_attack_release()
+	else:
+		ctx.action_main_attack_release(true)
 	
 	if ctx.character.is_on_floor():
 		next_state_name = "ground"
