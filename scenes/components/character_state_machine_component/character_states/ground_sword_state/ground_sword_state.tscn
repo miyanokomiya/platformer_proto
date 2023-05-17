@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ground_sword_state/ground_sword_state.gd" id="1_j4cr0"]
 
-[node name="GroundDashState" type="Node"]
+[node name="GroundSwordState" type="Node"]
 script = ExtResource("1_j4cr0")
 state_name = "ground_sword"
 

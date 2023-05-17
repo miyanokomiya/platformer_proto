@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgs0sg3a2ypc5"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/air_sword_state/air_sword_state.gd" id="1_jfwx7"]
+
+[node name="AirSwordState" type="Node"]
+script = ExtResource("1_jfwx7")
+state_name = "air_sword"

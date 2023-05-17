@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://dj7ijhocgp8d"]
+[gd_scene load_steps=90 format=3 uid="uid://dj7ijhocgp8d"]
 
 [ext_resource type="Script" path="res://scenes/pawns/player/player.gd" id="1_0u88g"]
 [ext_resource type="PackedScene" uid="uid://8j2dyxxf2rgj" path="res://scenes/weapons/small_shot/small_shot.tscn" id="2_vdr3h"]
@@ -45,6 +45,7 @@
 [ext_resource type="PackedScene" uid="uid://k7som4el36ns" path="res://scenes/components/character_state_machine_component/character_states/ground_in_trap_state/ground_in_trap_state.tscn" id="30_ns5ja"]
 [ext_resource type="PackedScene" uid="uid://tpfs7trjoish" path="res://scenes/components/character_state_machine_component/character_states/ground_out_trap_state/ground_out_trap_state.tscn" id="31_r0ox7"]
 [ext_resource type="PackedScene" uid="uid://w1cml1l8qshj" path="res://scenes/components/character_state_machine_component/character_states/ground_sword_state/ground_sword_state.tscn" id="33_lxmec"]
+[ext_resource type="PackedScene" uid="uid://cgs0sg3a2ypc5" path="res://scenes/components/character_state_machine_component/character_states/air_sword_state/air_sword_state.tscn" id="35_oxuev"]
 [ext_resource type="AudioStream" uid="uid://cy0jspxgajwds" path="res://assets/audios/charges/sci-fi_power_up_04.wav" id="35_u0jx0"]
 [ext_resource type="AudioStream" uid="uid://b0ufowevf1wyp" path="res://assets/audios/swords/bullet_leave_barrel_02.wav" id="39_koj55"]
 [ext_resource type="AudioStream" uid="uid://dngen870qy8ad" path="res://assets/audios/hits/punch_head_weapon_bat_impact_01.wav" id="40_jke7m"]
@@ -69,14 +70,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdjxp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3xfs"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ad8mx")
 shader_parameter/mix_weight = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4msw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbsde"]
 resource_local_to_scene = true
 shader = ExtResource("12_4flpg")
 shader_parameter/progress = null
@@ -1597,9 +1598,75 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_ntig8"]
+resource_name = "air_sword_1"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [37, 38, 39, 40, 41, 42, 43]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordHitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHitbox/CollisionShape2D:shape:size")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.075, 0.1, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(35, 32), Vector2(40, 47), Vector2(48, 24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SwordHitbox/CollisionShape2D:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.075, 0.1, 0.125),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(10.5, -33), Vector2(20, -21.5), Vector2(6, -10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Audios/Sword1SE:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amajf"]
 _data = {
 "RESET": SubResource("Animation_m1nvf"),
+"air_sword_1": SubResource("Animation_ntig8"),
 "dash": SubResource("Animation_hbewr"),
 "died": SubResource("Animation_bbr6x"),
 "ground_in_trap": SubResource("Animation_48epv"),
@@ -1724,11 +1791,11 @@ debug_color = Color(0.831373, 0.32549, 0.572549, 0.419608)
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("5_vir1a")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
-whiten_material = SubResource("ShaderMaterial_mdjxp")
+whiten_material = SubResource("ShaderMaterial_u3xfs")
 
 [node name="TeleportComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_gyvdc")]
 sprite = NodePath("../Sprite2D")
-teleport_material = SubResource("ShaderMaterial_o4msw")
+teleport_material = SubResource("ShaderMaterial_pbsde")
 
 [node name="AfterEffectComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("11_y2o4e")]
 position = Vector2(0, -24)
@@ -1773,7 +1840,7 @@ shape = SubResource("RectangleShape2D_5rw22")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
 texture = ExtResource("8_ndnoh")
-hframes = 37
+hframes = 44
 
 [node name="CharacterStateContext" parent="." node_paths=PackedStringArray("jump_se", "land_se", "ladder_detect_component", "almost_floor_raycast", "charge_component_main", "front_stickable_wall_raycast", "back_stickable_wall_raycast") instance=ExtResource("3_n1m2y")]
 jump_se = NodePath("../Audios/JumpSE")
@@ -1802,6 +1869,7 @@ ragdoll_scene = ExtResource("29_xr82m")
 ground_in_trap_scene = ExtResource("30_ns5ja")
 ground_out_trap_scene = ExtResource("31_r0ox7")
 ground_sword_scene = ExtResource("33_lxmec")
+air_sword_scene = ExtResource("35_oxuev")
 
 [node name="CharacterStateMachine" parent="." node_paths=PackedStringArray("state_context", "state_fuctory") instance=ExtResource("4_6g13u")]
 state_context = NodePath("../CharacterStateContext")
@@ -1867,7 +1935,7 @@ bus = &"SE"
 [node name="Sword1SE" type="AudioStreamPlayer" parent="Audios"]
 unique_name_in_owner = true
 stream = ExtResource("39_koj55")
-volume_db = -20.772
+volume_db = -24.074
 pitch_scale = 1.31
 bus = &"SE"
 

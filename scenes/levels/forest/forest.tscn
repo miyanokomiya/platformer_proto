@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dnqa8anv46h7c"]
+[gd_scene load_steps=45 format=3 uid="uid://dnqa8anv46h7c"]
 
 [ext_resource type="PackedScene" uid="uid://bgguponv3qtjp" path="res://scenes/main_camera/main_camera.tscn" id="1_sx5ei"]
 [ext_resource type="Script" path="res://scenes/levels/forest/forest.gd" id="1_uvd20"]
@@ -4874,27 +4874,19 @@ size = Vector2(1448, 209)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iio6g"]
 resource_local_to_scene = true
-size = Vector2(584, 832)
+size = Vector2(912, 528)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdhgq"]
 resource_local_to_scene = true
-size = Vector2(688, 769)
+size = Vector2(952, 664)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eoq8e"]
 resource_local_to_scene = true
-size = Vector2(216, 688)
+size = Vector2(784, 312)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4jkf"]
 resource_local_to_scene = true
-size = Vector2(600, 664)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqege"]
-resource_local_to_scene = true
-size = Vector2(224, 520)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_veudk"]
-resource_local_to_scene = true
-size = Vector2(656, 520)
+size = Vector2(776, 464)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3d0e"]
 size = Vector2(20, 194)
@@ -4946,7 +4938,6 @@ layer_1/tile_data = PackedInt32Array(-3145306, 1310722, 3, -3079770, 1310722, 2,
 metadata/_edit_group_ = true
 
 [node name="CameraBoundsGroup" type="Node2D" parent="."]
-visible = false
 
 [node name="CameraBounds" parent="CameraBoundsGroup" node_paths=PackedStringArray("camera") instance=ExtResource("4_ot1q5")]
 position = Vector2(160, 104)
@@ -5013,11 +5004,11 @@ position = Vector2(3008, 32)
 camera = NodePath("../../MainCamera")
 
 [node name="PlayerDetector" parent="CameraBoundsGroup/CameraBounds5" index="0"]
-position = Vector2(-12, -192)
+position = Vector2(-8, -344)
 shape = SubResource("RectangleShape2D_iio6g")
 
 [node name="BoundsArea" parent="CameraBoundsGroup/CameraBounds5" index="1"]
-position = Vector2(-8, -223.5)
+position = Vector2(-4, -276)
 shape = SubResource("RectangleShape2D_xdhgq")
 
 [node name="CameraBounds6" parent="CameraBoundsGroup" node_paths=PackedStringArray("camera") instance=ExtResource("4_ot1q5")]
@@ -5025,24 +5016,12 @@ position = Vector2(3328, 0)
 camera = NodePath("../../MainCamera")
 
 [node name="PlayerDetector" parent="CameraBoundsGroup/CameraBounds6" index="0"]
-position = Vector2(20, -232)
+position = Vector2(-264, 100)
 shape = SubResource("RectangleShape2D_eoq8e")
 
 [node name="BoundsArea" parent="CameraBoundsGroup/CameraBounds6" index="1"]
-position = Vector2(-148, -244)
+position = Vector2(-236, -40)
 shape = SubResource("RectangleShape2D_y4jkf")
-
-[node name="CameraBounds7" parent="CameraBoundsGroup" node_paths=PackedStringArray("camera") instance=ExtResource("4_ot1q5")]
-position = Vector2(2664, -168)
-camera = NodePath("../../MainCamera")
-
-[node name="PlayerDetector" parent="CameraBoundsGroup/CameraBounds7" index="0"]
-position = Vector2(-16, -148)
-shape = SubResource("RectangleShape2D_jqege")
-
-[node name="BoundsArea" parent="CameraBoundsGroup/CameraBounds7" index="1"]
-position = Vector2(200, -148)
-shape = SubResource("RectangleShape2D_veudk")
 
 [node name="BackgroundLayer" type="Node" parent="." groups=["background_layer"]]
 
@@ -5248,4 +5227,3 @@ position = Vector2(3384, -448)
 [editable path="CameraBoundsGroup/AirRaidBombCameraBounds"]
 [editable path="CameraBoundsGroup/CameraBounds5"]
 [editable path="CameraBoundsGroup/CameraBounds6"]
-[editable path="CameraBoundsGroup/CameraBounds7"]

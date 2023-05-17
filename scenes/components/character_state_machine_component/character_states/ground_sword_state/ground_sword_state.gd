@@ -18,6 +18,12 @@ func on_enter(ctx: CharacterStateContext):
 
 
 func state_process(ctx: CharacterStateContext, delta: float):
+	if Input.is_action_pressed("action_main_attack"):
+		ctx.action_charge()
+	
+	if Input.is_action_just_released("action_main_attack"):
+		ctx.action_main_attack_release()
+	
 	if !ctx.character.is_on_floor():
 		next_state_name = "air"
 	
@@ -47,9 +53,3 @@ func state_process(ctx: CharacterStateContext, delta: float):
 			ctx.character.velocity.y = ctx.JUMP_VELOCITY
 			ctx.play_jump_se()
 			next_state_name = "jumped"
-	
-	if Input.is_action_pressed("action_main_attack"):
-		ctx.action_charge()
-	
-	if Input.is_action_just_released("action_main_attack"):
-		ctx.action_main_attack_release()
