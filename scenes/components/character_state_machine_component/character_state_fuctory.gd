@@ -19,6 +19,8 @@ class_name CharacterStateFuctory
 @export var ground_out_trap_scene: PackedScene
 @export var ground_sword_scene: PackedScene
 @export var air_sword_scene: PackedScene
+@export var wall_sword_scene: PackedScene
+@export var ladder_sword_scene: PackedScene
 
 
 func get_state(state_name: String) -> CharacterState:
@@ -59,5 +61,9 @@ func get_state(state_name: String) -> CharacterState:
 			return ground_sword_scene.instantiate()
 		"air_sword":
 			return air_sword_scene.instantiate()
+		"wall_sword":
+			return wall_sword_scene.instantiate()
+		"ladder_sword":
+			return ladder_sword_scene.instantiate()
 		_:
 			return

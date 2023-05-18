@@ -28,5 +28,5 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		if ctx.front_stickable_wall_raycast.is_colliding():
 			next_state_name = "wall"
 	
-	if !ctx.animation_player.is_playing():
+	if next_state_name == "" && !ctx.animation_player.is_playing():
 		next_state_name = "air"

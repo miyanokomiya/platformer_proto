@@ -1,4 +1,5 @@
 extends CharacterState
+class_name CharacterWallState
 
 # WHen target wall is thin (not bigger than 16px?), "back_stickable_wall_raycast" misdetects at the second frame for some reason
 # Make extra frame threshold to avoid this misdetection
@@ -7,7 +8,8 @@ var uncolliding_frame = 0
 
 func on_enter(ctx: CharacterStateContext):
 	ctx.animation_player.play("wall_stick")
-	ctx.flip_character()
+	if ctx.front_stickable_wall_raycast.is_colliding():
+		ctx.flip_character()
 	ctx.set_after_effect_playing(false)
 	uncolliding_frame = 0
 
@@ -31,14 +33,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 		ctx.character.velocity.y = ctx.JUMP_VELOCITY
 		next_state_name = "wall_kicked"
 	
-	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
-		ctx.action_main_attack()
-	
-	if Input.is_action_pressed("action_main_attack"):
-		ctx.action_charge()
-	
-	if Input.is_action_just_released("action_main_attack"):
-		ctx.action_main_attack_release()
+	process_attack(ctx)
 	
 	var direction = free_move(ctx)
 	ctx.character.move_and_slide()
@@ -65,3 +60,15 @@ func free_move(ctx: CharacterStateContext) -> int:
 
 func is_close_to_floor() -> bool:
 	return true
+
+func process_attack(ctx: CharacterStateContext):
+	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
+		ctx.action_main_attack()
+	elif GlobalInputBuffer.is_action_pressed("action_weapon"):
+		next_state_name = "wall_sword"
+	
+	if Input.is_action_pressed("action_main_attack"):
+		ctx.action_charge()
+	
+	if Input.is_action_just_released("action_main_attack"):
+		ctx.action_main_attack_release()

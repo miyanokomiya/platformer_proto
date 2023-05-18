@@ -46,7 +46,9 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 		if !Input.is_action_pressed("move_down"):
 			ctx.character.velocity.y = ctx.JUMP_VELOCITY
 			ctx.play_jump_se()
+		
 		next_state_name = "air"
+		return
 	
 	if GlobalInputBuffer.is_action_pressed("action_main_attack"):
 		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
@@ -55,6 +57,12 @@ func state_process(ctx: CharacterStateContext, _delta: float):
 		if ctx.action_main_attack():
 			ctx.animation_player.play("ladder_buster")
 			attack_wait_timer.start()
+	elif GlobalInputBuffer.is_action_pressed("action_weapon"):
+		if ctx.current_direction * sign(Input.get_axis("move_left", "move_right")) < 0:
+			ctx.flip_character()
+		
+		next_state_name = "ladder_sword"
+		return
 	
 	if Input.is_action_pressed("action_main_attack"):
 		ctx.action_charge()

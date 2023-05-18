@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bisinm1etrfrf"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/ladder_sword_state/ladder_sword_state.gd" id="1_472te"]
+
+[node name="LadderSwordState" type="Node"]
+script = ExtResource("1_472te")
+state_name = "ladder_sword"

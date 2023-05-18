@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckssmdj5ahhu7"]
+
+[ext_resource type="Script" path="res://scenes/components/character_state_machine_component/character_states/wall_sword_state/wall_sword_state.gd" id="1_2ebny"]
+
+[node name="WallSwordState" type="Node"]
+script = ExtResource("1_2ebny")
+state_name = "wall_sword"
