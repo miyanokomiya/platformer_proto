@@ -15,8 +15,9 @@ func _ready():
 	timer.timeout.connect(on_timer_timeout)
 
 
-func play():
-	if timer.is_stopped():
+func play(wait_time = 0.075):
+	if timer.is_stopped() || timer.wait_time != wait_time:
+		timer.wait_time = wait_time
 		timer.start()
 
 

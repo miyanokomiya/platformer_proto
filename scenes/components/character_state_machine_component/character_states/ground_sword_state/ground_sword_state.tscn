@@ -7,9 +7,13 @@ script = ExtResource("1_j4cr0")
 state_name = "ground_sword"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.12
 one_shot = true
 
 [node name="Combo1Timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="Combo2Timer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true

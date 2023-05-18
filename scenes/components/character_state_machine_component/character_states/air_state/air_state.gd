@@ -8,9 +8,7 @@ var passing_floor_delay = 0.05
 
 
 func on_enter(ctx: CharacterStateContext):
-	if ctx.has_dash_momentum:
-		ctx.set_after_effect_playing(true)
-	
+	ctx.set_after_effect_playing(ctx.has_dash_momentum)
 	passing_floor_delay = 0.1
 
 

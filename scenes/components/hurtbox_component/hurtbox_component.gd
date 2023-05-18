@@ -14,7 +14,8 @@ signal denied(hitbox_component: HitboxComponent)
 
 @onready var timer = $Timer
 
-var colliding_hitboxes: Array[HitboxComponent] = []
+var colliding_hitboxes: Array[Dictionary] = []
+var minimum_cooltime = 0.0
 
 
 func _ready():
@@ -23,9 +24,16 @@ func _ready():
 	timer.timeout.connect(on_timer_timeout)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	minimum_cooltime -= delta
+	if minimum_cooltime > 0.0:
+		return
+	
 	for c in colliding_hitboxes:
-		accept_hitbox(c)
+		if c["count"] < c["hitbox"].max_hit_count:
+			accept_hitbox(c["hitbox"])
+			c["count"] += 1
+			minimum_cooltime = 0.025
 
 
 func accept_hitbox(hitbox_component: HitboxComponent):
@@ -69,15 +77,18 @@ func on_area_entered(other_area: Area2D):
 	if hitbox_component.oneshot:
 		accept_hitbox(hitbox_component)
 	else:
-		colliding_hitboxes.append(other_area as HitboxComponent)
-		colliding_hitboxes.sort_custom(func(a, b): return a.get_damage() >= b.get_damage())
+		colliding_hitboxes.append({
+			"hitbox": other_area,
+			"count": 0,
+		})
+		colliding_hitboxes.sort_custom(func(a, b): return a["hitbox"].get_damage() >= b["hitbox"].get_damage())
 
 
 func on_area_exited(other_area: Area2D):
 	if !(other_area is HitboxComponent):
 		return
 	
-	colliding_hitboxes = colliding_hitboxes.filter(func(c): return c != other_area)
+	colliding_hitboxes = colliding_hitboxes.filter(func(c): return c["hitbox"] != other_area)
 
 
 func on_timer_timeout():

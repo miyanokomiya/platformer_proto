@@ -2,6 +2,7 @@ extends CharacterGroundState
 
 @onready var timer = $Timer
 @onready var combo_1_timer = $Combo1Timer
+@onready var combo_2_timer = $Combo2Timer
 
 var dash_pressed = false
 var jump_pressed = false
@@ -27,6 +28,13 @@ func init():
 	timer.start()
 
 
+func try_slide(ctx: CharacterStateContext):
+	if sign(Input.get_axis("move_left", "move_right")) * ctx.current_direction > 0:
+		var speed = 60
+		ctx.character.velocity.x = speed * ctx.current_direction
+		initial_x_velocity = speed
+
+
 func state_process(ctx: CharacterStateContext, delta: float):
 	if Input.is_action_pressed("action_main_attack"):
 		ctx.action_charge()
@@ -46,7 +54,7 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if GlobalInputBuffer.is_action_pressed("action_jump"):
 		jump_pressed = true
 	
-	if GlobalInputBuffer.is_action_pressed("action_weapon", false) && sword_count == 1:
+	if GlobalInputBuffer.is_action_pressed("action_weapon", false) && sword_count <= 2:
 		GlobalInputBuffer.consume_action("action_weapon")
 		sword_pressed_count += 1
 		# Override other action buffers
@@ -56,11 +64,20 @@ func state_process(ctx: CharacterStateContext, delta: float):
 	if !timer.is_stopped():
 		return
 	
-	if sword_pressed_count > 0 && combo_1_timer.is_stopped():
-		if sword_count == 1:
+	if sword_pressed_count > 0:
+		if sword_count == 1 && combo_1_timer.is_stopped():
 			sword_count += 1
 			sword_pressed_count -= 1
 			ctx.animation_player.play("ground_sword_2")
+			try_slide(ctx)
+			combo_2_timer.start()
+			init()
+			return
+		elif sword_count == 2 && combo_2_timer.is_stopped():
+			sword_count += 1
+			sword_pressed_count -= 1
+			ctx.animation_player.play("ground_sword_3")
+			try_slide(ctx)
 			init()
 			return
 	
